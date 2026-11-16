@@ -1,0 +1,13 @@
+{
+  "config": {
+    "weeklyRate": 1.6,
+    "bossJump": 1.35,
+    "normalTarget": 90,
+    "evaluatorTarget": 210,
+    "brushCharges": 4
+  },
+  "artifacts": {
+    "mirror": {"value": 1.01},
+    "seal": {"value": 1.02}
+  }
+}

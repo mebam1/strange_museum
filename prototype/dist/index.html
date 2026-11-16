@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244638">
+  <meta name="description" content="박물관을 짓는 것이 곧 족보표를 설계하는 것. 주사위를 다듬고 유물의 연쇄로 관객을 감동시키는 박물관 게임.">
+  <title>이상한 박물관 · 내가 만드는 족보표</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <header class="app-header">
+      <a class="brand" href="./" aria-label="이상한 박물관 홈">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M6 18 24 7l18 11M9 20h30M12 23v15m8-15v15m8-15v15m8-15v15M8 40h32"/></svg></span>
+        <span><span class="eyebrow">THE STRANGE MUSEUM</span><span class="brand-name">이상한 박물관</span></span>
+      </a>
+      <p class="hook">박물관을 짓는 것이 곧<br><strong>족보표를 설계하는 것.</strong></p>
+      <div class="header-actions">
+        <span class="save-state" id="save-state">자동 저장</span>
+        <div class="money-badge"><span aria-hidden="true">₩</span><strong id="money-total">24</strong></div>
+        <button class="icon-button" data-action="help" aria-label="게임 규칙과 도움말">?</button>
+        <button class="quiet-button" data-action="new-run">새 박물관</button>
+      </div>
+    </header>
+
+    <nav class="week-track" id="week-track" aria-label="8주 운영 일정"></nav>
+
+    <main>
+      <div class="workspace">
+        <aside class="left-column">
+          <section class="visit-panel card" id="visit-panel" aria-label="현재 관람"></section>
+          <section class="forecast-panel" id="forecast-panel" aria-label="제출 예상 감동"></section>
+          <div class="strategy-note"><span class="note-star" aria-hidden="true">✧</span><p><strong>처음에는 1을 모아 보세요.</strong><br>조각마다 한 번, Lv.2까지 강화합니다. 붓을 새 조각으로 옮겨 남은 충전을 쓰세요.</p></div>
+        </aside>
+
+        <section class="museum-panel card">
+          <div class="museum-heading">
+            <div><span class="eyebrow">A SCORECARD OF YOUR OWN</span><h1>나의 전시실</h1></div>
+            <div class="board-tools" aria-label="전시실 확대 축소">
+              <button class="icon-button" data-action="zoom-out" aria-label="전시실 축소">−</button>
+              <button class="zoom-label" data-action="fit-board" id="zoom-label" aria-label="전시실 크기 맞추기">맞춤</button>
+              <button class="icon-button" data-action="zoom-in" aria-label="전시실 확대">+</button>
+            </div>
+          </div>
+          <div class="board-legend"><span><i class="legend-dot active"></i>조건 충족</span><span><i class="legend-dot overlap"></i>겹친 조각</span><span>칸의 횟수 = 조각 레벨의 합</span></div>
+          <div class="placement-bar" id="placement-bar" hidden></div>
+          <div class="animation-bar" id="animation-bar" hidden><div><span class="live-dot"></span><strong id="animation-title">유물 연쇄</strong><small id="animation-detail"></small></div><button class="quiet-button" data-action="skip-animation">연출 건너뛰기</button></div>
+          <div class="board-viewport" id="board-viewport" tabindex="0" aria-label="전시실 보드. 스크롤하여 이동할 수 있습니다.">
+            <div class="board-stage" id="board-stage"><div class="board-grid" id="board-grid"></div></div>
+            <div id="end-panel"></div>
+          </div>
+          <div class="board-foot"><span id="board-caption">유물이나 칸을 눌러 발동 조건을 살펴보세요.</span><span class="small-stamp">설계 · 굴림 · 감동</span></div>
+        </section>
+
+        <aside class="right-column">
+          <section class="inspector card" id="inspector" aria-label="선택한 칸과 유물 상세"></section>
+          <section class="recent-panel card" id="recent-panel" aria-label="최근 관람 기록"></section>
+        </aside>
+      </div>
+
+      <section class="dice-dock" id="dice-dock" aria-label="주사위와 관람 조작"></section>
+      <section class="shop-section card" id="shop-section" aria-label="박물관 상점" hidden></section>
+    </main>
+
+    <footer class="app-footer"><span>작은 전시실에서 시작하는, 나만의 거대한 족보.</span><span id="seed-label"></span></footer>
+  </div>
+
+  <dialog id="help-dialog" class="modal help-modal"><div class="modal-heading"><div><span class="eyebrow">CURATOR'S HANDBOOK</span><h2>박물관 운영 안내</h2></div><button class="icon-button" data-action="close-dialog" aria-label="도움말 닫기">×</button></div><div id="help-content" class="modal-body"></div></dialog>
+  <dialog id="new-dialog" class="modal small-modal"><div class="modal-heading"><div><span class="eyebrow">A NEW COLLECTION</span><h2>새 박물관을 열까요?</h2></div><button class="icon-button" data-action="close-dialog" aria-label="새 런 창 닫기">×</button></div><p>지금 진행 중인 박물관의 자동 저장을 새 런으로 바꿉니다.</p><label class="field-label" for="seed-input">시드 <span>비워 두면 무작위</span></label><input id="seed-input" placeholder="예: 2026" autocomplete="off"><div class="modal-actions"><button class="quiet-button" data-action="close-dialog">계속 운영하기</button><button class="primary-button" data-action="confirm-new">새 박물관 열기</button></div></dialog>
+  <dialog id="welcome-dialog" class="modal small-modal"><div class="welcome-mark" aria-hidden="true">✧</div><span class="eyebrow">WELCOME, CURATOR</span><h2 id="welcome-title">첫 전시를 시작해 볼까요?</h2><p id="welcome-copy">1이 나오는 주사위를 보관해 보세요. 거울이 연쇄를 시작하고, 금빛 동전과 전시 도선이 감동을 만듭니다. 유물은 관객마다, 조각은 주간 평가 통과 후에 받습니다.</p><div class="welcome-tip">주사위를 누르면 보관 · 제출은 관객당 3회<br>세 번의 제출이 리롤 3회를 나누어 씁니다.</div><button class="primary-button full-width" data-action="close-dialog" id="welcome-button">박물관 개관하기</button></dialog>
+  <dialog id="edit-dialog" class="modal edit-modal" aria-label="주사위 면 변경"><div id="edit-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1081 @@
+{
+  "title": "Controlled overlap expectations under prototype rules",
+  "method": "Exact enumeration of 6^5 physical face-index outcomes per dice set; no rerolls, policy, shop sequence, visitor strategy, human play, or empirical run claim.",
+  "controls": [
+    "One cell activation count is the sum of levels when its fixed multiset requirement is contained in the roll; repeated sets give no extra reward.",
+    "The optional coin+mirror diagnostic uses two adjacent cells with identical piece coverage, one coin and one mirror, without chains or static modifiers.",
+    "Existing level 5 is a pre-existing state, not a free level-up claim. Growing the new level-1 piece to level 5 consumes four charges; the fair-charge control spends those same four charges on the original piece (level 9).",
+    "Brush placement, proc probability and time to deliver upgrades are not modeled; only the exact number of charge-consuming upgrades is recorded.",
+    "The added piece also changes museum geometry and can support other artifacts. Those benefits, along with extra space opportunity costs and free/paid acquisition, are intentionally outside the one-cell comparison.",
+    "Edited sets are controlled extremes and their required face-edit expenditure is recorded; they are not claims that a policy could afford those edits at a particular week."
+  ],
+  "config": {
+    "mirror": 1.01,
+    "coin": 10,
+    "brushCharges": 4,
+    "editDieCost": 12
+  },
+  "engineFixturesVerified": 9,
+  "results": [
+    {
+      "id": "fair",
+      "name": "공정한 주사위 5개",
+      "dice": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "minimumFaceEdits": 0,
+      "editCostAtCurrentPrice": 0,
+      "expectations": [
+        {
+          "id": "young_single",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4651,
+          "outcomes": 7776,
+          "probability": 0.5981224279835391,
+          "activationCount": 1,
+          "expectedActivations": 0.5981224279835391,
+          "expectedCoinAndMirrorScore": 6.041036522633745
+        },
+        {
+          "id": "young_overlap_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 1526,
+          "outcomes": 7776,
+          "probability": 0.1962448559670782,
+          "activationCount": 2,
+          "expectedActivations": 0.3924897119341564,
+          "expectedCoinAndMirrorScore": 4.003787551440329
+        },
+        {
+          "id": "young_overlap_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 2550,
+          "outcomes": 7776,
+          "probability": 0.3279320987654321,
+          "activationCount": 2,
+          "expectedActivations": 0.6558641975308642,
+          "expectedCoinAndMirrorScore": 6.690470679012346
+        },
+        {
+          "id": "existing_level5",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            5
+          ],
+          "extraCharges": 0,
+          "successes": 4651,
+          "outcomes": 7776,
+          "probability": 0.5981224279835391,
+          "activationCount": 5,
+          "expectedActivations": 2.9906121399176957,
+          "expectedCoinAndMirrorScore": 31.43163415004566
+        },
+        {
+          "id": "existing5_new1_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 1526,
+          "outcomes": 7776,
+          "probability": 0.1962448559670782,
+          "activationCount": 6,
+          "expectedActivations": 1.1774691358024691,
+          "expectedCoinAndMirrorScore": 12.499072143650665
+        },
+        {
+          "id": "existing5_new1_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 2550,
+          "outcomes": 7776,
+          "probability": 0.3279320987654321,
+          "activationCount": 6,
+          "expectedActivations": 1.9675925925925926,
+          "expectedCoinAndMirrorScore": 20.886391852103014
+        },
+        {
+          "id": "equal_levels5_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 1526,
+          "outcomes": 7776,
+          "probability": 0.1962448559670782,
+          "activationCount": 10,
+          "expectedActivations": 1.962448559670782,
+          "expectedCoinAndMirrorScore": 21.677640989936965
+        },
+        {
+          "id": "equal_levels5_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 2550,
+          "outcomes": 7776,
+          "probability": 0.3279320987654321,
+          "activationCount": 10,
+          "expectedActivations": 3.2793209876543212,
+          "expectedCoinAndMirrorScore": 36.224105192882874
+        },
+        {
+          "id": "same_four_charges_into_existing",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            9
+          ],
+          "extraCharges": 4,
+          "successes": 4651,
+          "outcomes": 7776,
+          "probability": 0.5981224279835391,
+          "activationCount": 9,
+          "expectedActivations": 5.383101851851852,
+          "expectedCoinAndMirrorScore": 58.87419216730281
+        }
+      ],
+      "comparisons": {
+        "initialSameOverExisting5": 0.39372178026230914,
+        "initialDifferentOverExisting5": 0.6579230273059556,
+        "equalGrowthSameOverSingleWithSameCharges": 0.3645572039465826,
+        "equalGrowthDifferentOverSingleWithSameCharges": 0.6091879882462553
+      }
+    },
+    {
+      "id": "one_guaranteed_one",
+      "name": "주사위 하나의 모든 면을 1로 개조",
+      "dice": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "minimumFaceEdits": 5,
+      "editCostAtCurrentPrice": 60,
+      "expectations": [
+        {
+          "id": "young_single",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 1,
+          "expectedActivations": 1,
+          "expectedCoinAndMirrorScore": 10.1
+        },
+        {
+          "id": "young_overlap_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4026,
+          "outcomes": 7776,
+          "probability": 0.5177469135802469,
+          "activationCount": 2,
+          "expectedActivations": 1.0354938271604939,
+          "expectedCoinAndMirrorScore": 10.563072530864197
+        },
+        {
+          "id": "young_overlap_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4026,
+          "outcomes": 7776,
+          "probability": 0.5177469135802469,
+          "activationCount": 2,
+          "expectedActivations": 1.0354938271604939,
+          "expectedCoinAndMirrorScore": 10.563072530864197
+        },
+        {
+          "id": "existing_level5",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            5
+          ],
+          "extraCharges": 0,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 5,
+          "expectedActivations": 5,
+          "expectedCoinAndMirrorScore": 52.550502505000004
+        },
+        {
+          "id": "existing5_new1_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4026,
+          "outcomes": 7776,
+          "probability": 0.5177469135802469,
+          "activationCount": 6,
+          "expectedActivations": 3.106481481481482,
+          "expectedCoinAndMirrorScore": 32.975926900614404
+        },
+        {
+          "id": "existing5_new1_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4026,
+          "outcomes": 7776,
+          "probability": 0.5177469135802469,
+          "activationCount": 6,
+          "expectedActivations": 3.106481481481482,
+          "expectedCoinAndMirrorScore": 32.975926900614404
+        },
+        {
+          "id": "equal_levels5_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 4026,
+          "outcomes": 7776,
+          "probability": 0.5177469135802469,
+          "activationCount": 10,
+          "expectedActivations": 5.177469135802469,
+          "expectedCoinAndMirrorScore": 57.19146961041036
+        },
+        {
+          "id": "equal_levels5_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 4026,
+          "outcomes": 7776,
+          "probability": 0.5177469135802469,
+          "activationCount": 10,
+          "expectedActivations": 5.177469135802469,
+          "expectedCoinAndMirrorScore": 57.19146961041036
+        },
+        {
+          "id": "same_four_charges_into_existing",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            9
+          ],
+          "extraCharges": 4,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 9,
+          "expectedActivations": 9,
+          "expectedCoinAndMirrorScore": 98.43167454159249
+        }
+      ],
+      "comparisons": {
+        "initialSameOverExisting5": 0.6212962962962963,
+        "initialDifferentOverExisting5": 0.6212962962962963,
+        "equalGrowthSameOverSingleWithSameCharges": 0.5752743484224966,
+        "equalGrowthDifferentOverSingleWithSameCharges": 0.5752743484224966
+      }
+    },
+    {
+      "id": "all_half_one",
+      "name": "모든 주사위에 1을 세 면씩 배정",
+      "dice": [
+        [
+          1,
+          2,
+          3,
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          1,
+          1
+        ]
+      ],
+      "minimumFaceEdits": 10,
+      "editCostAtCurrentPrice": 120,
+      "expectations": [
+        {
+          "id": "young_single",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7533,
+          "outcomes": 7776,
+          "probability": 0.96875,
+          "activationCount": 1,
+          "expectedActivations": 0.96875,
+          "expectedCoinAndMirrorScore": 9.784375
+        },
+        {
+          "id": "young_overlap_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 6318,
+          "outcomes": 7776,
+          "probability": 0.8125,
+          "activationCount": 2,
+          "expectedActivations": 1.625,
+          "expectedCoinAndMirrorScore": 16.576625
+        },
+        {
+          "id": "young_overlap_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4440,
+          "outcomes": 7776,
+          "probability": 0.5709876543209876,
+          "activationCount": 2,
+          "expectedActivations": 1.1419753086419753,
+          "expectedCoinAndMirrorScore": 11.64929012345679
+        },
+        {
+          "id": "existing_level5",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            5
+          ],
+          "extraCharges": 0,
+          "successes": 7533,
+          "outcomes": 7776,
+          "probability": 0.96875,
+          "activationCount": 5,
+          "expectedActivations": 4.84375,
+          "expectedCoinAndMirrorScore": 50.908299301718756
+        },
+        {
+          "id": "existing5_new1_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 6318,
+          "outcomes": 7776,
+          "probability": 0.8125,
+          "activationCount": 6,
+          "expectedActivations": 4.875,
+          "expectedCoinAndMirrorScore": 51.749107341798755
+        },
+        {
+          "id": "existing5_new1_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 4440,
+          "outcomes": 7776,
+          "probability": 0.5709876543209876,
+          "activationCount": 6,
+          "expectedActivations": 3.4259259259259256,
+          "expectedCoinAndMirrorScore": 36.3668940483676
+        },
+        {
+          "id": "equal_levels5_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 6318,
+          "outcomes": 7776,
+          "probability": 0.8125,
+          "activationCount": 10,
+          "expectedActivations": 8.125,
+          "expectedCoinAndMirrorScore": 89.75054768966037
+        },
+        {
+          "id": "equal_levels5_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 4440,
+          "outcomes": 7776,
+          "probability": 0.5709876543209876,
+          "activationCount": 10,
+          "expectedActivations": 5.709876543209877,
+          "expectedCoinAndMirrorScore": 63.07255962996075
+        },
+        {
+          "id": "same_four_charges_into_existing",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            9
+          ],
+          "extraCharges": 4,
+          "successes": 7533,
+          "outcomes": 7776,
+          "probability": 0.96875,
+          "activationCount": 9,
+          "expectedActivations": 8.71875,
+          "expectedCoinAndMirrorScore": 95.35568471216772
+        }
+      ],
+      "comparisons": {
+        "initialSameOverExisting5": 1.0064516129032257,
+        "initialDifferentOverExisting5": 0.7072879330943846,
+        "equalGrowthSameOverSingleWithSameCharges": 0.931899641577061,
+        "equalGrowthDifferentOverSingleWithSameCharges": 0.6548962343466526
+      }
+    },
+    {
+      "id": "all_half_one_two",
+      "name": "모든 주사위를 1 세 면·2 세 면으로 개조",
+      "dice": [
+        [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ]
+      ],
+      "minimumFaceEdits": 20,
+      "editCostAtCurrentPrice": 240,
+      "expectations": [
+        {
+          "id": "young_single",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7533,
+          "outcomes": 7776,
+          "probability": 0.96875,
+          "activationCount": 1,
+          "expectedActivations": 0.96875,
+          "expectedCoinAndMirrorScore": 9.784375
+        },
+        {
+          "id": "young_overlap_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 6318,
+          "outcomes": 7776,
+          "probability": 0.8125,
+          "activationCount": 2,
+          "expectedActivations": 1.625,
+          "expectedCoinAndMirrorScore": 16.576625
+        },
+        {
+          "id": "young_overlap_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7290,
+          "outcomes": 7776,
+          "probability": 0.9375,
+          "activationCount": 2,
+          "expectedActivations": 1.875,
+          "expectedCoinAndMirrorScore": 19.126875000000002
+        },
+        {
+          "id": "existing_level5",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            5
+          ],
+          "extraCharges": 0,
+          "successes": 7533,
+          "outcomes": 7776,
+          "probability": 0.96875,
+          "activationCount": 5,
+          "expectedActivations": 4.84375,
+          "expectedCoinAndMirrorScore": 50.908299301718756
+        },
+        {
+          "id": "existing5_new1_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 6318,
+          "outcomes": 7776,
+          "probability": 0.8125,
+          "activationCount": 6,
+          "expectedActivations": 4.875,
+          "expectedCoinAndMirrorScore": 51.749107341798755
+        },
+        {
+          "id": "existing5_new1_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7290,
+          "outcomes": 7776,
+          "probability": 0.9375,
+          "activationCount": 6,
+          "expectedActivations": 5.625,
+          "expectedCoinAndMirrorScore": 59.710508471306255
+        },
+        {
+          "id": "equal_levels5_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 6318,
+          "outcomes": 7776,
+          "probability": 0.8125,
+          "activationCount": 10,
+          "expectedActivations": 8.125,
+          "expectedCoinAndMirrorScore": 89.75054768966037
+        },
+        {
+          "id": "equal_levels5_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 7290,
+          "outcomes": 7776,
+          "probability": 0.9375,
+          "activationCount": 10,
+          "expectedActivations": 9.375,
+          "expectedCoinAndMirrorScore": 103.55832425730043
+        },
+        {
+          "id": "same_four_charges_into_existing",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            9
+          ],
+          "extraCharges": 4,
+          "successes": 7533,
+          "outcomes": 7776,
+          "probability": 0.96875,
+          "activationCount": 9,
+          "expectedActivations": 8.71875,
+          "expectedCoinAndMirrorScore": 95.35568471216772
+        }
+      ],
+      "comparisons": {
+        "initialSameOverExisting5": 1.0064516129032257,
+        "initialDifferentOverExisting5": 1.1612903225806452,
+        "equalGrowthSameOverSingleWithSameCharges": 0.931899641577061,
+        "equalGrowthDifferentOverSingleWithSameCharges": 1.075268817204301
+      }
+    },
+    {
+      "id": "all_one",
+      "name": "모든 주사위의 모든 면을 1로 개조",
+      "dice": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "minimumFaceEdits": 25,
+      "editCostAtCurrentPrice": 300,
+      "expectations": [
+        {
+          "id": "young_single",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 1,
+          "expectedActivations": 1,
+          "expectedCoinAndMirrorScore": 10.1
+        },
+        {
+          "id": "young_overlap_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 2,
+          "expectedActivations": 2,
+          "expectedCoinAndMirrorScore": 20.402
+        },
+        {
+          "id": "young_overlap_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 0,
+          "outcomes": 7776,
+          "probability": 0,
+          "activationCount": 2,
+          "expectedActivations": 0,
+          "expectedCoinAndMirrorScore": 0
+        },
+        {
+          "id": "existing_level5",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            5
+          ],
+          "extraCharges": 0,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 5,
+          "expectedActivations": 5,
+          "expectedCoinAndMirrorScore": 52.550502505000004
+        },
+        {
+          "id": "existing5_new1_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 6,
+          "expectedActivations": 6,
+          "expectedCoinAndMirrorScore": 63.69120903606001
+        },
+        {
+          "id": "existing5_new1_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            1
+          ],
+          "extraCharges": 0,
+          "successes": 0,
+          "outcomes": 7776,
+          "probability": 0,
+          "activationCount": 6,
+          "expectedActivations": 0,
+          "expectedCoinAndMirrorScore": 0
+        },
+        {
+          "id": "equal_levels5_same",
+          "requirement": [
+            1,
+            1
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 10,
+          "expectedActivations": 10,
+          "expectedCoinAndMirrorScore": 110.46221254112045
+        },
+        {
+          "id": "equal_levels5_different",
+          "requirement": [
+            1,
+            2
+          ],
+          "levels": [
+            5,
+            5
+          ],
+          "extraCharges": 4,
+          "successes": 0,
+          "outcomes": 7776,
+          "probability": 0,
+          "activationCount": 10,
+          "expectedActivations": 0,
+          "expectedCoinAndMirrorScore": 0
+        },
+        {
+          "id": "same_four_charges_into_existing",
+          "requirement": [
+            1
+          ],
+          "levels": [
+            9
+          ],
+          "extraCharges": 4,
+          "successes": 7776,
+          "outcomes": 7776,
+          "probability": 1,
+          "activationCount": 9,
+          "expectedActivations": 9,
+          "expectedCoinAndMirrorScore": 98.43167454159249
+        }
+      ],
+      "comparisons": {
+        "initialSameOverExisting5": 1.2,
+        "initialDifferentOverExisting5": 0,
+        "equalGrowthSameOverSingleWithSameCharges": 1.1111111111111112,
+        "equalGrowthDifferentOverSingleWithSameCharges": 0
+      }
+    }
+  ]
+}

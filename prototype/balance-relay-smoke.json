@@ -1,0 +1,6296 @@
+{
+  "schemaVersion": 3,
+  "split": "relay-smoke",
+  "policyVersion": "cap2-relay-brush-move-v1",
+  "seedRange": [
+    4000,
+    4004
+  ],
+  "assumptions": {
+    "gameplay": "All live state changes go through engine.action; no hidden RNG inspection or future-roll access.",
+    "policy": "Heuristic public-state players with independently seeded Monte Carlo reroll estimates; automated results are not human playtests.",
+    "holdSamples": 18,
+    "seedMapping": "Bijective uint32 hash of sample ID; avoids correlated initial rolls for small xorshift32 seeds."
+  },
+  "config": {
+    "weeks": 8,
+    "visitorsPerWeek": 3,
+    "submissionsPerVisitor": 3,
+    "rerollsPerVisitor": 3,
+    "normalTarget": 90,
+    "evaluatorTarget": 210,
+    "weeklyRate": 1.6,
+    "bossJump": 1.35,
+    "bossWeeks": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "startingMoney": 24,
+    "editDieCost": 12,
+    "pieceBasePrice": 6,
+    "pieceCellPrice": 2,
+    "saleRatio": 0.1,
+    "brushCharges": 4,
+    "maxPieceLevel": 2,
+    "maxLoggedEvents": 1200,
+    "tipTiers": [
+      {
+        "name": "매우 나쁨",
+        "minRatio": 0,
+        "tip": 4
+      },
+      {
+        "name": "나쁨",
+        "minRatio": 0.25,
+        "tip": 8
+      },
+      {
+        "name": "보통",
+        "minRatio": 0.6,
+        "tip": 14
+      },
+      {
+        "name": "좋음",
+        "minRatio": 1,
+        "tip": 22
+      },
+      {
+        "name": "아주 좋음",
+        "minRatio": 1.6,
+        "tip": 32
+      }
+    ]
+  },
+  "artifactBalance": {
+    "coin": {
+      "value": 10,
+      "price": 18
+    },
+    "mirror": {
+      "value": 1.01,
+      "price": 24
+    },
+    "brush": {
+      "value": 1,
+      "price": 20,
+      "charges": 4
+    },
+    "observer": {
+      "value": 6,
+      "price": 20
+    },
+    "prism": {
+      "value": 6,
+      "price": 28
+    },
+    "seal": {
+      "value": 1.02,
+      "price": 34
+    },
+    "conduit": {
+      "value": 4,
+      "price": 16
+    },
+    "pedestal": {
+      "value": 5,
+      "price": 22
+    },
+    "frame": {
+      "value": 4,
+      "price": 28
+    }
+  },
+  "settings": {},
+  "elapsedMs": 7452.7706,
+  "summaries": [
+    {
+      "policy": "casual",
+      "samples": 5,
+      "wins": 0,
+      "clearRate": 0,
+      "meanFinalWeek": 4.2,
+      "weeks": [
+        {
+          "week": 1,
+          "losses": 1,
+          "reached": 5,
+          "meanRatio": 1.550552,
+          "medianRatio": 1.5252923809523808,
+          "minRatio": 0.8938019047619047
+        },
+        {
+          "week": 2,
+          "losses": 0,
+          "reached": 4,
+          "meanRatio": 2.399967410714286,
+          "medianRatio": 2.368089285714286,
+          "minRatio": 1.691058630952381
+        },
+        {
+          "week": 3,
+          "losses": 1,
+          "reached": 4,
+          "meanRatio": 1.4864570243606698,
+          "medianRatio": 1.098428681657848,
+          "minRatio": 0.8134391534391532
+        },
+        {
+          "week": 4,
+          "losses": 1,
+          "reached": 3,
+          "meanRatio": 1.6764792252259693,
+          "medianRatio": 1.040279672343474,
+          "minRatio": 0.9742295145778216
+        },
+        {
+          "week": 5,
+          "losses": 0,
+          "reached": 2,
+          "meanRatio": 1.1732377165434367,
+          "medianRatio": 1.3419222399335407,
+          "minRatio": 1.0045531931533327
+        },
+        {
+          "week": 6,
+          "losses": 1,
+          "reached": 2,
+          "meanRatio": 0.7133359589713456,
+          "medianRatio": 1.057725332431692,
+          "minRatio": 0.3689465855109993
+        },
+        {
+          "week": 7,
+          "losses": 1,
+          "reached": 1,
+          "meanRatio": 0.5802056747766436,
+          "medianRatio": 0.5802056747766436,
+          "minRatio": 0.5802056747766436
+        },
+        {
+          "week": 8,
+          "losses": 0,
+          "reached": 0,
+          "meanRatio": null,
+          "medianRatio": null,
+          "minRatio": null
+        }
+      ],
+      "averages": {
+        "money": 141.2,
+        "pieces": 12.6,
+        "artifacts": 28.4,
+        "sumPieceLevels": 13.6,
+        "maxPieceLevel": 2,
+        "boardCells": 55,
+        "chargesRemaining": 3,
+        "totalTips": 338,
+        "totalEmotion": 16961.42335058336,
+        "cappedTips": 7.6,
+        "rerolls": 37.8,
+        "submissions": 37.8,
+        "purchases": 12.8,
+        "spent": 220.8,
+        "sales": 0,
+        "saleRevenue": 0,
+        "diceEdits": 0,
+        "freePieces": 11.6,
+        "freeArtifacts": 11.6,
+        "rejectedPieces": 0,
+        "rejectedArtifacts": 0,
+        "chargesConsumed": 1,
+        "overlapPlacements": 0,
+        "overlapCellsAdded": 0,
+        "prismOverlapPlacements": 0,
+        "artifactMoves": 0,
+        "brushMoves": 0,
+        "brushMovesToUnfinished": 0,
+        "elapsedMs": 111.4884
+      },
+      "medianElapsedMs": 62.90180000000004,
+      "artifactUsage": {
+        "brush": {
+          "meanAcquired": 0,
+          "meanFinalOwned": 1,
+          "meanActivations": 1,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        },
+        "coin": {
+          "meanAcquired": 10.4,
+          "meanFinalOwned": 11.4,
+          "meanActivations": 307.8,
+          "meanAdditiveContribution": 3375,
+          "runsWithActivation": 5
+        },
+        "conduit": {
+          "meanAcquired": 8.2,
+          "meanFinalOwned": 9.2,
+          "meanActivations": 1954.6,
+          "meanAdditiveContribution": 7965.4,
+          "runsWithActivation": 5
+        },
+        "mirror": {
+          "meanAcquired": 0.2,
+          "meanFinalOwned": 1.2,
+          "meanActivations": 72.2,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        },
+        "observer": {
+          "meanAcquired": 0.8,
+          "meanFinalOwned": 0.8,
+          "meanActivations": 60.2,
+          "meanAdditiveContribution": 361.2,
+          "runsWithActivation": 3
+        },
+        "prism": {
+          "meanAcquired": 3,
+          "meanFinalOwned": 3,
+          "meanActivations": 769.2,
+          "meanAdditiveContribution": 4615.2,
+          "runsWithActivation": 4
+        },
+        "seal": {
+          "meanAcquired": 0.4,
+          "meanFinalOwned": 0.4,
+          "meanActivations": 9.2,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 1
+        }
+      },
+      "errors": []
+    },
+    {
+      "policy": "balanced",
+      "samples": 5,
+      "wins": 0,
+      "clearRate": 0,
+      "meanFinalWeek": 5.8,
+      "weeks": [
+        {
+          "week": 1,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 2.1315232380952382,
+          "medianRatio": 2.0402,
+          "minRatio": 1.7098819047619047
+        },
+        {
+          "week": 2,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 2.6685929252305733,
+          "medianRatio": 3.036894345238095,
+          "minRatio": 1.1727083333333335
+        },
+        {
+          "week": 3,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 2.5025848401574486,
+          "medianRatio": 2.6542453843639056,
+          "minRatio": 1.0665647045855378
+        },
+        {
+          "week": 4,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 1.7357224777008813,
+          "medianRatio": 1.783973178443174,
+          "minRatio": 1.0816762178612762
+        },
+        {
+          "week": 5,
+          "losses": 3,
+          "reached": 5,
+          "meanRatio": 1.1169733543635467,
+          "medianRatio": 0.7559500201227618,
+          "minRatio": 0.2692383392989825
+        },
+        {
+          "week": 6,
+          "losses": 0,
+          "reached": 2,
+          "meanRatio": 1.5773176090583512,
+          "medianRatio": 1.8861247732652318,
+          "minRatio": 1.2685104448514708
+        },
+        {
+          "week": 7,
+          "losses": 2,
+          "reached": 2,
+          "meanRatio": 0.7545639346713637,
+          "medianRatio": 0.8386486455049976,
+          "minRatio": 0.67047922383773
+        },
+        {
+          "week": 8,
+          "losses": 0,
+          "reached": 0,
+          "meanRatio": null,
+          "medianRatio": null,
+          "minRatio": null
+        }
+      ],
+      "averages": {
+        "money": 21.2,
+        "pieces": 17.4,
+        "artifacts": 43.6,
+        "sumPieceLevels": 26.6,
+        "maxPieceLevel": 2,
+        "boardCells": 53,
+        "chargesRemaining": 1.2,
+        "totalTips": 507.6,
+        "totalEmotion": 41510.26389968953,
+        "cappedTips": 14,
+        "rerolls": 30.2,
+        "submissions": 52.2,
+        "purchases": 25.4,
+        "spent": 510.4,
+        "sales": 0,
+        "saleRevenue": 0,
+        "diceEdits": 0,
+        "freePieces": 16.4,
+        "freeArtifacts": 16.4,
+        "rejectedPieces": 0,
+        "rejectedArtifacts": 0,
+        "chargesConsumed": 9.2,
+        "overlapPlacements": 11.4,
+        "overlapCellsAdded": 22,
+        "prismOverlapPlacements": 0.6,
+        "artifactMoves": 6.2,
+        "brushMoves": 6.2,
+        "brushMovesToUnfinished": 6.2,
+        "elapsedMs": 828.8216
+      },
+      "medianElapsedMs": 621.2579000000001,
+      "artifactUsage": {
+        "brush": {
+          "meanAcquired": 1.6,
+          "meanFinalOwned": 0.4,
+          "meanActivations": 8.6,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        },
+        "coin": {
+          "meanAcquired": 14.6,
+          "meanFinalOwned": 15.6,
+          "meanActivations": 603.8,
+          "meanAdditiveContribution": 6770.6,
+          "runsWithActivation": 5
+        },
+        "conduit": {
+          "meanAcquired": 8,
+          "meanFinalOwned": 9,
+          "meanActivations": 2694.2,
+          "meanAdditiveContribution": 11769.8,
+          "runsWithActivation": 5
+        },
+        "mirror": {
+          "meanAcquired": 0.2,
+          "meanFinalOwned": 1.2,
+          "meanActivations": 83.8,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        },
+        "observer": {
+          "meanAcquired": 3.8,
+          "meanFinalOwned": 3.8,
+          "meanActivations": 452,
+          "meanAdditiveContribution": 3220,
+          "runsWithActivation": 5
+        },
+        "prism": {
+          "meanAcquired": 7.2,
+          "meanFinalOwned": 7.2,
+          "meanActivations": 978.2,
+          "meanAdditiveContribution": 11234,
+          "runsWithActivation": 5
+        },
+        "seal": {
+          "meanAcquired": 2.4,
+          "meanFinalOwned": 2.4,
+          "meanActivations": 189,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        }
+      },
+      "errors": []
+    },
+    {
+      "policy": "investor",
+      "samples": 5,
+      "wins": 0,
+      "clearRate": 0,
+      "meanFinalWeek": 7,
+      "weeks": [
+        {
+          "week": 1,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 2.0538013333333334,
+          "medianRatio": 1.7681733333333336,
+          "minRatio": 1.7098819047619047
+        },
+        {
+          "week": 2,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 3.3437866516209445,
+          "medianRatio": 3.1430319226190484,
+          "minRatio": 2.908796694047619
+        },
+        {
+          "week": 3,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 2.5849381457163774,
+          "medianRatio": 2.324798004850088,
+          "minRatio": 2.244247149195326
+        },
+        {
+          "week": 4,
+          "losses": 0,
+          "reached": 5,
+          "meanRatio": 3.294782102769814,
+          "medianRatio": 3.854806697411573,
+          "minRatio": 1.4415922619047614
+        },
+        {
+          "week": 5,
+          "losses": 1,
+          "reached": 5,
+          "meanRatio": 1.6491359708876239,
+          "medianRatio": 1.3843888962725914,
+          "minRatio": 0.8638344057723394
+        },
+        {
+          "week": 6,
+          "losses": 0,
+          "reached": 4,
+          "meanRatio": 1.6598891666484148,
+          "medianRatio": 1.6855622614894707,
+          "minRatio": 1.2970132664463137
+        },
+        {
+          "week": 7,
+          "losses": 2,
+          "reached": 4,
+          "meanRatio": 0.9495567468701327,
+          "medianRatio": 1.1485592652206817,
+          "minRatio": 0.4553062090633496
+        },
+        {
+          "week": 8,
+          "losses": 2,
+          "reached": 2,
+          "meanRatio": 0.6079118191866498,
+          "medianRatio": 0.9351456622228362,
+          "minRatio": 0.28067797615046336
+        }
+      ],
+      "averages": {
+        "money": 18.4,
+        "pieces": 21,
+        "artifacts": 46.6,
+        "sumPieceLevels": 28.6,
+        "maxPieceLevel": 2,
+        "boardCells": 58.4,
+        "chargesRemaining": 1.2,
+        "totalTips": 616.8,
+        "totalEmotion": 81692.43659985787,
+        "cappedTips": 17,
+        "rerolls": 31,
+        "submissions": 63,
+        "purchases": 24.4,
+        "spent": 622.4,
+        "sales": 0,
+        "saleRevenue": 0,
+        "diceEdits": 11.6,
+        "freePieces": 20,
+        "freeArtifacts": 20,
+        "rejectedPieces": 0,
+        "rejectedArtifacts": 0,
+        "chargesConsumed": 7.6,
+        "overlapPlacements": 13.8,
+        "overlapCellsAdded": 28.2,
+        "prismOverlapPlacements": 0.4,
+        "artifactMoves": 5,
+        "brushMoves": 5,
+        "brushMovesToUnfinished": 5,
+        "elapsedMs": 549.8535400000003
+      },
+      "medianElapsedMs": 618.3984,
+      "artifactUsage": {
+        "brush": {
+          "meanAcquired": 1.2,
+          "meanFinalOwned": 0.4,
+          "meanActivations": 7,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        },
+        "coin": {
+          "meanAcquired": 14.8,
+          "meanFinalOwned": 15.8,
+          "meanActivations": 1123,
+          "meanAdditiveContribution": 14730.6,
+          "runsWithActivation": 5
+        },
+        "conduit": {
+          "meanAcquired": 8.6,
+          "meanFinalOwned": 9.6,
+          "meanActivations": 3585,
+          "meanAdditiveContribution": 17622,
+          "runsWithActivation": 5
+        },
+        "mirror": {
+          "meanAcquired": 0.2,
+          "meanFinalOwned": 1.2,
+          "meanActivations": 136.8,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 5
+        },
+        "observer": {
+          "meanAcquired": 5,
+          "meanFinalOwned": 5,
+          "meanActivations": 801.2,
+          "meanAdditiveContribution": 5702.2,
+          "runsWithActivation": 5
+        },
+        "prism": {
+          "meanAcquired": 7.2,
+          "meanFinalOwned": 7.2,
+          "meanActivations": 1996.4,
+          "meanAdditiveContribution": 27147.4,
+          "runsWithActivation": 5
+        },
+        "seal": {
+          "meanAcquired": 2.2,
+          "meanFinalOwned": 2.2,
+          "meanActivations": 247.8,
+          "meanAdditiveContribution": 0,
+          "runsWithActivation": 4
+        }
+      },
+      "errors": []
+    }
+  ],
+  "runs": [
+    {
+      "seed": 1945571996,
+      "initialDice": [
+        4,
+        5,
+        5,
+        6,
+        4
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "casual",
+      "won": false,
+      "finalWeek": 1,
+      "finalVisitor": 3,
+      "money": 68,
+      "pieces": 3,
+      "artifacts": 7,
+      "sumPieceLevels": 4,
+      "maxPieceLevel": 2,
+      "boardCells": 15,
+      "chargesRemaining": 3,
+      "totalTips": 60,
+      "totalEmotion": 462.94359999999995,
+      "cappedTips": 1,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 2,
+        "brush": 1,
+        "conduit": 2,
+        "mirror": 1,
+        "pedestal": 1
+      },
+      "rerolls": 9,
+      "submissions": 9,
+      "purchases": 1,
+      "spent": 16,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 2,
+      "freeArtifacts": 2,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 1,
+      "strengthenedPieces": 1,
+      "overlapPlacements": 0,
+      "overlapCellsAdded": 0,
+      "saleRevenue": 0,
+      "artifactMoves": 0,
+      "brushMoves": 0,
+      "brushMovesToUnfinished": 0,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "coin": 1,
+        "conduit": 1,
+        "pedestal": 1
+      },
+      "activationsByKind": {
+        "coin": 23,
+        "conduit": 46,
+        "brush": 1,
+        "mirror": 13
+      },
+      "additiveByKind": {
+        "coin": 230,
+        "conduit": 224
+      },
+      "errors": [],
+      "elapsedMs": 13.529099999999996,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 54.9036,
+          "target": 90,
+          "ratio": 0.6100399999999999,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 220.34159999999997,
+          "target": 90,
+          "ratio": 2.4482399999999997,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 187.6984,
+          "target": 210,
+          "ratio": 0.8938019047619047,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 187.6984,
+          "target": 210,
+          "ratio": 0.8938019047619047,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4000
+    },
+    {
+      "seed": 3004267917,
+      "initialDice": [
+        1,
+        6,
+        3,
+        4,
+        4
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "casual",
+      "won": false,
+      "finalWeek": 3,
+      "finalVisitor": 3,
+      "money": 118,
+      "pieces": 9,
+      "artifacts": 21,
+      "sumPieceLevels": 10,
+      "maxPieceLevel": 2,
+      "boardCells": 38,
+      "chargesRemaining": 3,
+      "totalTips": 250,
+      "totalEmotion": 3713.2084999999997,
+      "cappedTips": 6,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 8,
+        "brush": 1,
+        "conduit": 6,
+        "mirror": 1,
+        "pedestal": 1,
+        "prism": 2,
+        "observer": 1,
+        "frame": 1
+      },
+      "rerolls": 27,
+      "submissions": 27,
+      "purchases": 9,
+      "spent": 156,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 8,
+      "freeArtifacts": 8,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 1,
+      "strengthenedPieces": 1,
+      "overlapPlacements": 0,
+      "overlapCellsAdded": 0,
+      "saleRevenue": 0,
+      "artifactMoves": 0,
+      "brushMoves": 0,
+      "brushMovesToUnfinished": 0,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "conduit": 5,
+        "coin": 7,
+        "pedestal": 1,
+        "prism": 2,
+        "observer": 1,
+        "frame": 1
+      },
+      "activationsByKind": {
+        "coin": 122,
+        "conduit": 433,
+        "brush": 1,
+        "mirror": 47,
+        "prism": 55,
+        "observer": 22
+      },
+      "additiveByKind": {
+        "coin": 1453,
+        "conduit": 1732,
+        "prism": 330,
+        "observer": 132
+      },
+      "errors": [],
+      "elapsedMs": 46.1092,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 208.10039999999998,
+          "target": 90,
+          "ratio": 2.3122266666666667,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 320.3114,
+          "target": 210,
+          "ratio": 1.5252923809523808,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 303.10540000000003,
+          "target": 144,
+          "ratio": 2.1048986111111114,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 498.8289,
+          "target": 144,
+          "ratio": 3.464089583333333,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 568.1957,
+          "target": 336,
+          "ratio": 1.691058630952381,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 568.5626,
+          "target": 311.0400000000001,
+          "ratio": 1.8279404578189296,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 564.1152999999999,
+          "target": 311.0400000000001,
+          "ratio": 1.8136422968106989,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 590.3616,
+          "target": 725.7600000000002,
+          "ratio": 0.8134391534391532,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 320.3114,
+          "target": 210,
+          "ratio": 1.5252923809523808,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 568.1957,
+          "target": 336,
+          "ratio": 1.691058630952381,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 590.3616,
+          "target": 725.7600000000002,
+          "ratio": 0.8134391534391532,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4001
+    },
+    {
+      "seed": 3645144896,
+      "initialDice": [
+        4,
+        3,
+        2,
+        2,
+        5
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "casual",
+      "won": false,
+      "finalWeek": 7,
+      "finalVisitor": 3,
+      "money": 160,
+      "pieces": 21,
+      "artifacts": 50,
+      "sumPieceLevels": 22,
+      "maxPieceLevel": 2,
+      "boardCells": 93,
+      "chargesRemaining": 3,
+      "totalTips": 582,
+      "totalEmotion": 52972.23095291681,
+      "cappedTips": 15,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 20,
+        "brush": 1,
+        "conduit": 15,
+        "mirror": 2,
+        "prism": 10,
+        "seal": 1,
+        "frame": 1
+      },
+      "rerolls": 63,
+      "submissions": 63,
+      "purchases": 26,
+      "spent": 446,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 20,
+      "freeArtifacts": 20,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 1,
+      "strengthenedPieces": 1,
+      "overlapPlacements": 0,
+      "overlapCellsAdded": 0,
+      "saleRevenue": 0,
+      "artifactMoves": 0,
+      "brushMoves": 0,
+      "brushMovesToUnfinished": 0,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "coin": 19,
+        "conduit": 14,
+        "prism": 10,
+        "mirror": 1,
+        "seal": 1,
+        "frame": 1
+      },
+      "activationsByKind": {
+        "coin": 656,
+        "conduit": 5839,
+        "brush": 1,
+        "mirror": 141,
+        "prism": 3377,
+        "seal": 46
+      },
+      "additiveByKind": {
+        "coin": 6736,
+        "conduit": 23356,
+        "prism": 20262
+      },
+      "errors": [],
+      "elapsedMs": 258.1674,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 54.9036,
+          "target": 90,
+          "ratio": 0.6100399999999999,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 269.3064,
+          "target": 90,
+          "ratio": 2.9922933333333335,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 526.3716,
+          "target": 210,
+          "ratio": 2.5065314285714284,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 820.1604,
+          "target": 144,
+          "ratio": 5.6955583333333335,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 322.3516,
+          "target": 144,
+          "ratio": 2.238552777777778,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1260.8436000000002,
+          "target": 336,
+          "ratio": 3.7525107142857146,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1020.1,
+          "target": 311.0400000000001,
+          "ratio": 3.2796424897119336,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2025.9186,
+          "target": 311.0400000000001,
+          "ratio": 6.513369984567899,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2160.5718,
+          "target": 725.7600000000002,
+          "ratio": 2.9769783399470895,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2497.2048,
+          "target": 497.6640000000002,
+          "ratio": 5.017853009259257,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2876.682,
+          "target": 497.6640000000002,
+          "ratio": 5.780369888117281,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3500.9832,
+          "target": 1161.2160000000003,
+          "ratio": 3.014928488756613,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2845.6913620000005,
+          "target": 1074.9542400000005,
+          "ratio": 2.647267442751795,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3136.4530193304004,
+          "target": 1074.9542400000005,
+          "ratio": 2.9177549170189785,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3365.8450036560007,
+          "target": 2508.226560000001,
+          "ratio": 1.3419222399335407,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3507.339124828801,
+          "target": 1719.9267840000005,
+          "ratio": 2.039237459092212,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 4255.542886788,
+          "target": 1719.9267840000005,
+          "ratio": 2.4742581639963572,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 4244.8236351840005,
+          "target": 4013.1624960000013,
+          "ratio": 1.057725332431692,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3401.0979430696007,
+          "target": 3715.0418534400023,
+          "ratio": 0.9154938429348514,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 5850.567525463201,
+          "target": 3715.0418534400023,
+          "ratio": 1.5748321973938932,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5029.472852596801,
+          "target": 8668.430991360005,
+          "ratio": 0.5802056747766436,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 526.3716,
+          "target": 210,
+          "ratio": 2.5065314285714284,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1260.8436000000002,
+          "target": 336,
+          "ratio": 3.7525107142857146,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2160.5718,
+          "target": 725.7600000000002,
+          "ratio": 2.9769783399470895,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3500.9832,
+          "target": 1161.2160000000003,
+          "ratio": 3.014928488756613,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3365.8450036560007,
+          "target": 2508.226560000001,
+          "ratio": 1.3419222399335407,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 4244.8236351840005,
+          "target": 4013.1624960000013,
+          "ratio": 1.057725332431692,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5029.472852596801,
+          "target": 8668.430991360005,
+          "ratio": 0.5802056747766436,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "sampleId": 4002
+    },
+    {
+      "seed": 1168688368,
+      "initialDice": [
+        6,
+        3,
+        5,
+        1,
+        1
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "casual",
+      "won": false,
+      "finalWeek": 4,
+      "finalVisitor": 3,
+      "money": 140,
+      "pieces": 12,
+      "artifacts": 26,
+      "sumPieceLevels": 13,
+      "maxPieceLevel": 2,
+      "boardCells": 51,
+      "chargesRemaining": 3,
+      "totalTips": 306,
+      "totalEmotion": 6556.9859,
+      "cappedTips": 5,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 11,
+        "brush": 1,
+        "conduit": 8,
+        "mirror": 1,
+        "pedestal": 2,
+        "observer": 1,
+        "seal": 1,
+        "prism": 1
+      },
+      "rerolls": 36,
+      "submissions": 36,
+      "purchases": 11,
+      "spent": 190,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 11,
+      "freeArtifacts": 11,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 1,
+      "strengthenedPieces": 1,
+      "overlapPlacements": 0,
+      "overlapCellsAdded": 0,
+      "saleRevenue": 0,
+      "artifactMoves": 0,
+      "brushMoves": 0,
+      "brushMovesToUnfinished": 0,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "pedestal": 2,
+        "conduit": 7,
+        "coin": 10,
+        "observer": 1,
+        "seal": 1,
+        "prism": 1
+      },
+      "activationsByKind": {
+        "coin": 253,
+        "conduit": 531,
+        "brush": 1,
+        "mirror": 69,
+        "observer": 40,
+        "prism": 17
+      },
+      "additiveByKind": {
+        "coin": 3270,
+        "conduit": 2819,
+        "observer": 240,
+        "prism": 102
+      },
+      "errors": [],
+      "elapsedMs": 62.90180000000004,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 140.7738,
+          "target": 90,
+          "ratio": 1.5641533333333333,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 250.9446,
+          "target": 210,
+          "ratio": 1.1949742857142858,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 403.9596,
+          "target": 144,
+          "ratio": 2.805275,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 450.88419999999996,
+          "target": 144,
+          "ratio": 3.1311402777777775,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 600.8389,
+          "target": 336,
+          "ratio": 1.7882110119047618,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 540.653,
+          "target": 311.0400000000001,
+          "ratio": 1.7382105195473248,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 652.864,
+          "target": 311.0400000000001,
+          "ratio": 2.0989711934156374,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 767.1152,
+          "target": 725.7600000000002,
+          "ratio": 1.0569819223985888,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 768.1353000000001,
+          "target": 497.6640000000002,
+          "ratio": 1.5434817467206787,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 757.8992000000001,
+          "target": 497.6640000000002,
+          "ratio": 1.52291345164609,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1131.2909,
+          "target": 1161.2160000000003,
+          "ratio": 0.9742295145778216,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 250.9446,
+          "target": 210,
+          "ratio": 1.1949742857142858,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 600.8389,
+          "target": 336,
+          "ratio": 1.7882110119047618,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 767.1152,
+          "target": 725.7600000000002,
+          "ratio": 1.0569819223985888,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1131.2909,
+          "target": 1161.2160000000003,
+          "ratio": 0.9742295145778216,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4003
+    },
+    {
+      "seed": 2162945249,
+      "initialDice": [
+        2,
+        6,
+        1,
+        4,
+        5
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "casual",
+      "won": false,
+      "finalWeek": 6,
+      "finalVisitor": 3,
+      "money": 220,
+      "pieces": 18,
+      "artifacts": 38,
+      "sumPieceLevels": 19,
+      "maxPieceLevel": 2,
+      "boardCells": 78,
+      "chargesRemaining": 3,
+      "totalTips": 492,
+      "totalEmotion": 21101.747799999997,
+      "cappedTips": 11,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 16,
+        "brush": 1,
+        "conduit": 15,
+        "mirror": 1,
+        "observer": 2,
+        "prism": 2,
+        "frame": 1
+      },
+      "rerolls": 54,
+      "submissions": 54,
+      "purchases": 17,
+      "spent": 296,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 17,
+      "freeArtifacts": 17,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 1,
+      "strengthenedPieces": 1,
+      "overlapPlacements": 0,
+      "overlapCellsAdded": 0,
+      "saleRevenue": 0,
+      "artifactMoves": 0,
+      "brushMoves": 0,
+      "brushMovesToUnfinished": 0,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "coin": 15,
+        "conduit": 14,
+        "observer": 2,
+        "prism": 2,
+        "frame": 1
+      },
+      "activationsByKind": {
+        "coin": 485,
+        "conduit": 2924,
+        "brush": 1,
+        "mirror": 91,
+        "observer": 239,
+        "prism": 397
+      },
+      "additiveByKind": {
+        "coin": 5186,
+        "conduit": 11696,
+        "observer": 1434,
+        "prism": 2382
+      },
+      "errors": [],
+      "elapsedMs": 176.73450000000003,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 232.58280000000002,
+          "target": 90,
+          "ratio": 2.5842533333333337,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 342.7536,
+          "target": 210,
+          "ratio": 1.63216,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 434.5626,
+          "target": 144,
+          "ratio": 3.017795833333333,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 587.5776,
+          "target": 144,
+          "ratio": 4.0804,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 795.678,
+          "target": 336,
+          "ratio": 2.368089285714286,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 924.2106,
+          "target": 311.0400000000001,
+          "ratio": 2.9713560956790115,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 616.1404,
+          "target": 311.0400000000001,
+          "ratio": 1.9809040637860078,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 797.1956,
+          "target": 725.7600000000002,
+          "ratio": 1.098428681657848,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 889.879,
+          "target": 497.6640000000002,
+          "ratio": 1.7881120595421804,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1521.9892,
+          "target": 497.6640000000002,
+          "ratio": 3.058266621656377,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1207.9894,
+          "target": 1161.2160000000003,
+          "ratio": 1.040279672343474,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1258.2808,
+          "target": 1074.9542400000005,
+          "ratio": 1.1705435944882634,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2423.7576,
+          "target": 1074.9542400000005,
+          "ratio": 2.2547542116769534,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2519.647,
+          "target": 2508.226560000001,
+          "ratio": 1.0045531931533327,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1972.0192000000002,
+          "target": 1719.9267840000005,
+          "ratio": 1.146571597317482,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3005.2146000000002,
+          "target": 1719.9267840000005,
+          "ratio": 1.747292168455468,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1480.6426,
+          "target": 4013.1624960000013,
+          "ratio": 0.3689465855109993,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 342.7536,
+          "target": 210,
+          "ratio": 1.63216,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 795.678,
+          "target": 336,
+          "ratio": 2.368089285714286,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 797.1956,
+          "target": 725.7600000000002,
+          "ratio": 1.098428681657848,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1207.9894,
+          "target": 1161.2160000000003,
+          "ratio": 1.040279672343474,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2519.647,
+          "target": 2508.226560000001,
+          "ratio": 1.0045531931533327,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1480.6426,
+          "target": 4013.1624960000013,
+          "ratio": 0.3689465855109993,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "sampleId": 4004
+    },
+    {
+      "seed": 1945571996,
+      "initialDice": [
+        4,
+        5,
+        5,
+        6,
+        4
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "balanced",
+      "won": false,
+      "finalWeek": 7,
+      "finalVisitor": 3,
+      "money": 14,
+      "pieces": 21,
+      "artifacts": 53,
+      "sumPieceLevels": 31,
+      "maxPieceLevel": 2,
+      "boardCells": 63,
+      "chargesRemaining": 6,
+      "totalTips": 626,
+      "totalEmotion": 76623.8489519317,
+      "cappedTips": 18,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 17,
+        "conduit": 11,
+        "mirror": 2,
+        "prism": 10,
+        "seal": 2,
+        "observer": 3,
+        "pedestal": 4,
+        "frame": 2,
+        "brush": 2
+      },
+      "rerolls": 31,
+      "submissions": 63,
+      "purchases": 31,
+      "spent": 636,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 20,
+      "freeArtifacts": 20,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 10,
+      "strengthenedPieces": 10,
+      "overlapPlacements": 16,
+      "overlapCellsAdded": 28,
+      "saleRevenue": 0,
+      "artifactMoves": 6,
+      "brushMoves": 6,
+      "brushMovesToUnfinished": 6,
+      "prismOverlapPlacements": 1,
+      "acquiredByKind": {
+        "coin": 16,
+        "conduit": 10,
+        "mirror": 1,
+        "prism": 10,
+        "seal": 2,
+        "observer": 3,
+        "brush": 3,
+        "pedestal": 4,
+        "frame": 2
+      },
+      "activationsByKind": {
+        "coin": 859,
+        "conduit": 5109,
+        "brush": 9,
+        "mirror": 145,
+        "prism": 1828,
+        "seal": 384,
+        "observer": 320
+      },
+      "additiveByKind": {
+        "coin": 9969,
+        "conduit": 20436,
+        "prism": 21048,
+        "observer": 2280
+      },
+      "errors": [],
+      "elapsedMs": 1183.6603,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 54.9036,
+          "target": 90,
+          "ratio": 0.6100399999999999,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 204.01999999999998,
+          "target": 90,
+          "ratio": 2.2668888888888885,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 359.0752,
+          "target": 210,
+          "ratio": 1.7098819047619047,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 294.66608600000006,
+          "target": 144,
+          "ratio": 2.046292263888889,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 744.7468960440001,
+          "target": 144,
+          "ratio": 5.171853444750001,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1033.3332143873631,
+          "target": 336,
+          "ratio": 3.075396471390962,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2009.0755881205173,
+          "target": 311.0400000000001,
+          "ratio": 6.459219354811332,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2340.127716186081,
+          "target": 311.0400000000001,
+          "ratio": 7.523558758314302,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 774.07,
+          "target": 725.7600000000002,
+          "ratio": 1.0665647045855378,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3925.4743833589987,
+          "target": 497.6640000000002,
+          "ratio": 7.887800570985639,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3648.466638349907,
+          "target": 497.6640000000002,
+          "ratio": 7.331184571015596,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3248.675574568019,
+          "target": 1161.2160000000003,
+          "ratio": 2.7976496832355204,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3359.453298069337,
+          "target": 1074.9542400000005,
+          "ratio": 3.1252058674323995,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 4587.0133618520285,
+          "target": 1074.9542400000005,
+          "ratio": 4.267170816361473,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5017.945951642826,
+          "target": 2508.226560000001,
+          "ratio": 2.0005951741627457,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3090.5998353258456,
+          "target": 1719.9267840000005,
+          "ratio": 1.7969368603808222,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 7475.848176328592,
+          "target": 1719.9267840000005,
+          "ratio": 4.346608382330181,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 7569.325202844534,
+          "target": 4013.1624960000013,
+          "ratio": 1.8861247732652318,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 9232.911903978109,
+          "target": 3715.0418534400023,
+          "ratio": 2.4852780313709646,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 11842.11344189757,
+          "target": 3715.0418534400023,
+          "ratio": 3.187612390135572,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5812.00288297798,
+          "target": 8668.430991360005,
+          "ratio": 0.67047922383773,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 359.0752,
+          "target": 210,
+          "ratio": 1.7098819047619047,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1033.3332143873631,
+          "target": 336,
+          "ratio": 3.075396471390962,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 774.07,
+          "target": 725.7600000000002,
+          "ratio": 1.0665647045855378,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3248.675574568019,
+          "target": 1161.2160000000003,
+          "ratio": 2.7976496832355204,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5017.945951642826,
+          "target": 2508.226560000001,
+          "ratio": 2.0005951741627457,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 7569.325202844534,
+          "target": 4013.1624960000013,
+          "ratio": 1.8861247732652318,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5812.00288297798,
+          "target": 8668.430991360005,
+          "ratio": 0.67047922383773,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4000
+    },
+    {
+      "seed": 3004267917,
+      "initialDice": [
+        1,
+        6,
+        3,
+        4,
+        4
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "balanced",
+      "won": false,
+      "finalWeek": 5,
+      "finalVisitor": 3,
+      "money": 24,
+      "pieces": 15,
+      "artifacts": 38,
+      "sumPieceLevels": 23,
+      "maxPieceLevel": 2,
+      "boardCells": 48,
+      "chargesRemaining": 0,
+      "totalTips": 432,
+      "totalEmotion": 18960.28413205453,
+      "cappedTips": 11,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 15,
+        "conduit": 5,
+        "mirror": 1,
+        "prism": 8,
+        "observer": 3,
+        "frame": 2,
+        "pedestal": 2,
+        "seal": 2
+      },
+      "rerolls": 28,
+      "submissions": 45,
+      "purchases": 22,
+      "spent": 432,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 14,
+      "freeArtifacts": 14,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 8,
+      "strengthenedPieces": 8,
+      "overlapPlacements": 10,
+      "overlapCellsAdded": 18,
+      "saleRevenue": 0,
+      "artifactMoves": 6,
+      "brushMoves": 6,
+      "brushMovesToUnfinished": 6,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "coin": 14,
+        "conduit": 4,
+        "prism": 8,
+        "observer": 3,
+        "frame": 2,
+        "pedestal": 2,
+        "seal": 2,
+        "brush": 1
+      },
+      "activationsByKind": {
+        "coin": 426,
+        "conduit": 572,
+        "brush": 8,
+        "mirror": 59,
+        "prism": 736,
+        "observer": 186,
+        "seal": 123
+      },
+      "additiveByKind": {
+        "coin": 5070,
+        "conduit": 2288,
+        "prism": 8066,
+        "observer": 1151
+      },
+      "errors": [],
+      "elapsedMs": 621.2579000000001,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 271.34659999999997,
+          "target": 90,
+          "ratio": 3.0149622222222217,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 603.8992,
+          "target": 210,
+          "ratio": 2.875710476190476,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 782.874,
+          "target": 144,
+          "ratio": 5.436625,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 521.5676,
+          "target": 144,
+          "ratio": 3.621997222222222,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1007.8588,
+          "target": 336,
+          "ratio": 2.9995797619047617,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1148.6326,
+          "target": 311.0400000000001,
+          "ratio": 3.692877443415637,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 599.2000513431774,
+          "target": 311.0400000000001,
+          "ratio": 1.9264404942874782,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1926.3451301559487,
+          "target": 725.7600000000002,
+          "ratio": 2.6542453843639056,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 772.5366124155887,
+          "target": 497.6640000000002,
+          "ratio": 1.5523256904569918,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2942.7602150458856,
+          "target": 497.6640000000002,
+          "ratio": 5.913146651246392,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1364.1148362960103,
+          "target": 1161.2160000000003,
+          "ratio": 1.1747296250620125,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1726.3915887204942,
+          "target": 1074.9542400000005,
+          "ratio": 1.6060140278347974,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3426.335684785131,
+          "target": 1074.9542400000005,
+          "ratio": 3.1874246896176057,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1774.7940132922909,
+          "target": 2508.226560000001,
+          "ratio": 0.707589195328627,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 603.8992,
+          "target": 210,
+          "ratio": 2.875710476190476,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1007.8588,
+          "target": 336,
+          "ratio": 2.9995797619047617,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1926.3451301559487,
+          "target": 725.7600000000002,
+          "ratio": 2.6542453843639056,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1364.1148362960103,
+          "target": 1161.2160000000003,
+          "ratio": 1.1747296250620125,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1774.7940132922909,
+          "target": 2508.226560000001,
+          "ratio": 0.707589195328627,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4001
+    },
+    {
+      "seed": 3645144896,
+      "initialDice": [
+        4,
+        3,
+        2,
+        2,
+        5
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "balanced",
+      "won": false,
+      "finalWeek": 5,
+      "finalVisitor": 3,
+      "money": 28,
+      "pieces": 15,
+      "artifacts": 35,
+      "sumPieceLevels": 27,
+      "maxPieceLevel": 2,
+      "boardCells": 45,
+      "chargesRemaining": 0,
+      "totalTips": 410,
+      "totalEmotion": 21681.071191874238,
+      "cappedTips": 11,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 13,
+        "conduit": 7,
+        "mirror": 1,
+        "prism": 6,
+        "observer": 2,
+        "pedestal": 4,
+        "seal": 1,
+        "frame": 1
+      },
+      "rerolls": 29,
+      "submissions": 45,
+      "purchases": 20,
+      "spent": 406,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 14,
+      "freeArtifacts": 14,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 12,
+      "strengthenedPieces": 12,
+      "overlapPlacements": 10,
+      "overlapCellsAdded": 21,
+      "saleRevenue": 0,
+      "artifactMoves": 8,
+      "brushMoves": 8,
+      "brushMovesToUnfinished": 8,
+      "prismOverlapPlacements": 1,
+      "acquiredByKind": {
+        "coin": 12,
+        "conduit": 6,
+        "prism": 6,
+        "observer": 2,
+        "pedestal": 4,
+        "seal": 1,
+        "brush": 2,
+        "frame": 1
+      },
+      "activationsByKind": {
+        "coin": 466,
+        "conduit": 1266,
+        "brush": 11,
+        "mirror": 60,
+        "observer": 206,
+        "prism": 568,
+        "seal": 73
+      },
+      "additiveByKind": {
+        "coin": 5499,
+        "conduit": 5859,
+        "observer": 1616,
+        "prism": 7084
+      },
+      "errors": [],
+      "elapsedMs": 584.2831999999999,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 54.9036,
+          "target": 90,
+          "ratio": 0.6100399999999999,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 232.58280000000002,
+          "target": 90,
+          "ratio": 2.5842533333333337,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 369.27619999999996,
+          "target": 210,
+          "ratio": 1.758458095238095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 771.1956,
+          "target": 144,
+          "ratio": 5.355525,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 64,
+          "target": 144,
+          "ratio": 0.4444444444444444,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1027.6176,
+          "target": 336,
+          "ratio": 3.0583857142857145,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1230.2405999999999,
+          "target": 311.0400000000001,
+          "ratio": 3.9552488425925914,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 922.5875,
+          "target": 311.0400000000001,
+          "ratio": 2.966137795781892,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2442.345151552705,
+          "target": 725.7600000000002,
+          "ratio": 3.365224249824603,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2094.842695291627,
+          "target": 497.6640000000002,
+          "ratio": 4.209351480701088,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3156.2523908144726,
+          "target": 497.6640000000002,
+          "ratio": 6.342135237458348,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1256.059731,
+          "target": 1161.2160000000003,
+          "ratio": 1.0816762178612762,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3077.62384771099,
+          "target": 1074.9542400000005,
+          "ratio": 2.863027776615857,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3085.4495570000004,
+          "target": 1074.9542400000005,
+          "ratio": 2.8703078160796864,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1896.0939185044463,
+          "target": 2508.226560000001,
+          "ratio": 0.7559500201227618,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 369.27619999999996,
+          "target": 210,
+          "ratio": 1.758458095238095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1027.6176,
+          "target": 336,
+          "ratio": 3.0583857142857145,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2442.345151552705,
+          "target": 725.7600000000002,
+          "ratio": 3.365224249824603,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1256.059731,
+          "target": 1161.2160000000003,
+          "ratio": 1.0816762178612762,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1896.0939185044463,
+          "target": 2508.226560000001,
+          "ratio": 0.7559500201227618,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4002
+    },
+    {
+      "seed": 1168688368,
+      "initialDice": [
+        6,
+        3,
+        5,
+        1,
+        1
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "balanced",
+      "won": false,
+      "finalWeek": 7,
+      "finalVisitor": 3,
+      "money": 24,
+      "pieces": 21,
+      "artifacts": 53,
+      "sumPieceLevels": 29,
+      "maxPieceLevel": 2,
+      "boardCells": 65,
+      "chargesRemaining": 0,
+      "totalTips": 634,
+      "totalEmotion": 71707.40283256356,
+      "cappedTips": 18,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 19,
+        "conduit": 12,
+        "mirror": 1,
+        "prism": 8,
+        "observer": 7,
+        "pedestal": 1,
+        "seal": 5
+      },
+      "rerolls": 38,
+      "submissions": 63,
+      "purchases": 31,
+      "spent": 634,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 20,
+      "freeArtifacts": 20,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 8,
+      "strengthenedPieces": 8,
+      "overlapPlacements": 13,
+      "overlapCellsAdded": 25,
+      "saleRevenue": 0,
+      "artifactMoves": 6,
+      "brushMoves": 6,
+      "brushMovesToUnfinished": 6,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "prism": 8,
+        "conduit": 11,
+        "coin": 18,
+        "observer": 7,
+        "pedestal": 1,
+        "seal": 5,
+        "brush": 1
+      },
+      "activationsByKind": {
+        "coin": 812,
+        "conduit": 4969,
+        "brush": 8,
+        "mirror": 94,
+        "prism": 1647,
+        "observer": 1102,
+        "seal": 261
+      },
+      "additiveByKind": {
+        "coin": 8475,
+        "conduit": 22836,
+        "prism": 18468,
+        "observer": 8357
+      },
+      "errors": [],
+      "elapsedMs": 1206.4550000000004,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 242.7838,
+          "target": 90,
+          "ratio": 2.6975977777777778,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 428.442,
+          "target": 210,
+          "ratio": 2.0402,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 509.0299,
+          "target": 144,
+          "ratio": 3.5349298611111113,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1885.1448,
+          "target": 144,
+          "ratio": 13.091283333333333,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1020.3965000000001,
+          "target": 336,
+          "ratio": 3.036894345238095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1678.3712,
+          "target": 311.0400000000001,
+          "ratio": 5.39599794238683,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2394.1747,
+          "target": 311.0400000000001,
+          "ratio": 7.6973209233539075,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2524.7475,
+          "target": 725.7600000000002,
+          "ratio": 3.478763640873015,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1217.9994000000002,
+          "target": 497.6640000000002,
+          "ratio": 2.44743320794753,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3721.3248000000003,
+          "target": 497.6640000000002,
+          "ratio": 7.477584876543207,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2071.5781983790694,
+          "target": 1161.2160000000003,
+          "ratio": 1.783973178443174,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2770.043714755517,
+          "target": 1074.9542400000005,
+          "ratio": 2.5768945427439927,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 4091.9732414481027,
+          "target": 1074.9542400000005,
+          "ratio": 3.8066487755312273,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 4643.966534095143,
+          "target": 2508.226560000001,
+          "ratio": 1.8514940429046176,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 7844.3504873791535,
+          "target": 1719.9267840000005,
+          "ratio": 4.560863032283095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 5849.391250035675,
+          "target": 1719.9267840000005,
+          "ratio": 3.4009536361959887,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5090.738543062201,
+          "target": 4013.1624960000013,
+          "ratio": 1.2685104448514708,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 7609.131111403336,
+          "target": 3715.0418534400023,
+          "ratio": 2.048195259054091,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 8752.420042447746,
+          "target": 3715.0418534400023,
+          "ratio": 2.3559411677538176,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 7269.767909557611,
+          "target": 8668.430991360005,
+          "ratio": 0.8386486455049976,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 428.442,
+          "target": 210,
+          "ratio": 2.0402,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1020.3965000000001,
+          "target": 336,
+          "ratio": 3.036894345238095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2524.7475,
+          "target": 725.7600000000002,
+          "ratio": 3.478763640873015,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2071.5781983790694,
+          "target": 1161.2160000000003,
+          "ratio": 1.783973178443174,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 4643.966534095143,
+          "target": 2508.226560000001,
+          "ratio": 1.8514940429046176,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5090.738543062201,
+          "target": 4013.1624960000013,
+          "ratio": 1.2685104448514708,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 7269.767909557611,
+          "target": 8668.430991360005,
+          "ratio": 0.8386486455049976,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4003
+    },
+    {
+      "seed": 2162945249,
+      "initialDice": [
+        2,
+        6,
+        1,
+        4,
+        5
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "balanced",
+      "won": false,
+      "finalWeek": 5,
+      "finalVisitor": 3,
+      "money": 16,
+      "pieces": 15,
+      "artifacts": 39,
+      "sumPieceLevels": 23,
+      "maxPieceLevel": 2,
+      "boardCells": 44,
+      "chargesRemaining": 0,
+      "totalTips": 436,
+      "totalEmotion": 18578.712390023655,
+      "cappedTips": 12,
+      "diceFaces": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 14,
+        "conduit": 10,
+        "mirror": 1,
+        "observer": 4,
+        "seal": 2,
+        "pedestal": 4,
+        "prism": 4
+      },
+      "rerolls": 25,
+      "submissions": 45,
+      "purchases": 23,
+      "spent": 444,
+      "sales": 0,
+      "diceEdits": 0,
+      "freePieces": 14,
+      "freeArtifacts": 14,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 8,
+      "strengthenedPieces": 8,
+      "overlapPlacements": 8,
+      "overlapCellsAdded": 18,
+      "saleRevenue": 0,
+      "artifactMoves": 5,
+      "brushMoves": 5,
+      "brushMovesToUnfinished": 5,
+      "prismOverlapPlacements": 1,
+      "acquiredByKind": {
+        "observer": 4,
+        "coin": 13,
+        "conduit": 9,
+        "seal": 2,
+        "pedestal": 4,
+        "prism": 4,
+        "brush": 1
+      },
+      "activationsByKind": {
+        "coin": 456,
+        "conduit": 1555,
+        "brush": 7,
+        "mirror": 61,
+        "observer": 446,
+        "seal": 104,
+        "prism": 112
+      },
+      "additiveByKind": {
+        "coin": 4840,
+        "conduit": 7430,
+        "observer": 2696,
+        "prism": 1504
+      },
+      "errors": [],
+      "elapsedMs": 548.4515999999994,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 146.8944,
+          "target": 90,
+          "ratio": 1.6321599999999998,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 477.40680000000003,
+          "target": 210,
+          "ratio": 2.2733657142857147,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 590.7736,
+          "target": 144,
+          "ratio": 4.102594444444445,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 591.658,
+          "target": 144,
+          "ratio": 4.108736111111111,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 394.03000000000003,
+          "target": 336,
+          "ratio": 1.1727083333333335,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1063.2558,
+          "target": 311.0400000000001,
+          "ratio": 3.4183892746913567,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1482.06007085491,
+          "target": 311.0400000000001,
+          "ratio": 4.764853622861721,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1413.8720862546995,
+          "target": 725.7600000000002,
+          "ratio": 1.9481262211401829,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2662.384316622284,
+          "target": 497.6640000000002,
+          "ratio": 5.349762724694338,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2539.383827589944,
+          "target": 497.6640000000002,
+          "ratio": 5.102607035248567,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2137.315223086437,
+          "target": 1161.2160000000003,
+          "ratio": 1.8405836839024234,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2504.8718517780567,
+          "target": 1074.9542400000005,
+          "ratio": 2.330212541678105,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1807.8684602373264,
+          "target": 1074.9542400000005,
+          "ratio": 1.6818096928826716,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 675.3107536,
+          "target": 2508.226560000001,
+          "ratio": 0.2692383392989825,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 477.40680000000003,
+          "target": 210,
+          "ratio": 2.2733657142857147,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 394.03000000000003,
+          "target": 336,
+          "ratio": 1.1727083333333335,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1413.8720862546995,
+          "target": 725.7600000000002,
+          "ratio": 1.9481262211401829,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2137.315223086437,
+          "target": 1161.2160000000003,
+          "ratio": 1.8405836839024234,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 675.3107536,
+          "target": 2508.226560000001,
+          "ratio": 0.2692383392989825,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "sampleId": 4004
+    },
+    {
+      "seed": 1945571996,
+      "initialDice": [
+        4,
+        5,
+        5,
+        6,
+        4
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "investor",
+      "won": false,
+      "finalWeek": 8,
+      "finalVisitor": 3,
+      "money": 18,
+      "pieces": 24,
+      "artifacts": 53,
+      "sumPieceLevels": 38,
+      "maxPieceLevel": 2,
+      "boardCells": 64,
+      "chargesRemaining": 6,
+      "totalTips": 706,
+      "totalEmotion": 111367.87497429248,
+      "cappedTips": 20,
+      "diceFaces": [
+        [
+          1,
+          1,
+          1,
+          1,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 19,
+        "conduit": 8,
+        "mirror": 1,
+        "pedestal": 7,
+        "prism": 8,
+        "observer": 5,
+        "seal": 2,
+        "frame": 1,
+        "brush": 2
+      },
+      "rerolls": 36,
+      "submissions": 72,
+      "purchases": 29,
+      "spent": 712,
+      "sales": 0,
+      "diceEdits": 11,
+      "freePieces": 23,
+      "freeArtifacts": 23,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 14,
+      "strengthenedPieces": 14,
+      "overlapPlacements": 16,
+      "overlapCellsAdded": 36,
+      "saleRevenue": 0,
+      "artifactMoves": 8,
+      "brushMoves": 8,
+      "brushMovesToUnfinished": 8,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "coin": 18,
+        "conduit": 7,
+        "pedestal": 7,
+        "prism": 8,
+        "brush": 4,
+        "observer": 5,
+        "seal": 2,
+        "frame": 1
+      },
+      "activationsByKind": {
+        "coin": 1768,
+        "conduit": 6266,
+        "brush": 12,
+        "mirror": 168,
+        "prism": 2462,
+        "observer": 1040,
+        "seal": 137
+      },
+      "additiveByKind": {
+        "coin": 25925,
+        "conduit": 31269,
+        "prism": 34145,
+        "observer": 6685
+      },
+      "errors": [],
+      "elapsedMs": 665.2957999999999,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 54.9036,
+          "target": 90,
+          "ratio": 0.6100399999999999,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 204.01999999999998,
+          "target": 90,
+          "ratio": 2.2668888888888885,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 359.0752,
+          "target": 210,
+          "ratio": 1.7098819047619047,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 689.0897640000001,
+          "target": 144,
+          "ratio": 4.785345583333334,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 982.9071540000001,
+          "target": 144,
+          "ratio": 6.825744125000001,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1056.0587260000002,
+          "target": 336,
+          "ratio": 3.1430319226190484,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 823.9381250000001,
+          "target": 311.0400000000001,
+          "ratio": 2.6489780253343618,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1799.9358470000002,
+          "target": 311.0400000000001,
+          "ratio": 5.786830783822015,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1628.7848110000002,
+          "target": 725.7600000000002,
+          "ratio": 2.244247149195326,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2113.45083,
+          "target": 497.6640000000002,
+          "ratio": 4.246742440682869,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2902.4830070000003,
+          "target": 497.6640000000002,
+          "ratio": 5.83221411836098,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 4476.263213941478,
+          "target": 1161.2160000000003,
+          "ratio": 3.854806697411573,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 4100.244964525031,
+          "target": 1074.9542400000005,
+          "ratio": 3.814343729203793,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1847,
+          "target": 1074.9542400000005,
+          "ratio": 1.7182126748018587,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3472.3609990000004,
+          "target": 2508.226560000001,
+          "ratio": 1.3843888962725914,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 4748.276097630001,
+          "target": 1719.9267840000005,
+          "ratio": 2.7607431559307583,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 10704.869692976165,
+          "target": 1719.9267840000005,
+          "ratio": 6.224026390286252,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 9028.355021632202,
+          "target": 4013.1624960000013,
+          "ratio": 2.2496858850422683,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 10262.399198258365,
+          "target": 3715.0418534400023,
+          "ratio": 2.762391273938336,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 12017.355763278862,
+          "target": 3715.0418534400023,
+          "ratio": 3.2347834122383303,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 9956.206730052632,
+          "target": 8668.430991360005,
+          "ratio": 1.1485592652206817,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 11132.103809386188,
+          "target": 5944.066965504004,
+          "ratio": 1.8728092859637366,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 13114.932152323763,
+          "target": 5944.066965504004,
+          "ratio": 2.2063903768977364,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3892.8602672878096,
+          "target": 13869.489586176009,
+          "ratio": 0.28067797615046336,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 359.0752,
+          "target": 210,
+          "ratio": 1.7098819047619047,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1056.0587260000002,
+          "target": 336,
+          "ratio": 3.1430319226190484,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1628.7848110000002,
+          "target": 725.7600000000002,
+          "ratio": 2.244247149195326,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 4476.263213941478,
+          "target": 1161.2160000000003,
+          "ratio": 3.854806697411573,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3472.3609990000004,
+          "target": 2508.226560000001,
+          "ratio": 1.3843888962725914,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 9028.355021632202,
+          "target": 4013.1624960000013,
+          "ratio": 2.2496858850422683,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 9956.206730052632,
+          "target": 8668.430991360005,
+          "ratio": 1.1485592652206817,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3892.8602672878096,
+          "target": 13869.489586176009,
+          "ratio": 0.28067797615046336,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "sampleId": 4000
+    },
+    {
+      "seed": 3004267917,
+      "initialDice": [
+        1,
+        6,
+        3,
+        4,
+        4
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "investor",
+      "won": false,
+      "finalWeek": 7,
+      "finalVisitor": 3,
+      "money": 16,
+      "pieces": 21,
+      "artifacts": 44,
+      "sumPieceLevels": 29,
+      "maxPieceLevel": 2,
+      "boardCells": 49,
+      "chargesRemaining": 0,
+      "totalTips": 628,
+      "totalEmotion": 111576.51033394548,
+      "cappedTips": 18,
+      "diceFaces": [
+        [
+          1,
+          1,
+          1,
+          1,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 11,
+        "conduit": 11,
+        "mirror": 2,
+        "prism": 12,
+        "observer": 3,
+        "pedestal": 2,
+        "seal": 3
+      },
+      "rerolls": 30,
+      "submissions": 63,
+      "purchases": 22,
+      "spent": 636,
+      "sales": 0,
+      "diceEdits": 13,
+      "freePieces": 20,
+      "freeArtifacts": 20,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 8,
+      "strengthenedPieces": 8,
+      "overlapPlacements": 18,
+      "overlapCellsAdded": 34,
+      "saleRevenue": 0,
+      "artifactMoves": 6,
+      "brushMoves": 6,
+      "brushMovesToUnfinished": 6,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "coin": 10,
+        "conduit": 10,
+        "prism": 12,
+        "mirror": 1,
+        "observer": 3,
+        "pedestal": 2,
+        "brush": 1,
+        "seal": 3
+      },
+      "activationsByKind": {
+        "coin": 866,
+        "conduit": 3456,
+        "brush": 8,
+        "mirror": 246,
+        "prism": 3675,
+        "observer": 357,
+        "seal": 448
+      },
+      "additiveByKind": {
+        "coin": 10200,
+        "conduit": 13824,
+        "prism": 47910,
+        "observer": 2142
+      },
+      "errors": [],
+      "elapsedMs": 476.8734000000004,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 271.34659999999997,
+          "target": 90,
+          "ratio": 3.0149622222222217,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 603.8992,
+          "target": 210,
+          "ratio": 2.875710476190476,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 781.3966,
+          "target": 144,
+          "ratio": 5.426365277777778,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 303.85637092,
+          "target": 144,
+          "ratio": 2.1101136869444446,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 977.3556892,
+          "target": 336,
+          "ratio": 2.908796694047619,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1868.9248019600002,
+          "target": 311.0400000000001,
+          "ratio": 6.008631693544237,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1915.75198241,
+          "target": 311.0400000000001,
+          "ratio": 6.159182042213218,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2505.77445608,
+          "target": 725.7600000000002,
+          "ratio": 3.4526213294753076,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1498.1665048926102,
+          "target": 497.6640000000002,
+          "ratio": 3.0103975873131463,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1340.399071772972,
+          "target": 497.6640000000002,
+          "ratio": 2.6933816224861986,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5755.89384578299,
+          "target": 1161.2160000000003,
+          "ratio": 4.956781378988051,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 5908.420950196794,
+          "target": 1074.9542400000005,
+          "ratio": 5.496439504435828,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 7098.510900485739,
+          "target": 1074.9542400000005,
+          "ratio": 6.603547050045345,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 6691.866952586278,
+          "target": 2508.226560000001,
+          "ratio": 2.667967503137466,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 7336.601071840367,
+          "target": 1719.9267840000005,
+          "ratio": 4.265647317136242,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 9981.100700670328,
+          "target": 1719.9267840000005,
+          "ratio": 5.80321255155843,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5205.124997716803,
+          "target": 4013.1624960000013,
+          "ratio": 1.2970132664463137,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 27751.007799867322,
+          "target": 3715.0418534400023,
+          "ratio": 7.469904484163707,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 19742.694184359905,
+          "target": 3715.0418534400023,
+          "ratio": 5.314258886768353,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3946.790453203377,
+          "target": 8668.430991360005,
+          "ratio": 0.4553062090633496,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 603.8992,
+          "target": 210,
+          "ratio": 2.875710476190476,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 977.3556892,
+          "target": 336,
+          "ratio": 2.908796694047619,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2505.77445608,
+          "target": 725.7600000000002,
+          "ratio": 3.4526213294753076,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5755.89384578299,
+          "target": 1161.2160000000003,
+          "ratio": 4.956781378988051,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 6691.866952586278,
+          "target": 2508.226560000001,
+          "ratio": 2.667967503137466,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5205.124997716803,
+          "target": 4013.1624960000013,
+          "ratio": 1.2970132664463137,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3946.790453203377,
+          "target": 8668.430991360005,
+          "ratio": 0.4553062090633496,
+          "tier": "나쁨",
+          "tip": 8,
+          "passed": false
+        }
+      ],
+      "sampleId": 4001
+    },
+    {
+      "seed": 3645144896,
+      "initialDice": [
+        4,
+        3,
+        2,
+        2,
+        5
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "investor",
+      "won": false,
+      "finalWeek": 8,
+      "finalVisitor": 3,
+      "money": 24,
+      "pieces": 24,
+      "artifacts": 54,
+      "sumPieceLevels": 32,
+      "maxPieceLevel": 2,
+      "boardCells": 64,
+      "chargesRemaining": 0,
+      "totalTips": 704,
+      "totalEmotion": 112218.8328588164,
+      "cappedTips": 20,
+      "diceFaces": [
+        [
+          1,
+          1,
+          1,
+          1,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 19,
+        "conduit": 10,
+        "mirror": 1,
+        "prism": 8,
+        "observer": 7,
+        "frame": 2,
+        "seal": 2,
+        "pedestal": 5
+      },
+      "rerolls": 34,
+      "submissions": 72,
+      "purchases": 29,
+      "spent": 704,
+      "sales": 0,
+      "diceEdits": 11,
+      "freePieces": 23,
+      "freeArtifacts": 23,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 8,
+      "strengthenedPieces": 8,
+      "overlapPlacements": 15,
+      "overlapCellsAdded": 40,
+      "saleRevenue": 0,
+      "artifactMoves": 5,
+      "brushMoves": 5,
+      "brushMovesToUnfinished": 5,
+      "prismOverlapPlacements": 2,
+      "acquiredByKind": {
+        "coin": 18,
+        "conduit": 9,
+        "prism": 8,
+        "observer": 7,
+        "frame": 2,
+        "seal": 2,
+        "pedestal": 5,
+        "brush": 1
+      },
+      "activationsByKind": {
+        "coin": 1524,
+        "conduit": 3128,
+        "brush": 7,
+        "mirror": 142,
+        "observer": 1308,
+        "prism": 2741,
+        "seal": 396
+      },
+      "additiveByKind": {
+        "coin": 20320,
+        "conduit": 16117,
+        "observer": 10303,
+        "prism": 42186
+      },
+      "errors": [],
+      "elapsedMs": 629.4449000000004,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 54.9036,
+          "target": 90,
+          "ratio": 0.6100399999999999,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 232.58280000000002,
+          "target": 90,
+          "ratio": 2.5842533333333337,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 369.27619999999996,
+          "target": 210,
+          "ratio": 1.758458095238095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 771.1956,
+          "target": 144,
+          "ratio": 5.355525,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 579.4168,
+          "target": 144,
+          "ratio": 4.023727777777777,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1334.2908,
+          "target": 336,
+          "ratio": 3.9711035714285714,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1030.301,
+          "target": 311.0400000000001,
+          "ratio": 3.3124389146090523,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1360.8134,
+          "target": 311.0400000000001,
+          "ratio": 4.375043081275719,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1893.3056,
+          "target": 725.7600000000002,
+          "ratio": 2.6087213403880063,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1534.2304,
+          "target": 497.6640000000002,
+          "ratio": 3.0828639403292164,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 3423.9243572407076,
+          "target": 497.6640000000002,
+          "ratio": 6.879992037279583,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5369.069611525298,
+          "target": 1161.2160000000003,
+          "ratio": 4.623661413143891,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3865.216464825584,
+          "target": 1074.9542400000005,
+          "ratio": 3.5957032597272067,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 4668.5523619461255,
+          "target": 1074.9542400000005,
+          "ratio": 4.343024277894958,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5150.112864572353,
+          "target": 2508.226560000001,
+          "ratio": 2.0532885452629728,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 5804.980057748772,
+          "target": 1719.9267840000005,
+          "ratio": 3.3751320764063237,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 10024.474121478255,
+          "target": 1719.9267840000005,
+          "ratio": 5.82843073015267,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 6764.435252482492,
+          "target": 4013.1624960000013,
+          "ratio": 1.6855622614894707,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 7292.7234735112015,
+          "target": 3715.0418534400023,
+          "ratio": 1.9630259257398104,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 10074.872516956728,
+          "target": 3715.0418534400023,
+          "ratio": 2.711913597319971,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 11383.354405545491,
+          "target": 8668.430991360005,
+          "ratio": 1.313196634649512,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 3881.528068293903,
+          "target": 5944.066965504004,
+          "ratio": 0.6530088053886492,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 12385.280078932214,
+          "target": 5944.066965504004,
+          "ratio": 2.0836373733353546,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 12969.993023757295,
+          "target": 13869.489586176009,
+          "ratio": 0.9351456622228362,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 369.27619999999996,
+          "target": 210,
+          "ratio": 1.758458095238095,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1334.2908,
+          "target": 336,
+          "ratio": 3.9711035714285714,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1893.3056,
+          "target": 725.7600000000002,
+          "ratio": 2.6087213403880063,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5369.069611525298,
+          "target": 1161.2160000000003,
+          "ratio": 4.623661413143891,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5150.112864572353,
+          "target": 2508.226560000001,
+          "ratio": 2.0532885452629728,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 6764.435252482492,
+          "target": 4013.1624960000013,
+          "ratio": 1.6855622614894707,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 11383.354405545491,
+          "target": 8668.430991360005,
+          "ratio": 1.313196634649512,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 12969.993023757295,
+          "target": 13869.489586176009,
+          "ratio": 0.9351456622228362,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4002
+    },
+    {
+      "seed": 1168688368,
+      "initialDice": [
+        6,
+        3,
+        5,
+        1,
+        1
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "investor",
+      "won": false,
+      "finalWeek": 7,
+      "finalVisitor": 3,
+      "money": 14,
+      "pieces": 21,
+      "artifacts": 48,
+      "sumPieceLevels": 25,
+      "maxPieceLevel": 2,
+      "boardCells": 66,
+      "chargesRemaining": 0,
+      "totalTips": 604,
+      "totalEmotion": 55765.66783223501,
+      "cappedTips": 15,
+      "diceFaces": [
+        [
+          5,
+          5,
+          5,
+          4,
+          5,
+          6
+        ],
+        [
+          5,
+          5,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          5,
+          5,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          5,
+          5,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          5,
+          5,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 17,
+        "conduit": 13,
+        "mirror": 1,
+        "prism": 3,
+        "observer": 7,
+        "seal": 4,
+        "pedestal": 2,
+        "frame": 1
+      },
+      "rerolls": 33,
+      "submissions": 63,
+      "purchases": 25,
+      "spent": 614,
+      "sales": 0,
+      "diceEdits": 12,
+      "freePieces": 20,
+      "freeArtifacts": 20,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 4,
+      "strengthenedPieces": 4,
+      "overlapPlacements": 12,
+      "overlapCellsAdded": 20,
+      "saleRevenue": 0,
+      "artifactMoves": 3,
+      "brushMoves": 3,
+      "brushMovesToUnfinished": 3,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "prism": 3,
+        "conduit": 12,
+        "coin": 16,
+        "observer": 7,
+        "seal": 4,
+        "pedestal": 2,
+        "frame": 1
+      },
+      "activationsByKind": {
+        "coin": 954,
+        "conduit": 4348,
+        "brush": 4,
+        "mirror": 41,
+        "prism": 679,
+        "observer": 893,
+        "seal": 258
+      },
+      "additiveByKind": {
+        "coin": 10296,
+        "conduit": 23992,
+        "prism": 6576,
+        "observer": 6933
+      },
+      "errors": [],
+      "elapsedMs": 618.3984,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 242.7838,
+          "target": 90,
+          "ratio": 2.6975977777777778,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 452.9244,
+          "target": 210,
+          "ratio": 2.156782857142857,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 938.492,
+          "target": 144,
+          "ratio": 6.517305555555556,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1179.9650628962538,
+          "target": 144,
+          "ratio": 8.19420182566843,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1229.756359523186,
+          "target": 336,
+          "ratio": 3.659989165247577,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1544.507631427823,
+          "target": 311.0400000000001,
+          "ratio": 4.965623815032866,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2342.0850527567463,
+          "target": 311.0400000000001,
+          "ratio": 7.529851635663406,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1665.1132760955923,
+          "target": 725.7600000000002,
+          "ratio": 2.2943029046731587,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1064,
+          "target": 497.6640000000002,
+          "ratio": 2.137988683127571,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1134,
+          "target": 497.6640000000002,
+          "ratio": 2.278645833333332,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1674,
+          "target": 1161.2160000000003,
+          "ratio": 1.4415922619047614,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 2007,
+          "target": 1074.9542400000005,
+          "ratio": 1.8670562199931404,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2247,
+          "target": 1074.9542400000005,
+          "ratio": 2.090321537780063,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3201,
+          "target": 2508.226560000001,
+          "ratio": 1.2762005039927489,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 4375.14099884064,
+          "target": 1719.9267840000005,
+          "ratio": 2.5437949100748694,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 4106.252928250112,
+          "target": 1719.9267840000005,
+          "ratio": 2.387457981612612,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5647.70453260896,
+          "target": 4013.1624960000013,
+          "ratio": 1.407295253615606,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 5578.12078203228,
+          "target": 3715.0418534400023,
+          "ratio": 1.5014960805534747,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 7405.876866108735,
+          "target": 3715.0418534400023,
+          "ratio": 1.9934841001188575,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 7638.316941694678,
+          "target": 8668.430991360005,
+          "ratio": 0.8811648785469871,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 452.9244,
+          "target": 210,
+          "ratio": 2.156782857142857,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1229.756359523186,
+          "target": 336,
+          "ratio": 3.659989165247577,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1665.1132760955923,
+          "target": 725.7600000000002,
+          "ratio": 2.2943029046731587,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1674,
+          "target": 1161.2160000000003,
+          "ratio": 1.4415922619047614,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 3201,
+          "target": 2508.226560000001,
+          "ratio": 1.2762005039927489,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 5647.70453260896,
+          "target": 4013.1624960000013,
+          "ratio": 1.407295253615606,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 7638.316941694678,
+          "target": 8668.430991360005,
+          "ratio": 0.8811648785469871,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4003
+    },
+    {
+      "seed": 2162945249,
+      "initialDice": [
+        2,
+        6,
+        1,
+        4,
+        5
+      ],
+      "initialArtifactKinds": [
+        "coin",
+        "brush",
+        "conduit",
+        "mirror"
+      ],
+      "rulesVersion": 3,
+      "policy": "investor",
+      "won": false,
+      "finalWeek": 5,
+      "finalVisitor": 3,
+      "money": 20,
+      "pieces": 15,
+      "artifacts": 34,
+      "sumPieceLevels": 19,
+      "maxPieceLevel": 2,
+      "boardCells": 49,
+      "chargesRemaining": 0,
+      "totalTips": 442,
+      "totalEmotion": 17533.297000000002,
+      "cappedTips": 12,
+      "diceFaces": [
+        [
+          1,
+          1,
+          1,
+          1,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          1,
+          1,
+          4,
+          5,
+          6
+        ]
+      ],
+      "finalArtifactsByKind": {
+        "coin": 13,
+        "conduit": 6,
+        "mirror": 1,
+        "observer": 3,
+        "pedestal": 4,
+        "prism": 5,
+        "frame": 2
+      },
+      "rerolls": 22,
+      "submissions": 45,
+      "purchases": 17,
+      "spent": 446,
+      "sales": 0,
+      "diceEdits": 11,
+      "freePieces": 14,
+      "freeArtifacts": 14,
+      "rejectedPieces": 0,
+      "rejectedArtifacts": 0,
+      "chargesConsumed": 4,
+      "strengthenedPieces": 4,
+      "overlapPlacements": 8,
+      "overlapCellsAdded": 11,
+      "saleRevenue": 0,
+      "artifactMoves": 3,
+      "brushMoves": 3,
+      "brushMovesToUnfinished": 3,
+      "prismOverlapPlacements": 0,
+      "acquiredByKind": {
+        "observer": 3,
+        "coin": 12,
+        "pedestal": 4,
+        "prism": 5,
+        "frame": 2,
+        "conduit": 5
+      },
+      "activationsByKind": {
+        "coin": 503,
+        "conduit": 727,
+        "brush": 4,
+        "mirror": 87,
+        "observer": 408,
+        "prism": 425
+      },
+      "additiveByKind": {
+        "coin": 6912,
+        "conduit": 2908,
+        "observer": 2448,
+        "prism": 4920
+      },
+      "errors": [],
+      "elapsedMs": 359.2552000000005,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 91.62719999999999,
+          "target": 90,
+          "ratio": 1.0180799999999999,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 146.8944,
+          "target": 90,
+          "ratio": 1.6321599999999998,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 371.31640000000004,
+          "target": 210,
+          "ratio": 1.7681733333333336,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 467.20579999999995,
+          "target": 144,
+          "ratio": 3.244484722222222,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 599.8188,
+          "target": 144,
+          "ratio": 4.165408333333334,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1020.1000000000001,
+          "target": 336,
+          "ratio": 3.036011904761905,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1052.7432000000001,
+          "target": 311.0400000000001,
+          "ratio": 3.3845910493827156,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 873.2056,
+          "target": 311.0400000000001,
+          "ratio": 2.807373971193415,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1687.2454000000002,
+          "target": 725.7600000000002,
+          "ratio": 2.324798004850088,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1597.4766,
+          "target": 497.6640000000002,
+          "ratio": 3.209950086805554,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 1521.9892,
+          "target": 497.6640000000002,
+          "ratio": 3.058266621656377,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1854.5418000000002,
+          "target": 1161.2160000000003,
+          "ratio": 1.5970687624007933,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "evaluator": false,
+          "score": 1748.4514,
+          "target": 1074.9542400000005,
+          "ratio": 1.626535656066624,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "evaluator": false,
+          "score": 2333.9888,
+          "target": 1074.9542400000005,
+          "ratio": 2.1712447964296593,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2166.6924,
+          "target": 2508.226560000001,
+          "ratio": 0.8638344057723394,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "evaluatorHistory": [
+        {
+          "week": 1,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 371.31640000000004,
+          "target": 210,
+          "ratio": 1.7681733333333336,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1020.1000000000001,
+          "target": 336,
+          "ratio": 3.036011904761905,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1687.2454000000002,
+          "target": 725.7600000000002,
+          "ratio": 2.324798004850088,
+          "tier": "아주 좋음",
+          "tip": 32,
+          "passed": true
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 1854.5418000000002,
+          "target": 1161.2160000000003,
+          "ratio": 1.5970687624007933,
+          "tier": "좋음",
+          "tip": 22,
+          "passed": true
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "evaluator": true,
+          "score": 2166.6924,
+          "target": 2508.226560000001,
+          "ratio": 0.8638344057723394,
+          "tier": "보통",
+          "tip": 14,
+          "passed": false
+        }
+      ],
+      "sampleId": 4004
+    }
+  ]
+}

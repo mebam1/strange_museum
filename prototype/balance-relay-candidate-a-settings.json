@@ -1,0 +1,8 @@
+{
+  "config": {
+    "normalTarget": 75,
+    "evaluatorTarget": 170,
+    "weeklyRate": 1.5,
+    "bossJump": 1.3
+  }
+}
