@@ -16,14 +16,14 @@ function fixture(pieces,artifacts,values=[3,5,1,2,6]) {
 }
 const close=(actual,expected)=>assert(Math.abs(actual-expected)<=Math.max(1,Math.abs(expected))*1e-10,`${actual} != ${expected}`);
 
-test('rules v4 starter and generated markets use current kinds only',()=>{
+test('current rules starter and generated markets use current kinds only',()=>{
   assert.equal(ARTIFACTS.echo,undefined);assert.equal(ARTIFACTS.bell,undefined);
   assert.equal(ARTIFACTS.conduit.value,4);assert.equal(ARTIFACTS.prism.value,6);
   assert.equal(getArtifactDefinition('echo'),LEGACY_ARTIFACTS.echo);
   assert.equal(getArtifactDefinition({kind:'prism'}),ARTIFACTS.prism);
   for(let seed=1;seed<=8;seed++) {
     const state=createGame(seed);
-    assert.equal(state.rulesVersion,4);
+    assert.equal(state.rulesVersion,5);
     assert(state.artifacts.some(x=>x.kind==='conduit'));
     assert(state.artifacts.every(x=>ARTIFACTS[x.kind]));
     for(let i=0;i<3;i++)assert(action(state,{type:'SUBMIT'}).ok);
@@ -64,7 +64,7 @@ test('prism requires its own full eye bundle even when a neighbor actually fires
   assert.equal(blocked.score,0);
   const open=previewSubmission(state,[3,5,1,2,6]);
   assert.equal(open.counts.prism,2);
-  close(open.score,2*2*ARTIFACTS.prism.value*ARTIFACTS.mirror.value**2);
+  close(open.score,2*2*ARTIFACTS.prism.value*(1+(ARTIFACTS.mirror.value-1)*2));
   assert.equal(open.events.find(e=>e.type==='fire'&&e.artifactId==='prism').value,12);
   state.pieces[1].level=2;
   assert.equal(previewSubmission(state,[3,5,1,2,6]).score,open.score,'Prism reward counts pieces, not their level sum.');
@@ -89,7 +89,7 @@ test('prism overlap reward is computed before static support, and frame affects 
   const prism=result.events.find(e=>e.type==='fire'&&e.artifactId==='prism');
   assert.equal(source.value,ARTIFACTS.mirror.value);
   assert.equal(prism.value,2*ARTIFACTS.prism.value+ARTIFACTS.pedestal.value+ARTIFACTS.frame.value);
-  close(result.score,2*prism.value*ARTIFACTS.mirror.value**2);
+  close(result.score,2*prism.value*(1+(ARTIFACTS.mirror.value-1)*2));
   assert.equal(result.counts.stand,undefined);assert.equal(result.counts.frame,undefined);
 });
 
@@ -104,10 +104,10 @@ test('conduits and prisms repropagate through diamond merges and cycles once per
   assert.equal(result.chainCount,2);
   assert.deepEqual(result.counts,{source:2,b:2,c:2,d:2,e:2});
   assert.deepEqual(result.chains[0].steps.map(s=>[s.artifactId,s.layer]),[['source',0],['b',1],['c',1],['d',2],['e',3]]);
-  close(result.score,2*(3*ARTIFACTS.conduit.value+2*ARTIFACTS.prism.value)*ARTIFACTS.mirror.value**2);
+  close(result.score,2*(3*ARTIFACTS.conduit.value+2*ARTIFACTS.prism.value)*(1+(ARTIFACTS.mirror.value-1)*2));
   const blocked=previewSubmission(state,[3,1,1,2,6]);
   assert.deepEqual(blocked.counts,{source:2,b:2,c:2});
-  close(blocked.score,4*ARTIFACTS.conduit.value*ARTIFACTS.mirror.value**2);
+  close(blocked.score,4*ARTIFACTS.conduit.value*(1+(ARTIFACTS.mirror.value-1)*2));
 });
 
 test('a skipped capped brush cannot seed either new relay, while a fresh target restores one real root',()=>{

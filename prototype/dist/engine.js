@@ -110,7 +110,7 @@ function makeShop(state) {
 function freshVisit() {return {score:0,submissionsLeft:CONFIG.submissionsPerVisitor,rerollsLeft:CONFIG.rerollsPerVisitor,results:[]};}
 export function createGame(seed=1) {
   const numeric=typeof seed==='number'?seed:[...String(seed)].reduce((n,c)=>(Math.imul(n,31)+c.charCodeAt(0))>>>0,2166136261);
-  const state={version:1,rulesVersion:4,seed:numeric>>>0,rng:(numeric>>>0)||0x9e3779b9,nextId:20,phase:'visit',week:1,visitor:1,money:CONFIG.startingMoney,
+  const state={version:1,rulesVersion:5,seed:numeric>>>0,rng:(numeric>>>0)||0x9e3779b9,nextId:20,phase:'visit',week:1,visitor:1,money:CONFIG.startingMoney,
     pieces:[{id:'p1',face:1,level:1,cells:[{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:0,y:1},{x:1,y:1},{x:2,y:1}]}],
     artifacts:[{id:'a1',kind:'coin',x:0,y:0,rotation:0},{id:'a2',kind:'brush',x:1,y:1,rotation:0,charges:CONFIG.brushCharges},{id:'a3',kind:'conduit',x:0,y:1,rotation:0},{id:'a4',kind:'mirror',x:1,y:0,rotation:0}],
     dice:Array.from({length:5},(_,i)=>({id:`d${i+1}`,faces:[1,2,3,4,5,6],value:1,held:false})),visit:freshVisit(),shop:null,lastResolution:null,history:[]};
@@ -138,7 +138,7 @@ export function restoreGame(saved) {
       state.shop.freePieces=Array.from({length:3},()=>makePieceOffer(state));
     }
   }
-  state.rulesVersion=4;
+  state.rulesVersion=5;
   return state;
 }
 function adjacent(a,b) {return a.some(c=>b.some(d=>Math.abs(c.x-d.x)+Math.abs(c.y-d.y)===1));}
@@ -240,13 +240,17 @@ export function resolveSubmission(state) {
       if(enabled)effectValues[a.id]=def.conditionalValue;
     }
   }
-  const resolution={dice:state.dice.map(d=>d.value),score:0,additive:0,multiplier:1,logMultiplier:0,counts:{},effectValues,conditionBonuses,upgrades:[],despawn:[],events:[],chains:[],chainCount:0,tileCounts:cells,eventsCompacted:false};
+  const additiveMultiplier=(state.rulesVersion??1)>=5;
+  const resolution={dice:state.dice.map(d=>d.value),score:0,additive:0,multiplier:1,multiplierBonus:0,logMultiplier:0,counts:{},effectValues,conditionBonuses,upgrades:[],despawn:[],events:[],chains:[],chainCount:0,tileCounts:cells,eventsCompacted:false};
   function event(e) {if(resolution.events.length<CONFIG.maxLoggedEvents) resolution.events.push(e);else resolution.eventsCompacted=true;}
   function apply(a,n,rootId,layer) {
     const def=definition(a,state); resolution.counts[a.id]=(resolution.counts[a.id]||0)+n;
     event({type:'fire',artifactId:a.id,rootId,layer,repeat:n,effect:def.effect,value:effectValues[a.id],conditionalBonus:conditionBonuses[a.id]||false});
     if(def.effect==='add') resolution.additive+=addValues.get(a.id)*n;
-    if(def.effect==='multiply') resolution.logMultiplier+=Math.log(effectValues[a.id])*n;
+    if(def.effect==='multiply') {
+      if(additiveMultiplier)resolution.multiplierBonus+=(effectValues[a.id]-1)*n;
+      else resolution.logMultiplier+=Math.log(effectValues[a.id])*n;
+    }
     if(def.effect==='upgrade') {
       if(a.charges===undefined) a.charges=CONFIG.brushCharges;
       const chosen=upgradePlan.get(a.id)||[];
@@ -277,7 +281,8 @@ export function resolveSubmission(state) {
       event({type:'despawn',artifactId:root.id,rootId:root.id});
     }
   }
-  resolution.multiplier=Math.exp(resolution.logMultiplier);
+  // The base 1 is shared by all multiplying relics. Only their bonuses stack.
+  resolution.multiplier=additiveMultiplier?1+resolution.multiplierBonus:Math.exp(resolution.logMultiplier);
   resolution.score=resolution.additive===0?0:resolution.additive*resolution.multiplier;
   return resolution;
 }

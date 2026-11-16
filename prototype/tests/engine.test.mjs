@@ -82,7 +82,7 @@ test('cell repetitions sum individual piece levels without pattern coefficients'
   assert.equal(board.find(c => c.x === 1).levelSum, 4);
   const result = resolveSubmission(state);
   assert.equal(result.counts.source, 5);
-  close(result.multiplier, effect('mirror') ** 5);
+  close(result.multiplier, (1 + (effect('mirror') - 1) * 5));
   assert.equal(result.score, 0, 'Multipliers alone produce no additive score.');
 });
 
@@ -93,7 +93,7 @@ test('multi-cell artifacts use the largest active cell count and fall back when 
   const result = resolveSubmission(state);
   assert.equal(result.counts.wide, 4);
   assert.equal(result.chainCount, 4);
-  close(result.multiplier, effect('mirror') ** 4);
+  close(result.multiplier, (1 + (effect('mirror') - 1) * 4));
   const fallback = previewSubmission(state, [3, 1, 2, 4, 5]);
   assert.equal(fallback.counts.wide, 2);
   assert.equal(fallback.chainCount, 2);
@@ -117,7 +117,7 @@ test('the same rolled dice can satisfy multiple artifacts without consumption', 
   ], [3, 1, 2, 4, 5]);
   const result = resolveSubmission(state);
   assert.deepEqual(result.counts, {left: 2, right: 2});
-  close(result.multiplier, effect('mirror') ** 4);
+  close(result.multiplier, (1 + (effect('mirror') - 1) * 4));
 });
 
 test('different fixed eye bundles with the same level sum repeat equally', () => {
@@ -201,8 +201,8 @@ test('later upgrade reactions rank the actual new levels, while scoring keeps it
   assert.deepEqual(state.pieces.map(p => p.level), [2, 2]);
   assert.equal(new Set(result.upgrades.map(u => u.pieceId)).size, 2);
   assert.equal(result.counts.source, 2);
-  close(result.multiplier, effect('mirror') ** 2);
-  close(resolveSubmission(state).multiplier, effect('mirror') ** 4);
+  close(result.multiplier, (1 + (effect('mirror') - 1) * 2));
+  close(resolveSubmission(state).multiplier, (1 + (effect('mirror') - 1) * 4));
 });
 
 test('level rises immediately but root repetitions grow only on the next submission', () => {
@@ -220,7 +220,7 @@ test('level rises immediately but root repetitions grow only on the next submiss
   assert.equal(second.counts.brush || 0, 0);
   assert.equal(state.artifacts.find(a => a.id === 'brush').charges, 1);
   assert.equal(second.counts.source, 2);
-  close(second.multiplier, effect('mirror') ** 2);
+  close(second.multiplier, (1 + (effect('mirror') - 1) * 2));
 });
 
 test('a piece cannot be upgraded again in later submissions or by a replacement brush', () => {
@@ -256,7 +256,7 @@ test('legacy restoration preserves finished records and only caps unfinished run
   legacy.shop={freeArtifacts:[{kind:'echo',price:18},{kind:'bell',price:30}],artifacts:[{kind:'bell',price:30}]};
   const migrated=restoreGame(legacy);
   assert.equal(migrated.pieces[0].level,2);
-  assert.equal(migrated.rulesVersion,4);
+  assert.equal(migrated.rulesVersion,5);
   assert.equal(migrated.visit.score,90000);
   assert.deepEqual(migrated.history,legacy.history);
   assert.deepEqual(migrated.artifacts.map(a=>a.kind),['coin','brush','conduit','mirror','prism']);
@@ -341,7 +341,7 @@ test('BFS diamond merging and cycles fire once per chain, then reset for each ro
   assert.deepEqual(result.chains[0].steps.map(step => [step.artifactId, step.layer]),
     [['a', 0], ['b', 1], ['c', 1], ['d', 2], ['e', 3]]);
   assert.equal(new Set(result.chains[0].steps.map(step => step.artifactId)).size, 5);
-  close(result.score, 16 * effect('conduit') * effect('mirror') ** 4);
+  close(result.score, 16 * effect('conduit') * (1 + (effect('mirror') - 1) * 4));
 });
 
 test('separate tile roots can each activate a shared relay in their own chain', () => {
@@ -351,7 +351,7 @@ test('separate tile roots can each activate a shared relay in their own chain', 
   const result = resolveSubmission(state);
   assert.equal(result.chainCount, 2);
   assert.equal(result.counts.relay, 2);
-  close(result.score, 2 * effect('conduit') * effect('mirror') ** 2);
+  close(result.score, 2 * effect('conduit') * (1 + (effect('mirror') - 1) * 2));
 });
 
 test('all additive effects are collected before multipliers regardless of root order', () => {
@@ -397,7 +397,7 @@ test('prism accepts adjacent multiplicative and actual upgrade roots', () => {
   const result = resolveSubmission(state);
   assert.equal(result.counts.prism, 3);
   assert.equal(result.chainCount, 3);
-  close(result.score, 3 * effect('prism') * effect('mirror') ** 2);
+  close(result.score, 3 * effect('prism') * (1 + (effect('mirror') - 1) * 2));
 });
 
 test('a relay must not count multiple touching cells of one source as multiple eligible neighbors', () => {
@@ -408,7 +408,7 @@ test('a relay must not count multiple touching cells of one source as multiple e
   ]);
   const result = resolveSubmission(state);
   assert.equal(result.counts.prism, 2);
-  close(result.score, 2 * effect('prism') * effect('mirror') ** 2);
+  close(result.score, 2 * effect('prism') * (1 + (effect('mirror') - 1) * 2));
 });
 
 test('seal eligibility requires both roots and the seal to share one exact piece ID', () => {
@@ -416,7 +416,7 @@ test('seal eligibility requires both roots and the seal to share one exact piece
   const same = fixture([piece('one', 3, 1, points([[0, 0], [1, 0], [0, 1]]))], artifacts);
   const positive = resolveSubmission(same);
   assert.equal(positive.counts.seal, 2);
-  close(positive.score, 2 * effect('seal') * effect('mirror') ** 2);
+  close(positive.score, 2 * effect('seal') * (1 + (effect('mirror') - 1) * 2));
   const different = fixture([
     piece('one', 3, 1, points([[0, 0], [1, 0]])),
     piece('two', 3, 1, points([[0, 0], [0, 1]])),

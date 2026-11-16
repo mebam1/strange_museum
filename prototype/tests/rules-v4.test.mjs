@@ -91,7 +91,7 @@ test('a multicell source uses max rather than sum and transmits from its inactiv
   assert.equal(result.counts.wide,4);assert.equal(result.counts.receiver,4);
   assert.equal(result.chainCount,4);assert.equal(result.chains.length,1);
   assert.equal(result.chains[0].rootId,'wide');
-  close(result.score,4*ARTIFACTS.conduit.value*ARTIFACTS.mirror.value**4);
+  close(result.score,4*ARTIFACTS.conduit.value*(1+(ARTIFACTS.mirror.value-1)*4));
 });
 
 test('conditional wide mirror needs different requirements and every covered cell active',()=>{
@@ -104,7 +104,7 @@ test('conditional wide mirror needs different requirements and every covered cel
   const neither=previewSubmission(state,[3,3,3,4,5]);
   assert.equal(both.counts.wide,2);assert.equal(both.chainCount,2);
   assert.equal(both.conditionBonuses.wide,true);assert.equal(both.effectValues.wide,1.02);
-  close(both.score,2*ARTIFACTS.conduit.value*1.02**2);
+  close(both.score,2*ARTIFACTS.conduit.value*(1+0.02*2));
   assert.equal(left.counts.wide,2);assert.equal(left.conditionBonuses.wide,false);
   assert.equal(left.effectValues.wide,ARTIFACTS.mirror.value);
   assert.equal(right.counts.wide,1);assert.equal(right.conditionBonuses.wide,false);
@@ -145,7 +145,7 @@ test('coin receives only adjacent actual tile sources while downstream relays ma
   ]);
   const result=resolveSubmission(state);
   assert.deepEqual(result.counts,{source:2,coin:2,relay:2});
-  close(result.score,2*(ARTIFACTS.coin.value+ARTIFACTS.conduit.value)*ARTIFACTS.mirror.value**2);
+  close(result.score,2*(ARTIFACTS.coin.value+ARTIFACTS.conduit.value)*(1+(ARTIFACTS.mirror.value-1)*2));
 });
 
 test('restoring an ordinary v3 shop removes obsolete piece offers without rerolling artifacts',()=>{
@@ -153,7 +153,7 @@ test('restoring an ordinary v3 shop removes obsolete piece offers without reroll
   state.shop.freePieces=[{id:'old-free',face:2,cells:cells([[0,0],[1,0]]),price:10}];
   state.shop.pieces=structuredClone(state.shop.freePieces);state.shop.freePieceClaimed=false;
   const before=structuredClone(state),restored=restoreGame(state);
-  assert.equal(restored.rulesVersion,4);
+  assert.equal(restored.rulesVersion,5);
   assert.deepEqual(restored.shop.freePieces,[]);assert.deepEqual(restored.shop.pieces,[]);
   assert.equal(restored.shop.freePieceClaimed,true);
   assert.deepEqual(restored.shop.freeArtifacts,before.shop.freeArtifacts);

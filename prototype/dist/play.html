@@ -296,7 +296,7 @@ const MuseumEngine=(()=>{
 /** Prototype balance values. No pattern coefficients or research-point system. */
 const CONFIG = {
   weeks: 8, visitorsPerWeek: 3, submissionsPerVisitor: 3, rerollsPerVisitor: 3,
-  normalTarget: 70, evaluatorTarget: 150, weeklyRate: 1.46, bossJump: 1.30,
+  normalTarget: 60, evaluatorTarget: 110, weeklyRate: 1.36, bossJump: 1.20,
   bossWeeks: [2, 4, 6, 8], startingMoney: 24, editDieCost: 12,
   pieceBasePrice: 6, pieceCellPrice: 2, saleRatio: 0.1,
   brushCharges: 4, maxPieceLevel: 2, maxLoggedEvents: 1200,
@@ -311,8 +311,8 @@ const CONFIG = {
 const single = [{x:0,y:0}];
 const ARTIFACTS = {
   coin: {kind:'coin',name:'금빛 동전',trigger:'chain',effect:'add',value:10,cells:single,price:18,description:'변 인접한 칸 반응 유물의 실제 발동에 감동 +10. 자기 눈 조건 없음. 연쇄 유물에서는 직접 수신하지 않음.'},
-  mirror: {kind:'mirror',name:'되비추는 거울',trigger:'tile',effect:'multiply',value:1.01,cells:single,price:24,description:'자기 칸 조건 충족 시 매회 감동 ×1.01.'},
-  long_mirror: {kind:'long_mirror',name:'긴 거울',trigger:'tile',effect:'multiply',value:1.01,conditionalValue:1.02,cells:[{x:0,y:0},{x:1,y:0}],price:28,description:'덮은 칸의 발동 횟수 중 최댓값만큼 매회 감동 ×1.01. 두 칸의 요구 눈 묶음이 서로 다르고 둘 다 발동하면 매회 ×1.02. 유물 전체가 하나의 원천이며 전체 외곽에서 연쇄 전달.'},
+  mirror: {kind:'mirror',name:'되비추는 거울',trigger:'tile',effect:'multiply',value:1.01,cells:single,price:24,description:'자기 칸 조건 충족 시 매회 최종 감동 배율에 +0.01. 기본 배율 1에 모든 증가분을 합산.'},
+  long_mirror: {kind:'long_mirror',name:'긴 거울',trigger:'tile',effect:'multiply',value:1.01,conditionalValue:1.02,cells:[{x:0,y:0},{x:1,y:0}],price:28,description:'덮은 칸의 발동 횟수 중 최댓값만큼 매회 최종 감동 배율에 +0.01. 두 칸의 요구 눈 묶음이 서로 다르고 둘 다 발동하면 매회 +0.02. 기본 배율 1에 증가분 합산. 유물 전체가 하나의 원천이며 전체 외곽에서 연쇄 전달.'},
   brush: {kind:'brush',name:'복원 붓',trigger:'tile',effect:'upgrade',value:1,cells:single,price:20,charges:4,description:'아직 강화하지 않은 조각을 런당 한 번만 Lv.1 → Lv.2로 강화. 조각당 충전 1, 제출당 최대 1회 반응. 대상이 없으면 충전을 보존. 초기 충전 4.'},
   observer: {kind:'observer',name:'행 관측자',trigger:'chain',effect:'add',value:6,cells:single,price:20,description:'같은 행 칸 반응 유물의 실제 발동에 감동 +6. 자기 눈 조건 없음.'},
   prism: {kind:'prism',name:'겹빛 렌즈',trigger:'chain',effect:'add',value:6,cells:single,price:28,description:'자기 칸의 눈 조건을 만족할 때, 변 인접한 칸·연쇄 유물의 실제 발동에 반응. 1회 감동 +6 × 자기 칸의 구성 조각 수. 조각 레벨은 다시 곱하지 않음.'},
@@ -328,6 +328,10 @@ const PRE_V4_ARTIFACTS = {
   seal: {...ARTIFACTS.seal,effect:'multiply',value:1.02,description:'자신과 하나의 같은 조각을 공유하는 칸 유물 2개가 조건을 만족하면 그 유물의 발동에 반응해 감동 ×1.02.'},
   frame: {...ARTIFACTS.frame,description:'긴 축 직선 전체의 칸 반응 합연산 유물에 매회 +4. 회전 가능.'},
 };
+const PRE_V5_ARTIFACTS = {
+  mirror: {...ARTIFACTS.mirror,description:'이전 규칙: 자기 칸 조건 충족 시 매회 감동 ×1.01을 곱함.'},
+  long_mirror: {...ARTIFACTS.long_mirror,description:'이전 규칙: 점유 칸 최대 횟수만큼 ×1.01을 곱함. 두 칸이 활성이고 요구 눈 묶음이 다르면 ×1.02.'},
+};
 /** Finished legacy saves retain their original names, footprints, and displayed results. */
 const LEGACY_ARTIFACTS = {
   echo: {kind:'echo',name:'메아리석',trigger:'chain',effect:'add',value:2,cells:single,price:18,description:'이전 규칙: 변 인접한 합연산 유물의 실제 발동에 감동 +2.'},
@@ -336,6 +340,7 @@ const LEGACY_ARTIFACTS = {
 function getArtifactDefinition(artifactOrKind,state=null) {
   const kind=typeof artifactOrKind==='string'?artifactOrKind:artifactOrKind?.kind;
   if(state&&(state.rulesVersion??1)<4&&PRE_V4_ARTIFACTS[kind])return PRE_V4_ARTIFACTS[kind];
+  if(state&&(state.rulesVersion??1)<5&&PRE_V5_ARTIFACTS[kind])return PRE_V5_ARTIFACTS[kind];
   return ARTIFACTS[kind]||LEGACY_ARTIFACTS[kind];
 }
 const SHAPES = [
@@ -461,7 +466,7 @@ function makeShop(state) {
 function freshVisit() {return {score:0,submissionsLeft:CONFIG.submissionsPerVisitor,rerollsLeft:CONFIG.rerollsPerVisitor,results:[]};}
 function createGame(seed=1) {
   const numeric=typeof seed==='number'?seed:[...String(seed)].reduce((n,c)=>(Math.imul(n,31)+c.charCodeAt(0))>>>0,2166136261);
-  const state={version:1,rulesVersion:4,seed:numeric>>>0,rng:(numeric>>>0)||0x9e3779b9,nextId:20,phase:'visit',week:1,visitor:1,money:CONFIG.startingMoney,
+  const state={version:1,rulesVersion:5,seed:numeric>>>0,rng:(numeric>>>0)||0x9e3779b9,nextId:20,phase:'visit',week:1,visitor:1,money:CONFIG.startingMoney,
     pieces:[{id:'p1',face:1,level:1,cells:[{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:0,y:1},{x:1,y:1},{x:2,y:1}]}],
     artifacts:[{id:'a1',kind:'coin',x:0,y:0,rotation:0},{id:'a2',kind:'brush',x:1,y:1,rotation:0,charges:CONFIG.brushCharges},{id:'a3',kind:'conduit',x:0,y:1,rotation:0},{id:'a4',kind:'mirror',x:1,y:0,rotation:0}],
     dice:Array.from({length:5},(_,i)=>({id:`d${i+1}`,faces:[1,2,3,4,5,6],value:1,held:false})),visit:freshVisit(),shop:null,lastResolution:null,history:[]};
@@ -489,7 +494,7 @@ function restoreGame(saved) {
       state.shop.freePieces=Array.from({length:3},()=>makePieceOffer(state));
     }
   }
-  state.rulesVersion=4;
+  state.rulesVersion=5;
   return state;
 }
 function adjacent(a,b) {return a.some(c=>b.some(d=>Math.abs(c.x-d.x)+Math.abs(c.y-d.y)===1));}
@@ -591,13 +596,17 @@ function resolveSubmission(state) {
       if(enabled)effectValues[a.id]=def.conditionalValue;
     }
   }
-  const resolution={dice:state.dice.map(d=>d.value),score:0,additive:0,multiplier:1,logMultiplier:0,counts:{},effectValues,conditionBonuses,upgrades:[],despawn:[],events:[],chains:[],chainCount:0,tileCounts:cells,eventsCompacted:false};
+  const additiveMultiplier=(state.rulesVersion??1)>=5;
+  const resolution={dice:state.dice.map(d=>d.value),score:0,additive:0,multiplier:1,multiplierBonus:0,logMultiplier:0,counts:{},effectValues,conditionBonuses,upgrades:[],despawn:[],events:[],chains:[],chainCount:0,tileCounts:cells,eventsCompacted:false};
   function event(e) {if(resolution.events.length<CONFIG.maxLoggedEvents) resolution.events.push(e);else resolution.eventsCompacted=true;}
   function apply(a,n,rootId,layer) {
     const def=definition(a,state); resolution.counts[a.id]=(resolution.counts[a.id]||0)+n;
     event({type:'fire',artifactId:a.id,rootId,layer,repeat:n,effect:def.effect,value:effectValues[a.id],conditionalBonus:conditionBonuses[a.id]||false});
     if(def.effect==='add') resolution.additive+=addValues.get(a.id)*n;
-    if(def.effect==='multiply') resolution.logMultiplier+=Math.log(effectValues[a.id])*n;
+    if(def.effect==='multiply') {
+      if(additiveMultiplier)resolution.multiplierBonus+=(effectValues[a.id]-1)*n;
+      else resolution.logMultiplier+=Math.log(effectValues[a.id])*n;
+    }
     if(def.effect==='upgrade') {
       if(a.charges===undefined) a.charges=CONFIG.brushCharges;
       const chosen=upgradePlan.get(a.id)||[];
@@ -628,7 +637,8 @@ function resolveSubmission(state) {
       event({type:'despawn',artifactId:root.id,rootId:root.id});
     }
   }
-  resolution.multiplier=Math.exp(resolution.logMultiplier);
+  // The base 1 is shared by all multiplying relics. Only their bonuses stack.
+  resolution.multiplier=additiveMultiplier?1+resolution.multiplierBonus:Math.exp(resolution.logMultiplier);
   resolution.score=resolution.additive===0?0:resolution.additive*resolution.multiplier;
   return resolution;
 }
@@ -735,8 +745,8 @@ const number = (value, digits = 1) => Number.isFinite(value) ? value.toLocaleStr
 const multiplier = value => number(value, 4);
 const targetNumber = value => number(Math.ceil(value * 100) / 100, 2);
 const key = (x, y) => `${x},${y}`;
-const STORAGE_KEY = 'strange-museum-run-v4';
-const PREVIOUS_STORAGE_KEYS = ['strange-museum-run-v3','strange-museum-run-v2','strange-museum-run-v1'];
+const STORAGE_KEY = 'strange-museum-run-v5';
+const PREVIOUS_STORAGE_KEYS = ['strange-museum-run-v4','strange-museum-run-v3','strange-museum-run-v2','strange-museum-run-v1'];
 let restoreNotice = '';
 const TILE_GAP = 0;
 const pieceColors = ['99 151 171','193 139 93','145 129 183','112 159 114','194 119 139','162 164 83','112 137 204','192 153 174'];
@@ -781,7 +791,7 @@ function loadState() {
     const s = saved?.state;
     if (saved?.format !== 1 || s?.version !== 1 || !Array.isArray(s.pieces) || !Array.isArray(s.artifacts) || !Array.isArray(s.dice) || !s.dice.length || !['visit','shop','won','lost'].includes(s.phase)) return null;
     if (!s.dice.every(d=>Array.isArray(d.faces)&&d.faces.length===6&&d.faces.every(n=>Number.isInteger(n)&&n>=1&&n<=6))) return null;
-    if((s.rulesVersion??1)<4)restoreNotice=['won','lost'].includes(s.phase)?'이전 규칙으로 마친 런의 기록입니다. 새 박물관에서는 관객마다 유물 보상, 평가 통과 뒤 조각 보상과 새로운 다칸 유물을 만나 보세요.':'새 보상·유물 규칙으로 이어갑니다. 유물은 관객마다, 조각은 주간 평가 통과 뒤에 받으며 상점은 유물만 판매합니다. 이전 저장도 별도로 보존합니다.';
+    if((s.rulesVersion??1)<5)restoreNotice=['won','lost'].includes(s.phase)?'이전 규칙으로 마친 런의 기록입니다. 새 박물관부터 배율은 기본 1에 발동별 증가분을 합산합니다.':'새 규칙으로 이어갑니다. 배율은 기본 1에 발동별 증가분을 합산합니다. 유물은 관객마다, 조각은 주간 평가 통과 뒤에 받습니다. 이전 저장도 별도로 보존합니다.';
     return restoreGame(s);
   } catch { return null; }
 }
@@ -822,7 +832,8 @@ function effectText(def,artifact=null,s=shownState()) {
   if(def.effect==='multiply'){
     const applied=artifact?forecast?.effectValues?.[artifact.id]:null;
     const bonus=artifact&&forecast?.conditionBonuses?.[artifact.id];
-    return `감동 ×${multiplier(applied??def.value)}${bonus?` · 조건 충족 (기본 ×${multiplier(def.value)})`:''}`;
+    if((s.rulesVersion??1)<5)return `감동 ×${multiplier(applied??def.value)}${bonus?' · 조건 충족':''}`;
+    return `매회 감동 배율 +${multiplier((applied??def.value)-1)}${bonus?` · 조건 충족 (기본 +${multiplier(def.value-1)})`:''} · 기본 1에 합산`;
   }
   if(def.effect==='upgrade')return '조각 레벨 +1';
   return `이웃 효과 +${number(def.value)}`;
@@ -833,7 +844,7 @@ function closeDialog(button) { button.closest('dialog')?.close(); }
 function renderHeader(s) {
   document.querySelectorAll('[data-action="zoom-in"],[data-action="zoom-out"],[data-action="fit-board"]').forEach(button=>{button.disabled=!!animation;});
   $('money-total').textContent=number(s.money);
-  $('seed-label').textContent=`시드 ${state.seed}${(state.rulesVersion??1)<4?' · 이전 규칙 기록':''}`;
+  $('seed-label').textContent=`시드 ${state.seed}${(state.rulesVersion??1)<5?' · 이전 규칙 기록':''}`;
   $('week-track').innerHTML=Array.from({length:CONFIG.weeks},(_,i)=>{
     const week=i+1, complete=week<s.week||(state.phase==='won'&&week===s.week), current=week===s.week;
     return `<div class="week-item ${complete?'completed':''} ${current?'current':''}" ${current?'aria-current="step"':''}><strong>${complete?'✓':String(week).padStart(2,'0')}</strong><span>${current?'이번 주':'주차'}</span>${CONFIG.bossWeeks.includes(week)?'<span class="boss-mark" title="보스 주간">✧</span>':''}</div>`;
@@ -1211,7 +1222,7 @@ function renderEditor() {
   $('edit-content').innerHTML=`<div class="modal-heading"><div><span class="eyebrow">SHAPE YOUR ODDS</span><h2>주사위를 전시에 맞게</h2></div><button class="icon-button" data-action="close-dialog" aria-label="주사위 면 변경 닫기">×</button></div><p class="detail-description">주사위 하나의 한 면을 원하는 눈으로 바꿉니다. 같은 눈을 여러 면에 넣을 수 있고, 변경은 이번 런 동안 유지됩니다.</p><div class="edit-dice-tabs">${state.dice.map((d,i)=>`<button class="edit-die-tab ${draft.die===i?'active':''}" data-action="editor-die" data-die="${i}" aria-label="${i+1}번 주사위 선택">${pips(d.value)}${i+1}번 주사위</button>`).join('')}</div><p class="edit-label">1. 바꿀 면을 선택하세요</p><div class="edit-faces">${die.faces.map((value,i)=>`<button class="face-option ${draft.face===i?'active':''}" data-action="editor-face" data-face="${i}" aria-label="${i+1}번 면, 현재 ${value}눈 선택"><small>${i+1}번 면</small><strong>${value}</strong></button>`).join('')}</div><p class="edit-label">2. 새로 넣을 눈을 선택하세요</p><div class="new-eye-options">${Array.from({length:6},(_,i)=>i+1).map(value=>`<button class="eye-option ${draft.value===value?'active':''}" data-action="editor-value" data-value="${value}" aria-label="새 눈 ${value} 선택">${pips(value)}</button>`).join('')}</div><div class="edit-preview"><span>${draft.die+1}번 주사위 · ${draft.face+1}번 면<br><strong>${die.faces[draft.face]} → ${draft.value}</strong></span><span>변경 비용 <strong>${number(CONFIG.editDieCost)}원</strong></span></div><div class="modal-actions"><button class="quiet-button" data-action="close-dialog">취소</button><button class="primary-button" data-action="apply-edit" ${same||!affordable?'disabled':''}>${same?'새 눈을 골라주세요':!affordable?'보유 금액이 부족해요':'비용을 내고 변경'}</button></div>`;
 }
 function renderHelp() {
-  $('help-content').innerHTML=`<div class="rule-section"><h3>박물관이 곧 나의 족보표</h3><p>폴리오미노 하나에는 눈 하나가 정해져 있습니다. 조각을 겹치면 그 칸이 요구하는 눈 묶음도 늘어납니다. 예를 들어 [1,1]은 최종 주사위에 1이 두 개 있어야 합니다.</p><div class="rule-highlight">조건을 만족한 칸의 발동 횟수 = 구성 조각의 레벨 합<br>여러 칸 칸 반응 유물의 발동 횟수 = 점유 칸 횟수의 최댓값</div></div><div class="rule-section"><h3>한 관객에게 세 번의 기회</h3><ol><li>주사위를 눌러 보관하고 나머지를 리롤합니다.</li><li>제출 ${CONFIG.submissionsPerVisitor}회가 리롤 ${CONFIG.rerollsPerVisitor}회를 함께 씁니다. 제출 사이의 전체 재굴림은 무료입니다.</li><li>매주 일반 관객 ${CONFIG.visitorsPerWeek-1}명 뒤 평가 담당자가 옵니다. 평가 담당자의 자기 세 제출 감동으로 통과 여부를 결정합니다.</li></ol><p>현재 프로토타입은 감동이 기준 이상이면 통과합니다. 총 ${CONFIG.weeks}주를 완주하면 클리어합니다.</p></div><div class="rule-section"><h3>유물과 연쇄</h3><p>칸 반응 유물은 곱연산으로 감동을 증폭하고, 연쇄 유물은 합연산으로 감동을 만듭니다. 칸 유물의 실제 발동마다 독립 연쇄가 시작됩니다. 여러 칸 유물도 하나의 원천이며 전체 외곽에서 연쇄를 전달합니다. 연쇄 유물은 같은 연쇄에 한 번만 참여하며, 여러 변으로 접해도 중복 발동하지 않습니다.</p><p>검은 덮개는 이번 연쇄에서 이미 발동을 마쳤다는 뜻입니다. 같은 독립 연쇄가 여러 번 반복될 때는 대표 한 번과 반복 횟수를 표시합니다.</p></div><div class="rule-section"><h3>충전으로 조각을 강화하세요</h3><p>조각은 런 전체에서 한 번만 Lv.1에서 Lv.2로 강화할 수 있습니다. 복원 붓은 아직 강화하지 않은 대상 조각마다 충전 1을 쓰며 제출당 최대 한 번 반응합니다. 모두 강화한 자리에서는 발동하지 않고 충전을 보존합니다. 충전이 부족하면 큰 조각부터, 크기도 같으면 무작위로 고릅니다. 충전을 다 쓴 붓은 사라지고 새 발동 횟수는 다음 제출부터 적용됩니다.</p></div><div class="rule-section"><h3>상점에서 다음 전시 준비</h3><p>‘무료 보상!!’에서 관객 종료마다 유물 3개 중 1개를 고릅니다. 주간 평가를 통과하면 조각도 3개 중 1개를 고를 수 있습니다. 상점에서는 조각을 판매하지 않습니다. 런이 끝난 뒤에는 보상 선택을 진행하지 않습니다. 보상은 거절할 수 있습니다. 상품이나 배치 미리보기를 보드로 끌어 놓으세요. 선택 후 칸을 클릭해도 됩니다. R로 회전하고 Esc로 취소할 수 있습니다.</p><p>상점에서 기존 유물도 드래그로 이동할 수 있습니다. 배치된 조각은 고정입니다. 유물은 구매가의 ${number(CONFIG.saleRatio*100,0)}%에 판매할 수 있습니다. 주사위 한 면 변경은 ${number(CONFIG.editDieCost)}원입니다. 면 개조로 주력 족보의 성공 확률을 높여 보세요.</p></div><div class="rule-section"><h3>다섯 단계의 고정 팁</h3><p>관객의 세 제출 누적 감동 ÷ 감동 기준으로 등급을 정합니다. 아주 좋음 이후에는 팁이 더 늘지 않습니다.</p><table class="rule-table"><thead><tr><th>등급</th><th>달성 배수 이상</th><th>팁</th></tr></thead><tbody>${CONFIG.tipTiers.map(t=>`<tr><td>${t.name}</td><td>${number(t.minRatio,2)}배</td><td>${number(t.tip)}원</td></tr>`).join('')}</tbody></table></div><div class="rule-section"><h3>처음에는 이렇게</h3><p>시작 조각은 1눈을 요구합니다. 1이 나온 주사위를 보관하세요. 거울 → 금빛 동전 → 전시 도선으로 연쇄를 연결하세요. 렌즈는 자신의 눈 조건을 만족해야 하며 겹친 조각마다 감동이 커집니다. 붓으로 조각을 한 번 강화한 뒤, 상점에서 새 조각으로 옮겨 남은 충전을 쓰세요. 작은 유물과 큰 유물의 기본 수치는 비슷하며 큰 유물은 조건부 효과를 가집니다. 긴 거울은 두 칸이 모두 발동하고 요구 눈 묶음이 서로 다를 때 배율 보너스를 받습니다.</p><p>진행은 이 브라우저에 자동 저장됩니다. 현재 시드는 ${state.seed}입니다. 수치와 일부 배치 판정은 밸런스 검증을 위한 프로토타입 설정입니다.</p></div>`;
+  $('help-content').innerHTML=`<div class="rule-section"><h3>박물관이 곧 나의 족보표</h3><p>폴리오미노 하나에는 눈 하나가 정해져 있습니다. 조각을 겹치면 그 칸이 요구하는 눈 묶음도 늘어납니다. 예를 들어 [1,1]은 최종 주사위에 1이 두 개 있어야 합니다.</p><div class="rule-highlight">조건을 만족한 칸의 발동 횟수 = 구성 조각의 레벨 합<br>여러 칸 칸 반응 유물의 발동 횟수 = 점유 칸 횟수의 최댓값</div></div><div class="rule-section"><h3>한 관객에게 세 번의 기회</h3><ol><li>주사위를 눌러 보관하고 나머지를 리롤합니다.</li><li>제출 ${CONFIG.submissionsPerVisitor}회가 리롤 ${CONFIG.rerollsPerVisitor}회를 함께 씁니다. 제출 사이의 전체 재굴림은 무료입니다.</li><li>매주 일반 관객 ${CONFIG.visitorsPerWeek-1}명 뒤 평가 담당자가 옵니다. 평가 담당자의 자기 세 제출 감동으로 통과 여부를 결정합니다.</li></ol><p>현재 프로토타입은 감동이 기준 이상이면 통과합니다. 총 ${CONFIG.weeks}주를 완주하면 클리어합니다.</p></div><div class="rule-section"><h3>유물과 연쇄</h3><p>칸 반응 유물은 감동 배율을 높이고, 연쇄 유물은 합연산으로 감동을 만듭니다. 최종 배율은 기본 1에 모든 발동의 배율 증가분을 더합니다. 거울이 두 번 발동하면 1 + 0.01 + 0.01 = 1.02이며, 매번 곱하지 않습니다. 칸 유물의 실제 발동마다 독립 연쇄가 시작됩니다. 여러 칸 유물도 하나의 원천이며 전체 외곽에서 연쇄를 전달합니다. 연쇄 유물은 같은 연쇄에 한 번만 참여하며, 여러 변으로 접해도 중복 발동하지 않습니다.</p><p>검은 덮개는 이번 연쇄에서 이미 발동을 마쳤다는 뜻입니다. 같은 독립 연쇄가 여러 번 반복될 때는 대표 한 번과 반복 횟수를 표시합니다.</p></div><div class="rule-section"><h3>충전으로 조각을 강화하세요</h3><p>조각은 런 전체에서 한 번만 Lv.1에서 Lv.2로 강화할 수 있습니다. 복원 붓은 아직 강화하지 않은 대상 조각마다 충전 1을 쓰며 제출당 최대 한 번 반응합니다. 모두 강화한 자리에서는 발동하지 않고 충전을 보존합니다. 충전이 부족하면 큰 조각부터, 크기도 같으면 무작위로 고릅니다. 충전을 다 쓴 붓은 사라지고 새 발동 횟수는 다음 제출부터 적용됩니다.</p></div><div class="rule-section"><h3>상점에서 다음 전시 준비</h3><p>‘무료 보상!!’에서 관객 종료마다 유물 3개 중 1개를 고릅니다. 주간 평가를 통과하면 조각도 3개 중 1개를 고를 수 있습니다. 상점에서는 조각을 판매하지 않습니다. 런이 끝난 뒤에는 보상 선택을 진행하지 않습니다. 보상은 거절할 수 있습니다. 상품이나 배치 미리보기를 보드로 끌어 놓으세요. 선택 후 칸을 클릭해도 됩니다. R로 회전하고 Esc로 취소할 수 있습니다.</p><p>상점에서 기존 유물도 드래그로 이동할 수 있습니다. 배치된 조각은 고정입니다. 유물은 구매가의 ${number(CONFIG.saleRatio*100,0)}%에 판매할 수 있습니다. 주사위 한 면 변경은 ${number(CONFIG.editDieCost)}원입니다. 면 개조로 주력 족보의 성공 확률을 높여 보세요.</p></div><div class="rule-section"><h3>다섯 단계의 고정 팁</h3><p>관객의 세 제출 누적 감동 ÷ 감동 기준으로 등급을 정합니다. 아주 좋음 이후에는 팁이 더 늘지 않습니다.</p><table class="rule-table"><thead><tr><th>등급</th><th>달성 배수 이상</th><th>팁</th></tr></thead><tbody>${CONFIG.tipTiers.map(t=>`<tr><td>${t.name}</td><td>${number(t.minRatio,2)}배</td><td>${number(t.tip)}원</td></tr>`).join('')}</tbody></table></div><div class="rule-section"><h3>처음에는 이렇게</h3><p>시작 조각은 1눈을 요구합니다. 1이 나온 주사위를 보관하세요. 거울 → 금빛 동전 → 전시 도선으로 연쇄를 연결하세요. 렌즈는 자신의 눈 조건을 만족해야 하며 겹친 조각마다 감동이 커집니다. 붓으로 조각을 한 번 강화한 뒤, 상점에서 새 조각으로 옮겨 남은 충전을 쓰세요. 작은 유물과 큰 유물의 기본 수치는 비슷하며 큰 유물은 조건부 효과를 가집니다. 긴 거울은 두 칸이 모두 발동하고 요구 눈 묶음이 서로 다를 때 배율 보너스를 받습니다.</p><p>진행은 이 브라우저에 자동 저장됩니다. 현재 시드는 ${state.seed}입니다. 수치와 일부 배치 판정은 밸런스 검증을 위한 프로토타입 설정입니다.</p></div>`;
 }
 
 async function submitWithAnimation() {

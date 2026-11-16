@@ -1,7 +1,7 @@
 /** Prototype balance values. No pattern coefficients or research-point system. */
 export const CONFIG = {
   weeks: 8, visitorsPerWeek: 3, submissionsPerVisitor: 3, rerollsPerVisitor: 3,
-  normalTarget: 70, evaluatorTarget: 150, weeklyRate: 1.46, bossJump: 1.30,
+  normalTarget: 60, evaluatorTarget: 110, weeklyRate: 1.36, bossJump: 1.20,
   bossWeeks: [2, 4, 6, 8], startingMoney: 24, editDieCost: 12,
   pieceBasePrice: 6, pieceCellPrice: 2, saleRatio: 0.1,
   brushCharges: 4, maxPieceLevel: 2, maxLoggedEvents: 1200,
@@ -16,8 +16,8 @@ export const CONFIG = {
 const single = [{x:0,y:0}];
 export const ARTIFACTS = {
   coin: {kind:'coin',name:'금빛 동전',trigger:'chain',effect:'add',value:10,cells:single,price:18,description:'변 인접한 칸 반응 유물의 실제 발동에 감동 +10. 자기 눈 조건 없음. 연쇄 유물에서는 직접 수신하지 않음.'},
-  mirror: {kind:'mirror',name:'되비추는 거울',trigger:'tile',effect:'multiply',value:1.01,cells:single,price:24,description:'자기 칸 조건 충족 시 매회 감동 ×1.01.'},
-  long_mirror: {kind:'long_mirror',name:'긴 거울',trigger:'tile',effect:'multiply',value:1.01,conditionalValue:1.02,cells:[{x:0,y:0},{x:1,y:0}],price:28,description:'덮은 칸의 발동 횟수 중 최댓값만큼 매회 감동 ×1.01. 두 칸의 요구 눈 묶음이 서로 다르고 둘 다 발동하면 매회 ×1.02. 유물 전체가 하나의 원천이며 전체 외곽에서 연쇄 전달.'},
+  mirror: {kind:'mirror',name:'되비추는 거울',trigger:'tile',effect:'multiply',value:1.01,cells:single,price:24,description:'자기 칸 조건 충족 시 매회 최종 감동 배율에 +0.01. 기본 배율 1에 모든 증가분을 합산.'},
+  long_mirror: {kind:'long_mirror',name:'긴 거울',trigger:'tile',effect:'multiply',value:1.01,conditionalValue:1.02,cells:[{x:0,y:0},{x:1,y:0}],price:28,description:'덮은 칸의 발동 횟수 중 최댓값만큼 매회 최종 감동 배율에 +0.01. 두 칸의 요구 눈 묶음이 서로 다르고 둘 다 발동하면 매회 +0.02. 기본 배율 1에 증가분 합산. 유물 전체가 하나의 원천이며 전체 외곽에서 연쇄 전달.'},
   brush: {kind:'brush',name:'복원 붓',trigger:'tile',effect:'upgrade',value:1,cells:single,price:20,charges:4,description:'아직 강화하지 않은 조각을 런당 한 번만 Lv.1 → Lv.2로 강화. 조각당 충전 1, 제출당 최대 1회 반응. 대상이 없으면 충전을 보존. 초기 충전 4.'},
   observer: {kind:'observer',name:'행 관측자',trigger:'chain',effect:'add',value:6,cells:single,price:20,description:'같은 행 칸 반응 유물의 실제 발동에 감동 +6. 자기 눈 조건 없음.'},
   prism: {kind:'prism',name:'겹빛 렌즈',trigger:'chain',effect:'add',value:6,cells:single,price:28,description:'자기 칸의 눈 조건을 만족할 때, 변 인접한 칸·연쇄 유물의 실제 발동에 반응. 1회 감동 +6 × 자기 칸의 구성 조각 수. 조각 레벨은 다시 곱하지 않음.'},
@@ -33,6 +33,10 @@ const PRE_V4_ARTIFACTS = {
   seal: {...ARTIFACTS.seal,effect:'multiply',value:1.02,description:'자신과 하나의 같은 조각을 공유하는 칸 유물 2개가 조건을 만족하면 그 유물의 발동에 반응해 감동 ×1.02.'},
   frame: {...ARTIFACTS.frame,description:'긴 축 직선 전체의 칸 반응 합연산 유물에 매회 +4. 회전 가능.'},
 };
+const PRE_V5_ARTIFACTS = {
+  mirror: {...ARTIFACTS.mirror,description:'이전 규칙: 자기 칸 조건 충족 시 매회 감동 ×1.01을 곱함.'},
+  long_mirror: {...ARTIFACTS.long_mirror,description:'이전 규칙: 점유 칸 최대 횟수만큼 ×1.01을 곱함. 두 칸이 활성이고 요구 눈 묶음이 다르면 ×1.02.'},
+};
 /** Finished legacy saves retain their original names, footprints, and displayed results. */
 export const LEGACY_ARTIFACTS = {
   echo: {kind:'echo',name:'메아리석',trigger:'chain',effect:'add',value:2,cells:single,price:18,description:'이전 규칙: 변 인접한 합연산 유물의 실제 발동에 감동 +2.'},
@@ -41,6 +45,7 @@ export const LEGACY_ARTIFACTS = {
 export function getArtifactDefinition(artifactOrKind,state=null) {
   const kind=typeof artifactOrKind==='string'?artifactOrKind:artifactOrKind?.kind;
   if(state&&(state.rulesVersion??1)<4&&PRE_V4_ARTIFACTS[kind])return PRE_V4_ARTIFACTS[kind];
+  if(state&&(state.rulesVersion??1)<5&&PRE_V5_ARTIFACTS[kind])return PRE_V5_ARTIFACTS[kind];
   return ARTIFACTS[kind]||LEGACY_ARTIFACTS[kind];
 }
 export const SHAPES = [
