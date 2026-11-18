@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b3733">
+  <title>이상한 박물관 · 전시 운영실</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="mast"><div class="mast-inner">
+    <div class="brand"><span class="brandmark" data-icon="museum"></span><strong>이상한 박물관</strong></div>
+    <nav aria-label="운영 도구"><button data-action="schedule"><i data-icon="calendar"></i>평가 일정</button><button data-action="help"><i data-icon="book"></i>이용 안내</button></nav>
+  </div></header>
+  <main>
+    <section id="headline" class="headline" aria-label="진행 상태"></section>
+    <div id="layout" class="layout">
+      <div class="main-column">
+        <section class="panel gallery" aria-labelledby="floor-title">
+          <div class="section-head"><div><i data-icon="floor"></i><h2 id="floor-title">전시 배치도</h2></div><span class="quiet" id="board-count"></span></div>
+          <div class="map-shell">
+            <div id="board" class="map" tabindex="0" role="group" aria-label="전시 배치도. 방향키로 자리를 선택하고 Enter로 조사하거나 배치하세요.">
+              <div id="marks"></div><div id="tiles"></div><div id="axes" aria-hidden="true"></div>
+            </div>
+            <div class="map-controls"><button data-action="zoomout" aria-label="축소">−</button><button data-action="zoomin" aria-label="확대">+</button><button data-action="fit" aria-label="전체 보기" title="전체 보기"><i data-icon="fit"></i></button></div>
+            <div class="coordinate" id="coordinate" aria-hidden="true"></div>
+          </div>
+          <div class="map-foot"><span><b class="key owned"></b>구매한 칸</span><span><b class="key open"></b>미구매 자리</span><span><b class="key token"></b>토큰</span><small id="map-hint">드래그로 이동</small></div>
+          <div id="board-detail"></div>
+        </section>
+        <section id="controls" class="panel"></section>
+        <section id="report" class="panel" hidden></section>
+      </div>
+      <aside id="sidebar" class="side-column"></aside>
+    </div>
+    <footer><span id="save-status"></span><button data-action="new">새 런 시작</button></footer>
+  </main>
+  <dialog id="dialog"><div class="dialog-head"><h2 id="dialog-title"></h2><button data-action="close" aria-label="닫기">×</button></div><div id="dialog-body"></div></dialog>
+  <div id="feedback" role="status" aria-live="polite"></div>
+  <script src="../catalog.js"></script>
+  <script src="../core.js"></script>
+  <script src="../game.js"></script>
+  <script src="../policy.js"></script>
+  <script src="../symbols.js"></script>
+  <script src="../board.js"></script>
+  <script src="../app.js"></script>
+</body>
+</html>

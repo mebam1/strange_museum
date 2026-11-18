@@ -1,0 +1,1568 @@
+{
+  "rulesVersion": 5,
+  "firstSeed": 1,
+  "runCount": 10,
+  "wins": 7,
+  "weeks": [
+    {
+      "week": 1,
+      "reached": 10,
+      "reachRate": 1,
+      "diceAfterEvaluation": {
+        "count": 10,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "max": 7,
+        "mean": 6.1
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 10,
+            "min": 24,
+            "p25": 26,
+            "median": 26,
+            "p75": 34,
+            "max": 36,
+            "mean": 29
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 10,
+            "min": 22,
+            "p25": 30,
+            "median": 46,
+            "p75": 48,
+            "max": 126,
+            "mean": 49
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 10,
+            "min": 21,
+            "p25": 39,
+            "median": 90,
+            "p75": 108,
+            "max": 136,
+            "mean": 81.5
+          }
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 8,
+        "max": 9,
+        "mean": 6.714285714285714
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 90,
+            "p25": 144,
+            "median": 180,
+            "p75": 243,
+            "max": 250,
+            "mean": 183.42857142857142
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 204,
+            "p25": 217,
+            "median": 308,
+            "p75": 440,
+            "max": 465,
+            "mean": 318
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 195,
+            "p25": 212,
+            "median": 392,
+            "p75": 490,
+            "max": 828,
+            "mean": 409.57142857142856
+          }
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 9,
+        "max": 9,
+        "mean": 6.857142857142857
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 340,
+            "p25": 408,
+            "median": 468,
+            "p75": 637,
+            "max": 1440,
+            "mean": 619.1428571428571
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 440,
+            "p25": 448,
+            "median": 576,
+            "p75": 801,
+            "max": 1680,
+            "mean": 733.5714285714286
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 402,
+            "p25": 448,
+            "median": 832,
+            "p75": 1092,
+            "max": 1540,
+            "mean": 824.2857142857143
+          }
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 9,
+        "max": 9,
+        "mean": 7
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 721,
+            "p25": 780,
+            "median": 954,
+            "p75": 1452,
+            "max": 2641,
+            "mean": 1191.7142857142858
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 252,
+            "p25": 819,
+            "median": 1105,
+            "p75": 1408,
+            "max": 2265,
+            "mean": 1170.5714285714287
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 728,
+            "p25": 930,
+            "median": 1050,
+            "p75": 1456,
+            "max": 2752,
+            "mean": 1280.7142857142858
+          }
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 9,
+        "max": 10,
+        "mean": 7.285714285714286
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 540,
+            "p25": 945,
+            "median": 1404,
+            "p75": 1807,
+            "max": 3390,
+            "mean": 1570
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 765,
+            "p25": 1232,
+            "median": 1859,
+            "p75": 2057,
+            "max": 4123,
+            "mean": 1918.2857142857142
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 645,
+            "p25": 1342,
+            "median": 2070,
+            "p75": 2496,
+            "max": 2937,
+            "mean": 1917.2857142857142
+          }
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 9,
+        "max": 10,
+        "mean": 7.285714285714286
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 1003,
+            "p25": 1750,
+            "median": 1965,
+            "p75": 2678,
+            "max": 3585,
+            "mean": 2129.5714285714284
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 1207,
+            "p25": 1452,
+            "median": 2142,
+            "p75": 2522,
+            "max": 4395,
+            "mean": 2286.714285714286
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 645,
+            "p25": 1557,
+            "median": 2230,
+            "p75": 2688,
+            "max": 3806,
+            "mean": 2191.1428571428573
+          }
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 9,
+        "max": 10,
+        "mean": 7.285714285714286
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 1430,
+            "p25": 1804,
+            "median": 2520,
+            "p75": 2678,
+            "max": 4800,
+            "mean": 2524.285714285714
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 1360,
+            "p25": 1854,
+            "median": 2698,
+            "p75": 3249,
+            "max": 3872,
+            "mean": 2650.4285714285716
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 1365,
+            "p25": 1746,
+            "median": 2702,
+            "p75": 4503,
+            "max": 5520,
+            "mean": 3172.285714285714
+          }
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "reached": 7,
+      "reachRate": 0.7,
+      "diceAfterEvaluation": {
+        "count": 7,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 9,
+        "max": 10,
+        "mean": 7.285714285714286
+      },
+      "visitors": [
+        {
+          "visitor": 1,
+          "impression": {
+            "count": 7,
+            "min": 1464,
+            "p25": 1900,
+            "median": 2924,
+            "p75": 3971,
+            "max": 6030,
+            "mean": 3200.285714285714
+          }
+        },
+        {
+          "visitor": 2,
+          "impression": {
+            "count": 7,
+            "min": 1836,
+            "p25": 1900,
+            "median": 3405,
+            "p75": 4029,
+            "max": 8878,
+            "mean": 3724.714285714286
+          }
+        },
+        {
+          "visitor": 3,
+          "impression": {
+            "count": 7,
+            "min": 2124,
+            "p25": 2261,
+            "median": 3382,
+            "p75": 4237,
+            "max": 7920,
+            "mean": 3815.1428571428573
+          }
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "seed": 1,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 9,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 26,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 48,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 116,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 147,
+          "diceCount": 7
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 465,
+          "diceCount": 8
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 828,
+          "diceCount": 9
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 1440,
+          "diceCount": 9
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 1680,
+          "diceCount": 9
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 1540,
+          "diceCount": 9
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 2641,
+          "diceCount": 9
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 2265,
+          "diceCount": 9
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 2752,
+          "diceCount": 9
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 3390,
+          "diceCount": 9
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 4123,
+          "diceCount": 9
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 2937,
+          "diceCount": 9
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 3585,
+          "diceCount": 9
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 4395,
+          "diceCount": 9
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 3806,
+          "diceCount": 9
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 4800,
+          "diceCount": 9
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 3872,
+          "diceCount": 9
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 5520,
+          "diceCount": 9
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 6030,
+          "diceCount": 9
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 8878,
+          "diceCount": 9
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 7920,
+          "diceCount": 9
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 24,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 22,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 136,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 243,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 217,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 392,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 627,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 576,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 1092,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 975,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 1360,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 1050,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 1177,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 1232,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 2266,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 2006,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 1452,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 1738,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 1804,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 2698,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 3692,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 2850,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 2184,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 3382,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 8,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 26,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 48,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 95,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 230,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 440,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 195,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 340,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 440,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 510,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 721,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 1105,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 981,
+          "diceCount": 7
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 945,
+          "diceCount": 8
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 2057,
+          "diceCount": 8
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 2070,
+          "diceCount": 8
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 1920,
+          "diceCount": 8
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 2142,
+          "diceCount": 8
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 2688,
+          "diceCount": 8
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 2520,
+          "diceCount": 8
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 2924,
+          "diceCount": 8
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 2702,
+          "diceCount": 8
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 2924,
+          "diceCount": 8
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 3841,
+          "diceCount": 8
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 3914,
+          "diceCount": 8
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 36,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 32,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 78,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 250,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 204,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 490,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 637,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 801,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 832,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 819,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 819,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 930,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 1404,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 1467,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 1342,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 1750,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 1926,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 1557,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 1820,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 1854,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 1746,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 1464,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 1836,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 2124,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 26,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 48,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 90,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 144,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 272,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 212,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 408,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 448,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 448,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 780,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 252,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 728,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 540,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 765,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 645,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 1003,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 1207,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 645,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 1430,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 1360,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 1365,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 1900,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 1900,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 2261,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "outcome": "lost",
+      "finalWeek": 1,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 34,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 46,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 30,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "outcome": "lost",
+      "finalWeek": 1,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 26,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 126,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 21,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 8,
+      "outcome": "lost",
+      "finalWeek": 1,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 28,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 24,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 39,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 9,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 6,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 28,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 30,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 102,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 90,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 308,
+          "diceCount": 6
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 414,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 468,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 630,
+          "diceCount": 6
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 946,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 1452,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 1408,
+          "diceCount": 6
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 1456,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 1807,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 1925,
+          "diceCount": 6
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 1665,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 1965,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 2363,
+          "diceCount": 6
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 2674,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 2618,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 3249,
+          "diceCount": 6
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 4503,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 3971,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 4029,
+          "diceCount": 6
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 4237,
+          "diceCount": 6
+        }
+      ]
+    },
+    {
+      "seed": 10,
+      "outcome": "won",
+      "finalWeek": 8,
+      "finalDice": 10,
+      "visits": [
+        {
+          "week": 1,
+          "visitor": 1,
+          "score": 36,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 2,
+          "score": 66,
+          "diceCount": 6
+        },
+        {
+          "week": 1,
+          "visitor": 3,
+          "score": 108,
+          "diceCount": 7
+        },
+        {
+          "week": 2,
+          "visitor": 1,
+          "score": 180,
+          "diceCount": 7
+        },
+        {
+          "week": 2,
+          "visitor": 2,
+          "score": 320,
+          "diceCount": 8
+        },
+        {
+          "week": 2,
+          "visitor": 3,
+          "score": 336,
+          "diceCount": 8
+        },
+        {
+          "week": 3,
+          "visitor": 1,
+          "score": 414,
+          "diceCount": 8
+        },
+        {
+          "week": 3,
+          "visitor": 2,
+          "score": 560,
+          "diceCount": 8
+        },
+        {
+          "week": 3,
+          "visitor": 3,
+          "score": 402,
+          "diceCount": 9
+        },
+        {
+          "week": 4,
+          "visitor": 1,
+          "score": 954,
+          "diceCount": 9
+        },
+        {
+          "week": 4,
+          "visitor": 2,
+          "score": 985,
+          "diceCount": 9
+        },
+        {
+          "week": 4,
+          "visitor": 3,
+          "score": 1068,
+          "diceCount": 9
+        },
+        {
+          "week": 5,
+          "visitor": 1,
+          "score": 1727,
+          "diceCount": 9
+        },
+        {
+          "week": 5,
+          "visitor": 2,
+          "score": 1859,
+          "diceCount": 10
+        },
+        {
+          "week": 5,
+          "visitor": 3,
+          "score": 2496,
+          "diceCount": 10
+        },
+        {
+          "week": 6,
+          "visitor": 1,
+          "score": 2678,
+          "diceCount": 10
+        },
+        {
+          "week": 6,
+          "visitor": 2,
+          "score": 2522,
+          "diceCount": 10
+        },
+        {
+          "week": 6,
+          "visitor": 3,
+          "score": 2230,
+          "diceCount": 10
+        },
+        {
+          "week": 7,
+          "visitor": 1,
+          "score": 2678,
+          "diceCount": 10
+        },
+        {
+          "week": 7,
+          "visitor": 2,
+          "score": 2596,
+          "diceCount": 10
+        },
+        {
+          "week": 7,
+          "visitor": 3,
+          "score": 2678,
+          "diceCount": 10
+        },
+        {
+          "week": 8,
+          "visitor": 1,
+          "score": 3263,
+          "diceCount": 10
+        },
+        {
+          "week": 8,
+          "visitor": 2,
+          "score": 3405,
+          "diceCount": 10
+        },
+        {
+          "week": 8,
+          "visitor": 3,
+          "score": 2868,
+          "diceCount": 10
+        }
+      ]
+    }
+  ]
+}

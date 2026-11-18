@@ -1,0 +1,2981 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b3733">
+  <title>이상한 박물관 · 전시 운영실</title>
+  <link rel="icon" href="data:,">
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #253630;
+  --sub: #626d62;
+  --paper: #f4f2e9;
+  --card: #fffef8;
+  --green: #23483d;
+  --deep: #1b3733;
+  --line: #cdd0bf;
+  --orange: #a53d21;
+  --ochre: #bc9459;
+  --mono: "Consolas","Courier New",monospace;
+  font-family: "Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+button:focus-visible,summary:focus-visible,.map:focus-visible {
+  outline: 3px solid #cd7b3a;
+  outline-offset: 2px;
+}
+
+button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+p,h1,h2,h3,h4,ol,ul {
+  margin: 0;
+}
+
+button {
+  border: 0;
+  background: none;
+}
+
+i[data-icon],span[data-icon] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  font-style: normal;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+[hidden] {
+  display: none!important;
+}
+
+.mast {
+  background: var(--deep);
+  color: #f5f1df;
+  border-bottom: 4px solid #c99c62;
+}
+
+.mast-inner,main {
+  width: min(1376px,100%);
+  margin: 0 auto;
+  padding: 0 clamp(18px,4vw,70px);
+}
+
+.mast-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 65px;
+}
+
+.brand,.mast nav,.mast nav button,.section-head>div,.title-actions,.title-actions>div,.inline-actions,.score-tag,.stat,.section-head,.map-foot,.detail-title,.section-title,.topline,.small-caption {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 12px;
+}
+
+.brand strong {
+  font: 700 22px/1.2 "Batang","Noto Serif KR",Georgia,serif;
+  letter-spacing: -.055em;
+}
+
+.brand .brandmark {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ddc996;
+  color: #e9d9a6;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.mast nav {
+  gap: 8px;
+}
+
+.mast nav button {
+  color: #f2f1dc;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 11px;
+  gap: 7px;
+  border: 1px solid #647468;
+  border-radius: 4px;
+}
+
+.mast nav button:hover {
+  background: #365447;
+}
+
+.mast nav i {
+  width: 15px;
+  height: 15px;
+}
+
+.headline {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 35px 0 24px;
+}
+
+.topline {
+  gap: 8px;
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .07em;
+}
+
+.topline:before {
+  content: "";
+  height: 2px;
+  width: 23px;
+  background: #b25732;
+}
+
+.headline h1 {
+  font-family: "Batang","Noto Serif KR",Georgia,serif;
+  font-weight: 700;
+  font-size: clamp(31px,4vw,49px);
+  line-height: 1.25;
+  letter-spacing: -.075em;
+  margin: 7px 0;
+}
+
+.headline p {
+  font-size: 14px;
+  color: var(--sub);
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.title-actions {
+  gap: 10px;
+  align-self: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid #b9c0ae;
+  border-radius: 4px;
+  background: #fffef8;
+  min-height: 38px;
+}
+
+.btn:hover:not(:disabled) {
+  background: #eaece0;
+  border-color: #839581;
+}
+
+.btn.primary {
+  background: var(--orange);
+  color: #fffaf0;
+  border-color: var(--orange);
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #862e19;
+}
+
+.btn.green {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.btn.green:hover:not(:disabled) {
+  background: #15382e;
+}
+
+.btn.large {
+  min-height: 46px;
+  padding: 10px 20px;
+  gap: 18px;
+}
+
+.btn.small {
+  font-size: 12px;
+  padding: 5px 10px;
+  min-height: 30px;
+}
+
+.text-btn {
+  font-size: 12px;
+  color: var(--sub);
+  padding: 6px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inline-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0,1.85fr) minmax(290px,1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.main-column,.side-column {
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 0 #283d2d08;
+}
+
+.section-head {
+  min-height: 52px;
+  padding: 12px 18px;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.section-head>div,.section-title {
+  gap: 9px;
+}
+
+.section-head i,.section-title i {
+  color: #617963;
+  width: 17px;
+  height: 17px;
+}
+
+h2 {
+  font-size: 17px;
+  letter-spacing: -.05em;
+  line-height: 1.4;
+}
+
+h3 {
+  font-size: 15px;
+  letter-spacing: -.045em;
+}
+
+h4 {
+  font-size: 13px;
+}
+
+.quiet {
+  font-size: 12px;
+  color: var(--sub);
+}
+
+.small-caption {
+  gap: 6px;
+  color: var(--sub);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.rules-copy,.detail-copy,.muted {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--sub);
+  word-break: keep-all;
+}
+
+.map-shell {
+  position: relative;
+  background: #e9eadb;
+}
+
+.map {
+  position: relative;
+  overflow: hidden;
+  height: clamp(235px,29vh,335px);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  border-top: 1px solid #c0c7b5;
+  border-bottom: 1px solid #c0c7b5;
+  background-color: #e8ebda;
+  background-image: linear-gradient(to right,#afbaa4 1px,transparent 1px),linear-gradient(to bottom,#afbaa4 1px,transparent 1px),radial-gradient(#bec7b0 .85px,transparent .85px);
+  background-size: var(--grid,78px) var(--grid,78px),var(--grid,78px) var(--grid,78px),10px 10px;
+  background-position: var(--ox) var(--oy),var(--ox) var(--oy),var(--ox) var(--oy);
+}
+
+.map:active {
+  cursor: grabbing;
+}
+
+.map-controls,.coordinate {
+  position: absolute;
+  z-index: 5;
+  background: #f9faebeb;
+  border: 1px solid #b8c3ad;
+  border-radius: 4px;
+  bottom: 11px;
+}
+
+.map-controls {
+  right: 11px;
+  display: flex;
+  overflow: hidden;
+}
+
+.map-controls button {
+  height: 31px;
+  width: 33px;
+  font: 18px/1 var(--mono);
+  display: grid;
+  place-items: center;
+}
+
+.map-controls button+button {
+  border-left: 1px solid #cad0bd;
+}
+
+.map-controls button:hover {
+  background: #dae2cd;
+}
+
+.map-controls i {
+  width: 15px;
+  height: 15px;
+}
+
+.coordinate {
+  left: 12px;
+  font: 10px var(--mono);
+  padding: 4px 7px;
+  color: #66775d;
+  pointer-events: none;
+}
+
+.coordinate:empty {
+  display: none;
+}
+
+.map-foot {
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 10px 17px;
+  color: var(--sub);
+  font-size: 11px;
+}
+
+.map-foot span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.map-foot small {
+  margin-left: auto;
+  font-size: 11px;
+}
+
+.key {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 1px solid #7e9079;
+}
+
+.key.owned {
+  background: #b5c6a6;
+}
+
+.key.open {
+  border-style: dashed;
+}
+
+.key.token {
+  width: 9px;
+  height: 9px;
+  border: 1px solid #a67733;
+  background: #eccc83;
+  transform: rotate(45deg);
+}
+
+.tile,.map-mark {
+  position: absolute;
+  width: var(--cell);
+  height: var(--cell);
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 2px;
+  z-index: 2;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 7px;
+}
+
+.tile.artifact {
+  color: #29463c;
+  background-color: #f9f3d9;
+  box-shadow: inset 0 0 0 1.5px #75866a,inset 0 -5px 0 #c7ccb3;
+}
+
+.tile.artifact:before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid #bac2a7;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.tile .tile-icon {
+  width: 46%;
+  height: 46%;
+}
+
+.tile-name {
+  font-size: clamp(9px,calc(var(--cell) * .16),15px);
+  line-height: 1.3;
+  font-weight: 750;
+  letter-spacing: -.06em;
+  white-space: nowrap;
+  max-width: 99%;
+  overflow: hidden;
+}
+
+.tile.vacant {
+  background-color: #d8e2cc;
+  color: #697c62;
+  box-shadow: inset 0 0 0 1.3px #84997b;
+}
+
+.empty-plus {
+  font: 25px/1 var(--mono);
+  color: #7b8e73;
+}
+
+.tile.token-cell {
+  background: radial-gradient(ellipse at center,#fae3a5 47%,transparent 49%);
+  color: #755621;
+}
+
+.facing {
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  color: var(--orange);
+  font-size: 12px;
+}
+
+.tile:hover {
+  filter: brightness(1.04);
+}
+
+.small-tiles .tile-name,.tiny-tiles .tile-icon {
+  display: none;
+}
+
+.tiny-tiles .tile {
+  border: 0;
+  border-radius: 0;
+}
+
+.tiny-tiles .empty-plus {
+  font-size: 0;
+}
+
+#marks {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.map-mark {
+  box-shadow: inset 0 0 0 2px var(--orange);
+  border-radius: 4px;
+}
+
+.map-mark.target {
+  background: #dcb56555;
+  box-shadow: inset 0 0 0 2px #ab842e;
+}
+
+.map-mark.forecast {
+  box-shadow: inset 0 0 0 3px #3a8770;
+  background: #7abfa222;
+}
+
+.map-mark.place {
+  border: 2px dashed #9c4726;
+  background: #eac48555;
+  box-shadow: none;
+}
+
+.map-mark.flash {
+  background: #ffcc547a;
+  box-shadow: inset 0 0 0 3px #c28d28;
+}
+
+.axis-x,.axis-y {
+  position: absolute;
+  font: 10px/1 var(--mono);
+  color: #687a61;
+  pointer-events: none;
+}
+
+.axis-x {
+  top: 6px;
+  transform: translateX(-50%);
+}
+
+.axis-y {
+  left: 7px;
+  transform: translateY(-50%);
+}
+
+#board-detail:not(:empty) {
+  padding: 12px 17px;
+  border-top: 1px solid #d7dacb;
+  background: #f8f8ed;
+}
+
+.detail-title {
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.detail-title small {
+  font: 11px var(--mono);
+  color: var(--sub);
+}
+
+#board-detail .inline-actions {
+  margin-top: 6px;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  padding: 16px 2px;
+  background: #eeefe2;
+  border: 1px solid #c6cbb9;
+  border-radius: 7px;
+}
+
+.stat {
+  padding: 0 8px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat+.stat {
+  border-left: 1px solid #c8cebc;
+}
+
+.stat strong {
+  font: 700 24px/1.1 var(--mono);
+  color: var(--green);
+}
+
+.stat strong small {
+  font: 12px "Malgun Gothic",sans-serif;
+  margin-left: 2px;
+}
+
+.stat span {
+  font-size: 11px;
+  color: #576554;
+}
+
+.starter-cards,.offers {
+  padding: 0 17px 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.starter-cards {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-align: left;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #d1d5c5;
+  border-radius: 5px;
+  background: #fafaf0;
+}
+
+.item-card:hover:not(:disabled),.item-card.chosen {
+  border-color: #81967d;
+  background: #eff2e4;
+}
+
+.icon-well {
+  width: 42px;
+  height: 42px;
+  background: #e9e9d4;
+  border: 1px solid #d2d6c0;
+  color: #435d47;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.icon-well i {
+  width: 29px;
+  height: 29px;
+}
+
+.item-card .item-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-card strong {
+  font-size: 14px;
+  display: block;
+}
+
+.item-card small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--sub);
+  word-break: keep-all;
+}
+
+.price {
+  font: 700 13px var(--mono);
+  white-space: nowrap;
+  color: var(--orange);
+}
+
+.empty-offer {
+  padding: 9px 12px;
+  color: var(--sub);
+  font-size: 12px;
+}
+
+.intro-note {
+  padding: 0 17px 15px;
+}
+
+.schedule {
+  list-style: none;
+  padding: 0 16px 12px;
+}
+
+.schedule li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 9px;
+  align-items: start;
+  border-top: 1px solid #dde0d1;
+  padding: 9px 0;
+}
+
+.week-no {
+  padding: 4px 0;
+  color: #6e7867;
+  font: 12px var(--mono);
+  white-space: nowrap;
+}
+
+.schedule strong {
+  font-size: 13px;
+}
+
+.schedule p {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--sub);
+  word-break: keep-all;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #e9eddf;
+  color: #526950;
+  margin-left: 6px;
+  font-weight: 700;
+}
+
+.tier-1 {
+  background: #f1e6ca;
+  color: #856626;
+}
+
+.tier-2 {
+  background: #f5dace;
+  color: #984426;
+}
+
+.score-panel {
+  background: #254b3f;
+  color: #faf7e8;
+  border-color: #254b3f;
+}
+
+.score-panel .section-head i,.score-panel .quiet {
+  color: #d6e0cd;
+}
+
+.score-main {
+  padding: 0 18px 16px;
+}
+
+.score-number {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.score-number b {
+  font: 700 50px/1.15 var(--mono);
+  letter-spacing: -.07em;
+}
+
+.score-number span {
+  font-size: 13px;
+  color: #dde3d3;
+}
+
+.progress {
+  height: 6px;
+  border-radius: 3px;
+  margin: 12px 0 9px;
+  background: #536e5a;
+  overflow: hidden;
+}
+
+.progress i {
+  display: block;
+  background: #edc07d;
+  height: 100%;
+}
+
+.score-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 13px;
+  font-size: 11px;
+  color: #dbe4d5;
+}
+
+.score-breakdown b {
+  color: white;
+  font-family: var(--mono);
+}
+
+.preview-body,.panel-body {
+  padding: 0 17px 16px;
+}
+
+.preview-body strong {
+  font-size: 14px;
+}
+
+.preview-body p+p {
+  margin-top: 6px;
+}
+
+.preview-score {
+  font: 700 20px var(--mono);
+  color: var(--orange);
+}
+
+.preview-list {
+  padding: 7px 0 0 19px;
+  font-size: 12px;
+  color: var(--sub);
+  line-height: 1.8;
+}
+
+.warning,.boss-note {
+  padding: 9px 11px;
+  border-left: 3px solid #ba6843;
+  background: #f7eadc;
+  color: #784127;
+  font-size: 12px;
+  line-height: 1.65;
+  margin-top: 7px;
+  word-break: keep-all;
+}
+
+.boss-note {
+  margin: 0 17px 15px;
+}
+
+.boss-note strong {
+  display: block;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding: 9px 0;
+  font-size: 13px;
+  gap: 10px;
+}
+
+.tray {
+  padding: 0 17px 15px;
+}
+
+.dice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 5px 0 13px;
+}
+
+.die {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: clamp(40px,4.4vw,55px);
+  height: clamp(40px,4.4vw,55px);
+  padding: 8px;
+  border-radius: 8px;
+  border: 1.5px solid #7c8873;
+  background: #f9f8eb;
+  box-shadow: 0 3px 0 #c3c7b3;
+  color: #334c3d;
+}
+
+.die[aria-pressed=true] {
+  border: 2px solid #a2482c;
+  background: #f6d9b8;
+  color: #903f25;
+  box-shadow: 0 3px 0 #ca9872;
+}
+
+.pips {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(3,1fr);
+  gap: 1.5px;
+}
+
+.pips b {
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.consumed {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 11px;
+  color: var(--sub);
+  padding-bottom: 10px;
+}
+
+.mini-die {
+  border: 1px solid #c6ccbc;
+  border-radius: 3px;
+  padding: 2px 5px;
+  background: #eeefe5;
+  font-family: var(--mono);
+}
+
+.action-line {
+  border-top: 1px solid #d4d8c7;
+  padding-top: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.action-line .text-btn:last-child {
+  margin-left: auto;
+}
+
+.button-note {
+  font-size: 12px;
+  color: var(--sub);
+  margin: 8px 0;
+}
+
+.trace-line {
+  padding: 0 17px 13px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.log-list {
+  font-size: 12px;
+  color: var(--sub);
+  line-height: 1.85;
+  padding-left: 22px;
+}
+
+.report-body {
+  padding: 0 17px 16px;
+}
+
+.report-body summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--sub);
+}
+
+.alert-block {
+  padding: 12px 17px;
+  background: #f7eadb;
+  border-top: 1px solid #d7c8a9;
+}
+
+.hint-block {
+  margin: 0 17px 15px;
+  border: 1px solid #d3d6c4;
+  border-radius: 4px;
+  padding: 9px 11px;
+}
+
+.reward-grid {
+  display: grid;
+  gap: 7px;
+}
+
+.subsection {
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+.shop-hint {
+  padding: 0 17px 12px;
+}
+
+.schedule-button {
+  width: 100%;
+  text-align: left;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 28px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  color: var(--sub);
+  font-size: 11px;
+}
+
+footer button {
+  color: var(--sub);
+  text-decoration: underline;
+  padding: 4px 0;
+}
+
+dialog {
+  width: min(530px,calc(100% - 28px));
+  max-height: 84dvh;
+  overflow: auto;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid #8a9989;
+  padding: 0;
+  border-radius: 9px;
+  box-shadow: 0 18px 80px #15281b40;
+}
+
+dialog::backdrop {
+  background: #192a25a3;
+}
+
+.dialog-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 17px;
+  background: #f5f5e9;
+  border-bottom: 1px solid var(--line);
+}
+
+.dialog-head button {
+  font-size: 24px;
+}
+
+.dialog-copy {
+  padding: 18px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.dialog-copy h3 {
+  margin-top: 12px;
+}
+
+.dialog-copy p+p {
+  margin-top: 8px;
+}
+
+.dialog-copy .inline-actions {
+  margin-top: 14px;
+}
+
+#feedback {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  background: #253c33;
+  color: white;
+  padding: 9px 15px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px #0002;
+  z-index: 10;
+  max-width: min(95vw,620px);
+  width: max-content;
+  pointer-events: none;
+}
+
+#feedback:empty {
+  display: none;
+}
+
+@media(min-width:1500px) {
+  .headline {
+    padding-top: 45px;
+    padding-bottom: 28px;
+  }
+  .map {
+    height: 335px;
+  }
+}
+
+@media(max-width:860px) {
+  .layout {
+    grid-template-columns: minmax(0,1.5fr) minmax(245px,1fr);
+    gap: 12px;
+  }
+  .mast-inner,main {
+    padding-inline: 16px;
+  }
+  .starter-cards {
+    grid-template-columns: 1fr;
+  }
+  .headline {
+    padding-top: 24px;
+  }
+  .section-head {
+    padding-inline: 14px;
+  }
+  .item-card {
+    gap: 7px;
+  }
+  .action-line .text-btn:last-child {
+    margin-left: 0;
+  }
+}
+
+@media(max-width:660px) {
+  .mast-inner {
+    min-height: 53px;
+  }
+  .mast nav {
+    gap: 2px;
+  }
+  .mast nav button {
+    padding: 7px 6px;
+    font-size: 11px;
+    border-color: transparent;
+  }
+  .mast nav i {
+    width: 13px;
+    height: 13px;
+  }
+  .brand {
+    gap: 7px;
+  }
+  .brand strong {
+    font-size: 18px;
+  }
+  .brand .brandmark {
+    width: 29px;
+    height: 29px;
+  }
+  .headline {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px 0 15px;
+    gap: 12px;
+  }
+  .headline h1 {
+    margin: 5px 0;
+  }
+  .headline p {
+    font-size: 13px;
+  }
+  .title-actions {
+    align-self: stretch;
+    justify-content: flex-start;
+  }
+  .btn.large {
+    min-height: 40px;
+  }
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .main-column,.side-column {
+    width: 100%;
+    gap: 12px;
+  }
+  .map {
+    height: 220px;
+  }
+  .map-foot {
+    gap: 9px;
+    padding: 8px 12px;
+  }
+  .map-foot small {
+    font-size: 10px;
+  }
+  .inventory {
+    padding: 10px 2px;
+  }
+  .starter-cards {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    padding-inline: 10px;
+  }
+  .starter-cards .item-card {
+    align-items: start;
+    flex-direction: column;
+  }
+  .die {
+    width: 42px;
+    height: 42px;
+    padding: 7px;
+  }
+  .dice-row {
+    gap: 7px;
+  }
+  .section-head {
+    min-height: 45px;
+  }
+  .action-line .btn {
+    padding: 7px 9px;
+  }
+  .score-number b {
+    font-size: 38px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior: auto!important;
+    animation: none!important;
+    transition: none!important;
+  }
+}
+
+.title-actions .inventory {
+  display: grid;
+  min-width: 260px;
+  padding: 10px 4px;
+}
+
+.title-actions .stat strong {
+  font-size: 20px;
+}
+
+.tile.token-cell.purchased {
+  background-color: #d8e2cc;
+  box-shadow: inset 0 0 0 1.3px #84997b;
+}
+
+.tile-progress {
+  font: 700 clamp(8px,calc(var(--cell) * .14),11px)/1 var(--mono);
+  color: #6e5326;
+}
+
+.tile:has(.tile-progress) .tile-icon {
+  height: 34%;
+}
+
+.tiny-tiles .tile-progress {
+  display: none;
+}
+
+.map-mark.target-open {
+  background: #f5c45255;
+  box-shadow: inset 0 0 0 2px #a17326;
+}
+
+.map-mark.target-blocked {
+  background: none;
+  box-shadow: inset 0 0 0 1px #a49876;
+  border: 1px dashed #a49876;
+}
+
+.mobile-prediction {
+  display: none;
+}
+
+@media(max-width:660px) {
+  .title-actions .inventory {
+    min-width: 0;
+    width: 100%;
+    padding: 6px 0;
+  }
+  .title-actions .stat {
+    flex-direction: row;
+    gap: 5px;
+  }
+  .title-actions .stat strong {
+    font-size: 16px;
+  }
+  .mobile-prediction {
+    display: block;
+    font-size: 12px;
+    line-height: 1.6;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: #eff2e6;
+    border-left: 2px solid #8d9f7f;
+  }
+  .headline:has(.inventory) {
+    gap: 7px;
+  }
+}
+
+</style>
+</head>
+<body>
+  <header class="mast"><div class="mast-inner">
+    <div class="brand"><span class="brandmark" data-icon="museum"></span><strong>이상한 박물관</strong></div>
+    <nav aria-label="운영 도구"><button data-action="schedule"><i data-icon="calendar"></i>평가 일정</button><button data-action="help"><i data-icon="book"></i>이용 안내</button></nav>
+  </div></header>
+  <main>
+    <section id="headline" class="headline" aria-label="진행 상태"></section>
+    <div id="layout" class="layout">
+      <div class="main-column">
+        <section class="panel gallery" aria-labelledby="floor-title">
+          <div class="section-head"><div><i data-icon="floor"></i><h2 id="floor-title">전시 배치도</h2></div><span class="quiet" id="board-count"></span></div>
+          <div class="map-shell">
+            <div id="board" class="map" tabindex="0" role="group" aria-label="전시 배치도. 방향키로 자리를 선택하고 Enter로 조사하거나 배치하세요.">
+              <div id="marks"></div><div id="tiles"></div><div id="axes" aria-hidden="true"></div>
+            </div>
+            <div class="map-controls"><button data-action="zoomout" aria-label="축소">−</button><button data-action="zoomin" aria-label="확대">+</button><button data-action="fit" aria-label="전체 보기" title="전체 보기"><i data-icon="fit"></i></button></div>
+            <div class="coordinate" id="coordinate" aria-hidden="true"></div>
+          </div>
+          <div class="map-foot"><span><b class="key owned"></b>구매한 칸</span><span><b class="key open"></b>미구매 자리</span><span><b class="key token"></b>토큰</span><small id="map-hint">드래그로 이동</small></div>
+          <div id="board-detail"></div>
+        </section>
+        <section id="controls" class="panel"></section>
+        <section id="report" class="panel" hidden></section>
+      </div>
+      <aside id="sidebar" class="side-column"></aside>
+    </div>
+    <footer><span id="save-status"></span><button data-action="new">새 런 시작</button></footer>
+  </main>
+  <dialog id="dialog"><div class="dialog-head"><h2 id="dialog-title"></h2><button data-action="close" aria-label="닫기">×</button></div><div id="dialog-body"></div></dialog>
+  <div id="feedback" role="status" aria-live="polite"></div>
+  <script>
+/* 규칙 v12 카탈로그와 프로토타입 시험값. */
+(function (root) {
+  "use strict";
+
+  const CONFIG = {
+    rulesVersion: 5, weeks: 8, visitorsPerWeek: 3,
+    fairFaces: [1, 2, 3, 4, 5, 6], startDice: 6, minimumDice: 1, rerolls: 8,
+    startMoney: 24, startCells: ["0,0", "2,0", "1,1"],
+    startRelics: {"0,0": "guide", "2,0": "lamp"},
+    cellPriceBase: 4, cellPriceStep: 2, saleFraction: 0.1, slots: 3, rewardDiceChance: 0.5,
+    baseTarget: {normal: 20, boss: 40}, weekMultipliers: [1, 1.6, 2.5, 3.8, 5.5, 8, 11, 15],
+    tipTiers: [
+      {ratio: 0, name: "매우 나쁨", tip: 4}, {ratio: 0.25, name: "나쁨", tip: 8},
+      {ratio: 0.6, name: "보통", tip: 14}, {ratio: 1, name: "좋음", tip: 22},
+      {ratio: 1.6, name: "아주 좋음", tip: 32}
+    ],
+    boss: {
+      strengthWeeks: [2, 6],
+      steady: {perWeek: 2, caps: [1, 2, null]},
+      burst: {free: [3, 2, 2], sum: [3, 5, 8], mult: [0, 1, 1], dustCaps: [0, 2, null]},
+      diversity: {caps: [0, 2, null]}
+    },
+    eventLimit: 1000,
+    auto: {fullEnumerationLimit: 12, maxSubsetSize: 6, dieLossPenalty: 10000,
+      faceChangePenalty: 8, dustPenalty: 5, warningPenalty: 10, temporaryLossPenalty: 3}
+  };
+
+  const PATTERNS = {
+    "[x]": "주사위 하나", "[x,x]": "같은 눈 둘", "[x,x,x]": "같은 눈 셋",
+    "[x,y]": "서로 다른 눈 둘", "[x,y] where x+y=7": "합이 7인 서로 다른 눈 둘",
+    "[n,n+1,n+2]": "연속된 눈 셋", "[x,x,y,y]": "서로 다른 두 쌍"
+  };
+
+  const sum = amount => ({type: "addSum", amount});
+  const mult = amount => ({type: "addMult", amount});
+  const submit = pattern => ({on: "submit", pattern});
+  const create = (token, scope = "adjacent") => ({type: "createToken", token, scope});
+  const destroy = token => ({type: "destroyTokens", token, scope: "adjacent"});
+  const token = (id, name, tags, lifetime, onVanish, description) =>
+    ({id, name, tags, lifetime, onVanish, onDestroyed: [], description});
+
+  const tokenList = [
+    token("coin", "동전", ["보석"], "viewing", [sum(5)], "관람이 끝나면 합 +5"),
+    token("ingot", "금괴", ["보석"], "viewing", [sum(15)], "관람이 끝나면 합 +15"),
+    token("cheese", "치즈", ["음식"], "viewing", [sum(3)], "관람이 끝나면 합 +3"),
+    token("scroll", "문서", ["문서"], "viewing", [sum(4)], "관람이 끝나면 합 +4"),
+    token("spark", "불꽃", [], "submission", [mult(1)], "제출이 끝나면 배율 +1"),
+    token("dust", "먼지", [], "persistent", [], "치울 때까지 이 자리를 차지합니다.")
+  ];
+  const TOKENS = Object.fromEntries(tokenList.map(item => [item.id, item]));
+
+  function relic(id, name, price, trigger, effects, effectText, extra = {}) {
+    const triggerText = extra.triggerText || PATTERNS[trigger.pattern] + " 제출";
+    return {id, name, price, kind: "normal", tags: [], trigger, effects, triggerText, effectText,
+      description: triggerText + " · " + effectText, ...extra};
+  }
+  function dieRelic(id, name, pattern, tokenId, required) {
+    const targetName = TOKENS[tokenId].name;
+    return relic(id, name, 20, submit(pattern), [destroy(tokenId), {type: "grantDieIfDestroyed", required}],
+      `인접한 ${targetName} 모두 파괴. 한 번에 ${required}개 이상이면 주사위 하나를 얻고 이 유물은 사라집니다.`,
+      {kind: "dice"});
+  }
+  const relicList = [
+    relic("guide", "안내원", 12, submit("[x]"), [sum("x")], "낸 눈만큼 합 증가"),
+    relic("lamp", "조명", 16, submit("[x,x]"), [mult(1)], "배율 +1"),
+    relic("banker", "금고지기", 18, submit("[x,x]"), [create("coin")], "인접한 빈자리마다 동전 생성"),
+    relic("alchemist", "연금술사", 22, submit("[x,x,x]"),
+      [{type: "transformTokens", from: "coin", to: "ingot", scope: "adjacent"}], "인접한 동전을 모두 금괴로 변형"),
+    relic("thief", "좀도둑", 20, submit("[x,y] where x+y=7"),
+      [{...destroy("ingot"), perToken: [sum(30)]}], "인접한 금괴를 모두 파괴하고 하나당 합 +30"),
+    relic("dairy", "낙농가", 16, submit("[x,x]"), [create("cheese")], "인접한 빈자리마다 치즈 생성"),
+    relic("scribe", "필경사", 14, submit("[x,y]"), [create("scroll", "facing")], "바라보는 빈자리에 문서 생성", {facing: true}),
+    relic("archivist", "기록 보관인", 22, submit("[n,n+1,n+2]"), [create("scroll", "rowCol")],
+      "같은 행·열의 구매한 빈칸마다 문서 생성"),
+    relic("collector", "수집가", 20, {on: "tokenCreated"}, [sum(2)], "합 +2", {triggerText: "어디서든 토큰이 생성될 때마다"}),
+    relic("curator", "학예사", 22, {on: "tokenDestroyed", where: "adjacent"}, [mult(1)], "배율 +1",
+      {triggerText: "인접한 토큰이 파괴될 때마다"}),
+    relic("critic", "평론가", 20, {on: "threshold", stat: "sum", limit: 30}, [mult(2)], "배율 +2",
+      {triggerText: "한 관람에서 합이 처음으로 30을 넘을 때"}),
+    relic("fidget", "안절부절", 14, {on: "reroll"}, [sum(2)], "합 +2", {triggerText: "리롤할 때마다"}),
+    relic("sweeper", "청소부", 10, submit("[x]"), [destroy("dust")], "인접한 먼지 모두 파괴"),
+    relic("firework", "폭죽 장수", 20, submit("[x,x,y,y]"), [create("spark")], "인접한 빈자리마다 불꽃 생성"),
+    relic("carver", "조각칼", 24, submit("[x,x,x]"), [{type: "changeFace", value: "x"}],
+      "남은 주사위 하나의 현재 면을 제출한 눈으로 영구 교체", {charges: 6}),
+    dieRelic("die_coin", "환전상", "[x,x]", "coin", 2),
+    dieRelic("die_scroll", "사서", "[x,x,x]", "scroll", 2),
+    dieRelic("die_cheese", "미식가", "[x,x,y,y]", "cheese", 3)
+  ];
+  const RELICS = Object.fromEntries(relicList.map(item => [item.id, item]));
+  const api = {CONFIG, PATTERNS, TOKENS, RELICS};
+  if (typeof module === "object" && module.exports) module.exports = api;
+  else root.MuseumCatalog = api;
+})(globalThis);
+
+</script>
+  <script>
+/* DOM 없이 실행되는 관람 규칙. 상태 변경 함수는 화면에서 재생할 사건 기록을 반환한다. */
+(function (root) {
+  "use strict";
+  const catalog = typeof module === "object" && module.exports ? require("./catalog.js") : root.MuseumCatalog;
+  const {CONFIG, RELICS, TOKENS, PATTERNS} = catalog;
+  const directions = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+
+  function random(game) {
+    game.rng = (game.rng + 0x6d2b79f5) >>> 0;
+    let bits = game.rng;
+    bits = Math.imul(bits ^ (bits >>> 15), bits | 1);
+    bits ^= bits + Math.imul(bits ^ (bits >>> 7), bits | 61);
+    return ((bits ^ (bits >>> 14)) >>> 0) / 4294967296;
+  }
+  function randomInt(game, count) {
+    if (!Number.isInteger(count) || count < 1) throw new RangeError("추첨할 대상이 없습니다.");
+    return Math.floor(random(game) * count);
+  }
+  function newDie(game) {
+    return {id: game.nextDieId++, faces: [...CONFIG.fairFaces]};
+  }
+  function valueOf(game, rolled) {
+    return game.dice.find(die => die.id === rolled.id).faces[rolled.face];
+  }
+  function instance(id, facing = 0) {
+    const item = RELICS[id];
+    if (!item) throw new Error("알 수 없는 유물 " + id);
+    const result = {id, facing};
+    if (item.charges !== undefined) result.charges = item.charges;
+    return result;
+  }
+  function xy(pos) { return pos.split(",").map(Number); }
+  function comparePos(a, b) {
+    const [ax, ay] = xy(a);
+    const [bx, by] = xy(b);
+    return ay - by || ax - bx;
+  }
+  function targets(board, pos, scope, facing = 0) {
+    const [x, y] = xy(pos);
+    if (scope === "rowCol") {
+      return board.cells.filter(cell => {
+        const [cx, cy] = xy(cell);
+        return cell !== pos && (cx === x || cy === y);
+      }).sort(comparePos);
+    }
+    if (scope !== "adjacent" && scope !== "facing") return [];
+    const offsets = scope === "facing" ? [directions[facing]] : directions;
+    return offsets.map(([dx, dy]) => [x + dx, y + dy])
+      .filter(pair => pair.every(Number.isSafeInteger))
+      .map(pair => pair.join(",")).sort(comparePos);
+  }
+
+  // Compile the six-face assignments once per pattern. A signature represents
+  // the entire multiset, so extra dice can never match a smaller pattern.
+  const compiled = new Map();
+  function conditionTest(clause) {
+    if (!clause) return () => true;
+    const compact = clause.replace(/\s/g, "");
+    const comparison = /^([a-z](?:\+[a-z])*)(<=|>=|=|<|>)(\d+)$/.exec(compact);
+    if (comparison) {
+      const [, expr, op, literal] = comparison;
+      return bindings => {
+        const value = expr.split("+").reduce((a, key) => a + bindings[key], 0);
+        const expected = Number(literal);
+        switch (op) {
+          case "=": return value === expected;
+          case "<=": return value <= expected;
+          case ">=": return value >= expected;
+          case "<": return value < expected;
+          case ">": return value > expected;
+        }
+      };
+    }
+    const prime = /^([a-z](?:\+[a-z])*)(?:가소수|isprime)$/.exec(compact);
+    if (prime) return bindings => {
+      const n = prime[1].split("+").reduce((total, key) => total + bindings[key], 0);
+      for (let i = 2; i * i <= n; i++) if (n % i === 0) return false;
+      return n >= 2;
+    };
+    throw new Error("지원하지 않는 패턴 조건 " + clause);
+  }
+  function compilePattern(pattern) {
+    const syntax = /^\s*\[([^\]]+)\]\s*(?:where\s+(.+))?\s*$/.exec(pattern);
+    if (!syntax) throw new Error("잘못된 제출 패턴 " + pattern);
+    const accepts = conditionTest(syntax[2]);
+    const variables = [];
+    const terms = syntax[1].split(",").map(raw => {
+      const term = raw.trim();
+      if (/^[1-6]$/.test(term)) return {fixed: Number(term)};
+      const parsed = /^([a-z])(?:\s*\+\s*(\d+))?$/.exec(term);
+      if (!parsed || (parsed[2] && parsed[1] !== "n")) throw new Error("잘못된 패턴 항 " + term);
+      const variable = parsed[1];
+      if (!variables.includes(variable)) variables.push(variable);
+      return {variable, offset: Number(parsed[2] || 0)};
+    });
+    const results = new Map();
+    function enumerate(index, bindings, taken, weight) {
+      if (index < variables.length) {
+        for (const value of CONFIG.fairFaces) {
+          const bit = 1 << value;
+          if (bit & taken) continue;
+          bindings[variables[index]] = value;
+          enumerate(index + 1, bindings, taken | bit, weight + value);
+        }
+        return;
+      }
+      if (!accepts(bindings)) return;
+      const faces = terms.map(term => term.fixed ?? (bindings[term.variable] + term.offset));
+      if (faces.some(value => !CONFIG.fairFaces.includes(value))) return;
+      const key = faces.sort().join("");
+      if (!results.has(key) || weight > results.get(key).weight) {
+        results.set(key, {weight, bindings: Object.freeze({...bindings})});
+      }
+    }
+    enumerate(0, {}, 0, 0);
+    return results;
+  }
+  function matchKey(pattern, key) {
+    if (!compiled.has(pattern)) compiled.set(pattern, compilePattern(pattern));
+    return compiled.get(pattern).get(key)?.bindings ?? null;
+  }
+  function matchPattern(pattern, values) {
+    if (values.some(value => !CONFIG.fairFaces.includes(value))) return null;
+    return matchKey(pattern, [...values].sort().join(""));
+  }
+
+  // A wave spans all exact matches of one submission. Positions identify relic
+  // instances throughout a wave because a relic can disappear but cannot move.
+  class Resolution {
+    constructor(game) {
+      this.game = game;
+      this.board = game.board;
+      this.view = game.view;
+      this.order = Object.keys(this.board.relics).sort(comparePos);
+      this.queue = [];
+      this.reacted = new Map();
+      this.deferred = [];
+      this.trace = [];
+      this.handled = 0;
+    }
+    log(type, text, details = {}) {
+      this.trace.push({type, text, ...details});
+    }
+    limit() {
+      this.handled++;
+      if (this.handled <= CONFIG.eventLimit) return false;
+      if (this.handled === CONFIG.eventLimit + 1) {
+        const message = "사건 처리 한도 초과. 연쇄를 중단합니다.";
+        console.warn(message);
+        this.log("warning", message);
+      }
+      return true;
+    }
+    matches(trigger, event, pos, facing) {
+      if (trigger.on !== event.on) return false;
+      if (trigger.pattern && trigger.pattern !== event.pattern) return false;
+      if (trigger.on === "threshold" && (trigger.stat !== event.stat || trigger.limit !== event.limit)) return false;
+      if (trigger.token && trigger.token !== event.token) return false;
+      if (trigger.tag && !TOKENS[event.token]?.tags.includes(trigger.tag)) return false;
+      return !trigger.where || targets(this.board, pos, trigger.where, facing).includes(event.pos);
+    }
+    react(pos, event) {
+      const item = this.board.relics[pos];
+      if (!item || event.causes?.has(pos)) return;
+      const definition = RELICS[item.id];
+      if (!this.matches(definition.trigger, event, pos, item.facing)) return;
+      const target = event.pos ?? event;
+      if (!this.reacted.has(pos)) this.reacted.set(pos, new Set());
+      const seen = this.reacted.get(pos);
+      if (seen.has(target)) return;
+      seen.add(target);
+      const causes = new Set(event.causes);
+      causes.add(pos);
+      this.log("fire", definition.name + " 발동", {pos, id: item.id});
+      const context = {pos, item, causes, bindings: event.bindings || {}, destroyed: 0};
+      const applied = this.apply(definition.effects, context);
+      if (applied) this.spendCharge(pos, item);
+      this.queue.push({on: "relicFired", pos, id: item.id, causes});
+    }
+    drain() {
+      for (let i = 0; i < this.queue.length; i++) {
+        if (this.limit()) break;
+        const event = this.queue[i];
+        for (const pos of this.order) this.react(pos, event);
+      }
+      this.queue.length = 0;
+    }
+    spendCharge(pos, item) {
+      if (item?.charges === undefined || this.board.relics[pos] !== item) return;
+      if (--item.charges === 0) {
+        delete this.board.relics[pos];
+        this.log("removeRelic", RELICS[item.id].name + " 충전 소진", {pos, id: item.id});
+      }
+    }
+    score(stat, amount, context) {
+      if (!amount) return false;
+      const before = this.view[stat];
+      this.view[stat] += amount;
+      this.log("score", (stat === "sum" ? "합 " : "배율 ") + (amount > 0 ? "+" : "") + amount,
+        {pos: context.pos, stat, amount});
+      for (const pos of this.order) {
+        const item = this.board.relics[pos];
+        if (!item) continue;
+        const {trigger} = RELICS[item.id];
+        if (trigger.on !== "threshold" || trigger.stat !== stat) continue;
+        const key = stat + ":" + trigger.limit;
+        if (before <= trigger.limit && this.view[stat] > trigger.limit && !this.view.thresholds.includes(key)) {
+          this.view.thresholds.push(key);
+          this.queue.push({on: "threshold", stat, limit: trigger.limit, causes: context.causes});
+        }
+      }
+      return true;
+    }
+    create(pos, token, causes) {
+      if (this.board.relics[pos] || this.board.tokens[pos]) return false;
+      this.board.tokens[pos] = token;
+      this.log("create", TOKENS[token].name + " 생성", {pos, id: token});
+      this.queue.push({on: "tokenCreated", pos, token, causes});
+      return true;
+    }
+    destroy(pos, token, context, perToken) {
+      delete this.board.tokens[pos];
+      this.log("destroy", TOKENS[token].name + " 파괴", {pos, id: token});
+      this.queue.push({on: "tokenDestroyed", pos, token, causes: context.causes});
+      this.apply(TOKENS[token].onDestroyed, {...context, pos, item: null});
+      if (perToken) this.apply(perToken, context);
+    }
+    apply(effects, context) {
+      let changed = false;
+      for (const effect of effects) {
+        const {pos, item, causes, bindings} = context;
+        const amount = bindings[effect.amount] ?? effect.amount;
+        switch (effect.type) {
+          case "addSum":
+          case "addMult":
+            changed = this.score(effect.type === "addSum" ? "sum" : "mult", amount, context) || changed;
+            break;
+          case "gainReroll":
+            this.view.rerollsLeft += amount;
+            this.log("gainReroll", "리롤 +" + amount, {pos, amount});
+            changed ||= !!amount;
+            break;
+          case "createToken":
+            for (const dest of targets(this.board, pos, effect.scope, item?.facing)) {
+              changed = this.create(dest, effect.token, causes) || changed;
+            }
+            break;
+          case "destroyTokens":
+            context.destroyed = 0;
+            context.targetToken = effect.token;
+            for (const dest of targets(this.board, pos, effect.scope, item?.facing)) {
+              const token = this.board.tokens[dest];
+              if (!token || (effect.token && token !== effect.token)) continue;
+              if (effect.tag && !TOKENS[token].tags.includes(effect.tag)) continue;
+              this.destroy(dest, token, context, effect.perToken);
+              context.destroyed++;
+              changed = true;
+            }
+            break;
+          case "transformTokens":
+            for (const dest of targets(this.board, pos, effect.scope, item?.facing)) {
+              if (this.board.tokens[dest] !== effect.from) continue;
+              this.board.tokens[dest] = effect.to;
+              this.log("transform", TOKENS[effect.from].name + " → " + TOKENS[effect.to].name,
+                {pos: dest, id: effect.to, from: effect.from});
+              this.queue.push({on: "tokenTransformed", pos: dest, from: effect.from, token: effect.to, causes});
+              changed = true;
+            }
+            break;
+          case "grantDieIfDestroyed":
+            if (context.destroyed >= effect.required) {
+              this.game.dice.push(newDie(this.game));
+              delete this.board.relics[pos];
+              this.log("grantDie", "주사위 +1 · 다음 관람부터 사용", {pos, id: item.id});
+              this.log("removeRelic", RELICS[item.id].name + " 소진", {pos, id: item.id});
+              changed = true;
+            } else {
+              const name = TOKENS[context.targetToken]?.name || "토큰";
+              this.log("warning", name + " " + context.destroyed + "개가 파괴되고 주사위는 얻지 못합니다.",
+                {pos, id: item.id, count: context.destroyed, token: context.targetToken, required: effect.required});
+            }
+            break;
+          case "changeFace":
+            this.deferred.push({pos, item, value: bindings[effect.value] ?? effect.value});
+            break;
+          default:
+            throw new Error("알 수 없는 효과 " + effect.type);
+        }
+      }
+      return changed;
+    }
+    expire(lifetime) {
+      const positions = Object.keys(this.board.tokens).sort(comparePos);
+      for (const pos of positions) {
+        const token = this.board.tokens[pos];
+        if (TOKENS[token]?.lifetime !== lifetime) continue;
+        this.log("vanish", TOKENS[token].name + " 소멸", {pos, id: token});
+        delete this.board.tokens[pos];
+        this.apply(TOKENS[token].onVanish, {pos, item: null, bindings: {}, causes: new Set()});
+        this.drain();
+      }
+    }
+    changeFaces() {
+      for (const {pos, item, value} of this.deferred) {
+        if (this.board.relics[pos] !== item) continue;
+        const candidates = this.view.remaining.filter(die => valueOf(this.game, die) !== value);
+        if (!candidates.length) continue;
+        const choice = candidates[randomInt(this.game, candidates.length)];
+        const die = this.game.dice.find(candidate => candidate.id === choice.id);
+        const old = die.faces[choice.face];
+        die.faces[choice.face] = value;
+        this.log("changeFace", "주사위 면 " + old + " → " + value, {pos, id: item.id, die: die.id, old, value});
+        this.spendCharge(pos, item);
+      }
+    }
+  }
+
+  function submitEffects(game, values, {sealed = false} = {}) {
+    const wave = new Resolution(game);
+    if (!sealed) {
+      const key = [...values].sort().join("");
+      const patterns = new Set(wave.order.map(pos => RELICS[game.board.relics[pos].id].trigger.pattern).filter(Boolean));
+      // Display exact catalogue matches even if this museum owns no listener.
+      for (const pattern of Object.keys(PATTERNS)) patterns.add(pattern);
+      const events = new Map();
+      for (const pattern of patterns) {
+        const bindings = matchKey(pattern, key);
+        if (!bindings) continue;
+        const event = {on: "submit", pattern, bindings};
+        events.set(pattern, event);
+        wave.log("pattern", PATTERNS[pattern] || pattern, {pattern, bindings});
+        if (wave.limit()) break;
+      }
+      // Distinct patterns share a root. Interleave their listeners in board
+      // order before processing the child events generated by any listener.
+      for (const pos of wave.order) {
+        const item = game.board.relics[pos];
+        const event = item && events.get(RELICS[item.id].trigger.pattern);
+        if (event) wave.react(pos, event);
+      }
+      wave.drain();
+    }
+    wave.expire("submission");
+    wave.changeFaces();
+    return wave.trace;
+  }
+  function resolveEvent(game, event) {
+    const wave = new Resolution(game);
+    wave.queue.push(event);
+    wave.drain();
+    wave.changeFaces();
+    return wave.trace;
+  }
+  function rerollEffects(game, count) {
+    return resolveEvent(game, {on: "reroll", count});
+  }
+  function createExternalToken(game, pos, id) {
+    const wave = new Resolution(game);
+    wave.create(pos, id, new Set());
+    wave.drain();
+    wave.changeFaces();
+    return wave.trace;
+  }
+  function endEffects(game) {
+    const wave = new Resolution(game);
+    wave.expire("viewing");
+    wave.changeFaces();
+    return wave.trace;
+  }
+  function projectedScore(game) {
+    const {sum, mult} = game.view;
+    if (!Object.values(game.board.tokens).some(id => TOKENS[id].lifetime === "viewing")) {
+      return {tokenSum: 0, score: sum * (1 + mult)};
+    }
+    // A token can cross the critic's threshold at closing. Simulate the same
+    // expiry on an isolated rules state so the estimate includes that response.
+    const shadow = JSON.parse(JSON.stringify({board: game.board, dice: game.dice, rng: game.rng,
+      nextDieId: game.nextDieId, view: {sum, mult, thresholds: game.view.thresholds,
+        remaining: game.view.remaining, rerollsLeft: game.view.rerollsLeft}}));
+    endEffects(shadow);
+    return {tokenSum: shadow.view.sum - sum, score: shadow.view.sum * (1 + shadow.view.mult)};
+  }
+
+  const api = {...catalog, random, randomInt, newDie, instance, matchPattern, submitEffects, rerollEffects,
+    endEffects, projectedScore, targets, comparePos, valueOf, resolveEvent, createExternalToken};
+  if (typeof module === "object" && module.exports) module.exports = api;
+  else root.MuseumCore = api;
+})(globalThis);
+
+</script>
+  <script>
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(require('./core.js'));
+  else root.MuseumGame = factory(root.MuseumCore);
+})(globalThis, function (Core) {
+  'use strict';
+
+  const C = Core.CONFIG;
+  const RULES_VERSION = C.rulesVersion;
+  const SAVE_KEY = 'strange-museum-v12-run-v5';
+  const bossNames = { steady: '꾸준함', burst: '한 방', diversity: '눈의 다양성' };
+  const strengthNames = ['약', '중', '강'];
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const money = value => Math.round(value * 10) / 10;
+  const choose = (game, entries) => entries[Core.randomInt(game, entries.length)];
+  const belowCap = (count, cap) => cap == null || count < cap;
+
+  function seedNumber(seed) {
+    if (Number.isFinite(seed)) return Math.trunc(seed) >>> 0;
+    let hash = 2166136261;
+    for (const ch of String(seed)) hash = Math.imul(hash ^ ch.codePointAt(0), 16777619);
+    return hash >>> 0;
+  }
+
+  function bossEntry(week, type) {
+    const [weakThrough, mediumThrough] = C.boss.strengthWeeks;
+    const tier = week <= weakThrough ? 0 : week <= mediumThrough ? 1 : 2;
+    let rule;
+    if (type === 'steady') {
+      const cap = C.boss.steady.caps[tier];
+      const damage = tier === 0 ? '남은 주사위 1개를 이번 관람에서 제외합니다.' : '주사위 1개를 영구히 잃습니다.';
+      rule = `한 번의 제출로 합 +${week * C.boss.steady.perWeek} 또는 배율 +1을 얻어야 합니다. 미달하면 ${damage}${cap == null ? '' : ' 최대 ' + cap + '회.'}`;
+    } else if (type === 'burst') {
+      const b = C.boss.burst;
+      const mult = b.mult[tier] ? `, 배율 −${b.mult[tier]}` : '';
+      const cap = b.dustCaps[tier];
+      const dust = cap === 0 ? '' : ` 유물 곁에 먼지가 쌓입니다.${cap == null ? '' : ' 최대 ' + cap + '개.'}`;
+      rule = `${b.free[tier] + 1}번째 제출부터 매번 합 −${b.sum[tier]}${mult}.${dust}`;
+    } else {
+      const cap = C.boss.diversity.caps[tier];
+      rule = '전체 주사위의 면에 가장 많은 눈을 봉인합니다(동률이면 큰 눈). 그 눈을 내면 모든 패턴이 무효입니다.';
+      if (cap !== 0) rule += ` 함께 낸 봉인된 면 하나가 영구히 바뀝니다.${cap == null ? '' : ' 최대 ' + cap + '회.'}`;
+    }
+    return { week, type, tier, strength: strengthNames[tier], name: bossNames[type], rule };
+  }
+
+  function newGame(seed = Date.now()) {
+    const game = {
+      rulesVersion: RULES_VERSION, seed, rng: seedNumber(seed), phase: 'intro', week: 1, visitor: 1,
+      money: C.startMoney, dice: [], nextDieId: 1, schedule: [], view: null, shop: null,
+      lastResult: null, history: [], board: { cells: [...C.startCells], relics: {}, tokens: {} }
+    };
+    for (const [pos, id] of Object.entries(C.startRelics)) game.board.relics[pos] = Core.instance(id);
+    for (let i = 0; i < C.startDice; i++) game.dice.push(Core.newDie(game));
+    let previous;
+    for (let week = 1; week <= C.weeks; week++) {
+      const type = choose(game, Object.keys(bossNames).filter(id => id !== previous));
+      game.schedule.push(bossEntry(week, type));
+      previous = type;
+    }
+    return game;
+  }
+
+  function drawStock(game, ids) {
+    const pool = [...ids], drawn = [];
+    while (drawn.length < C.slots && pool.length) drawn.push(pool.splice(Core.randomInt(game, pool.length), 1)[0]);
+    return drawn;
+  }
+
+  function rewardChoices(game) {
+    const catalog = Object.values(Core.RELICS);
+    const choices = drawStock(game, catalog.filter(r => r.kind === 'normal').map(r => r.id));
+    if (Core.random(game) < C.rewardDiceChance) {
+      choices[Core.randomInt(game, choices.length)] = choose(game, catalog.filter(r => r.kind === 'dice')).id;
+    }
+    return choices;
+  }
+
+  function sealedValue(game) {
+    const counts = new Map(C.fairFaces.map(value => [value, 0]));
+    for (const die of game.dice) for (const face of die.faces) counts.set(face, counts.get(face) + 1);
+    return [...counts].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0][0];
+  }
+
+  function startViewing(game) {
+    if (game.phase !== 'intro' && game.phase !== 'shop') return false;
+    if (game.phase === 'shop') {
+      game.visitor = game.visitor % C.visitorsPerWeek + 1;
+      if (game.visitor === 1) game.week++;
+    }
+    const boss = game.visitor === C.visitorsPerWeek ? game.schedule[game.week - 1] : null;
+    game.phase = 'viewing';
+    game.shop = null;
+    game.view = {
+      remaining: game.dice.map(die => ({ id: die.id, face: Core.randomInt(game, die.faces.length) })),
+      submitted: [], removed: [], sum: 0, mult: 0, rerollsLeft: C.rerolls, thresholds: [],
+      rewards: rewardChoices(game), target: C.baseTarget[boss ? 'boss' : 'normal'] * C.weekMultipliers[game.week - 1],
+      boss, sealedFace: boss && boss.type === 'diversity' ? sealedValue(game) : null,
+      submissions: 0, damage: [], penaltyCount: 0, dustCount: 0
+    };
+    return true;
+  }
+
+  function selected(game, ids) {
+    if (game.phase !== 'viewing' || !Array.isArray(ids) || !ids.length) return [];
+    const keys = new Set(ids);
+    if (keys.size !== ids.length) return [];
+    const entries = game.view.remaining.filter(entry => keys.has(entry.id));
+    return entries.length === keys.size ? entries : [];
+  }
+
+  function reroll(game, ids) {
+    const entries = selected(game, ids);
+    if (!entries.length || game.view.rerollsLeft <= 0) return [];
+    game.view.rerollsLeft--;
+    for (const entry of entries) {
+      const die = game.dice.find(d => d.id === entry.id);
+      entry.face = Core.randomInt(game, die.faces.length);
+    }
+    return [{ type: 'reroll', text: `주사위 ${entries.length}개를 다시 굴렸습니다.` }, ...Core.rerollEffects(game, entries.length)];
+  }
+
+  function recordDamage(view, trace, kind, text) {
+    view.damage.push(text);
+    trace.push({ type: 'boss', kind, text });
+  }
+
+  function steadyPenalty(game, oldSum, oldMult, trace) {
+    const v = game.view, tier = v.boss.tier;
+    if (v.sum - oldSum >= C.boss.steady.perWeek * game.week || v.mult > oldMult) return;
+    if (!belowCap(v.penaltyCount, C.boss.steady.caps[tier])) return;
+    if (tier === 0 ? !v.remaining.length : game.dice.length <= C.minimumDice) return;
+    const chosen = choose(game, v.remaining.length ? v.remaining : game.dice);
+    const remaining = v.remaining.find(entry => entry.id === chosen.id);
+    if (remaining) v.removed.push({ id: chosen.id, value: Core.valueOf(game, remaining) });
+    v.remaining = v.remaining.filter(entry => entry.id !== chosen.id);
+    v.penaltyCount++;
+    if (tier === 0) {
+      recordDamage(v, trace, 'temporaryLoss', `주사위 #${chosen.id}을 이번 관람에서 제외했습니다.`);
+    } else {
+      game.dice = game.dice.filter(die => die.id !== chosen.id);
+      recordDamage(v, trace, 'dieLost', `주사위 #${chosen.id}을 영구히 잃었습니다.`);
+    }
+  }
+
+  function burstPenalty(game, trace) {
+    const v = game.view, tier = v.boss.tier, b = C.boss.burst;
+    if (v.submissions <= b.free[tier]) return;
+    const sumLost = Math.min(v.sum, b.sum[tier]), multLost = Math.min(v.mult, b.mult[tier]);
+    v.sum -= sumLost;
+    v.mult -= multLost;
+    if (sumLost || multLost) {
+      const losses = [sumLost && `합 −${sumLost}`, multLost && `배율 −${multLost}`].filter(Boolean);
+      recordDamage(v, trace, 'scoreLost', losses.join(', '));
+    }
+    if (!belowCap(v.dustCount, b.dustCaps[tier])) return;
+    const neighbours = new Set();
+    for (const source of Object.keys(game.board.relics)) {
+      for (const pos of Core.targets(game.board, source, 'adjacent')) {
+        if (!game.board.relics[pos] && !game.board.tokens[pos]) neighbours.add(pos);
+      }
+    }
+    if (!neighbours.size) return;
+    const pos = choose(game, [...neighbours].sort(Core.comparePos));
+    v.dustCount++;
+    recordDamage(v, trace, 'dust', `(${pos})에 먼지가 쌓였습니다.`);
+    trace.push(...Core.createExternalToken(game, pos, 'dust'));
+  }
+
+  function diversityPenalty(game, blockedDice, trace) {
+    const v = game.view, cap = C.boss.diversity.caps[v.boss.tier];
+    recordDamage(v, trace, 'sealed', `봉인된 눈 ${v.sealedFace}을 내서 패턴이 무효가 되었습니다.`);
+    if (!belowCap(v.penaltyCount, cap)) return;
+    const chosen = choose(game, blockedDice);
+    const die = game.dice.find(d => d.id === chosen.id);
+    const replacement = choose(game, C.fairFaces.filter(n => n !== v.sealedFace));
+    die.faces[chosen.face] = replacement;
+    v.penaltyCount++;
+    recordDamage(v, trace, 'faceChanged', `주사위 #${die.id}의 ${v.sealedFace} 면이 ${replacement}(으)로 바뀌었습니다.`);
+  }
+
+  function submit(game, ids) {
+    const entries = selected(game, ids);
+    if (!entries.length) return [];
+    const v = game.view, selectedIds = new Set(ids);
+    const values = entries.map(entry => Core.valueOf(game, entry));
+    const blockedDice = entries.filter((_, index) => values[index] === v.sealedFace);
+    const oldSum = v.sum, oldMult = v.mult;
+    v.remaining = v.remaining.filter(entry => !selectedIds.has(entry.id));
+    v.submitted.push(...entries.map((entry, i) => ({ id: entry.id, value: values[i] })));
+    v.submissions++;
+    const trace = [{ type: 'submit', text: `${values.join(' · ')} 제출` },
+      ...Core.submitEffects(game, values, { sealed: blockedDice.length > 0 })];
+    switch (v.boss && v.boss.type) {
+      case 'steady': steadyPenalty(game, oldSum, oldMult, trace); break;
+      case 'burst': burstPenalty(game, trace); break;
+      case 'diversity': if (blockedDice.length) diversityPenalty(game, blockedDice, trace); break;
+    }
+    if (!v.remaining.length) trace.push(...endViewing(game));
+    return trace;
+  }
+
+  function endViewing(game) {
+    if (game.phase !== 'viewing') return [];
+    const v = game.view;
+    v.remaining = [];
+    v.rerollsLeft = 0;
+    const trace = Core.endEffects(game);
+    const score = v.sum * (1 + v.mult), ratio = score / v.target;
+    const tier = C.tipTiers.filter(t => ratio >= t.ratio).pop();
+    const passed = score >= v.target;
+    const result = {
+      week: game.week, visitor: game.visitor, score, target: v.target, tip: tier.tip, grade: tier.name,
+      passed, damage: [...v.damage], diceCount: game.dice.length
+    };
+    game.history.push(result);
+    game.lastResult = result;
+    game.money = money(game.money + tier.tip);
+    if (v.boss && !passed) game.phase = 'lost';
+    else if (v.boss && game.week === C.weeks) game.phase = 'won';
+    else {
+      game.phase = 'shop';
+      game.shop = { stock: drawStock(game, Object.keys(Core.RELICS)), rewardDone: false };
+    }
+    trace.push({ type: 'end', text: `관람 종료 · 감동 ${score} · 팁 ${tier.tip}원` });
+    return trace;
+  }
+
+  function projected(game) {
+    if (game.phase === 'viewing') return Core.projectedScore(game);
+    return { score: game.lastResult ? game.lastResult.score : 0, tokenSum: 0 };
+  }
+
+  function preview(game, ids) {
+    // The history and stock of a simulated run never feed the rules for the current visitor.
+    const scratch = { ...game, board: copy(game.board), dice: copy(game.dice), view: copy(game.view), history: [] };
+    const trace = submit(scratch, ids);
+    const byType = type => trace.filter(ev => ev.type === type).map(ev => ev.text);
+    const count = kind => trace.filter(ev => ev.type === 'boss' && ev.kind === kind).length;
+    return {
+      ...projected(scratch), trace, patterns: byType('pattern'), warnings: byType('warning'),
+      damage: byType('boss'), permanentLosses: count('dieLost'), permanentFaceChanges: count('faceChanged'),
+      temporaryLosses: count('temporaryLoss'), newDust: count('dust')
+    };
+  }
+
+  function cellPrice(game) {
+    return C.cellPriceBase + C.cellPriceStep * (game.board.cells.length - C.startCells.length);
+  }
+
+  function validPos(pos) {
+    if (typeof pos !== 'string') return false;
+    const xy = pos.split(',').map(Number);
+    return xy.length === 2 && xy.every(Number.isSafeInteger) && xy.join(',') === pos;
+  }
+
+  function buyCell(game, pos) {
+    if (game.phase !== 'shop' || !validPos(pos) || game.board.cells.includes(pos)) return false;
+    const price = cellPrice(game);
+    if (game.money < price) return false;
+    game.money = money(game.money - price);
+    game.board.cells.push(pos);
+    return true;
+  }
+
+  const emptyCell = (board, pos) => board.cells.includes(pos) && !board.relics[pos] && !board.tokens[pos];
+  const validFacing = facing => Number.isInteger(facing) && facing >= 0 && facing < 4;
+
+  function acquire(game, source, index, pos, facing = 0) {
+    if (game.phase !== 'shop' || !Number.isInteger(index) || !validFacing(facing)) return false;
+    if (!emptyCell(game.board, pos)) return false;
+    const reward = source === 'reward';
+    if (reward ? game.shop.rewardDone : source !== 'stock') return false;
+    const id = (reward ? game.view.rewards : game.shop.stock)[index];
+    const def = Core.RELICS[id];
+    if (!def || (!reward && game.money < def.price)) return false;
+    const item = Core.instance(id, def.facing ? facing : 0);
+    if (reward) game.shop.rewardDone = true;
+    else {
+      game.shop.stock[index] = null;
+      game.money = money(game.money - def.price);
+    }
+    game.board.relics[pos] = item;
+    return true;
+  }
+
+  function declineReward(game) {
+    if (game.phase !== 'shop' || game.shop.rewardDone) return false;
+    game.shop.rewardDone = true;
+    return true;
+  }
+
+  function moveRelic(game, from, to, facing) {
+    if (game.phase !== 'shop' || !game.board.cells.includes(from)) return false;
+    const item = game.board.relics[from];
+    if (!item || (from !== to && !emptyCell(game.board, to))) return false;
+    if (facing != null && !validFacing(facing)) return false;
+    if (facing != null && Core.RELICS[item.id].facing) item.facing = facing;
+    delete game.board.relics[from];
+    game.board.relics[to] = item;
+    return true;
+  }
+
+  function rotateRelic(game, pos) {
+    if (game.phase !== 'shop' || !game.board.cells.includes(pos)) return false;
+    const item = game.board.relics[pos];
+    if (!item || !Core.RELICS[item.id].facing) return false;
+    item.facing = (item.facing + 1) % 4;
+    return true;
+  }
+
+  function sellRelic(game, pos) {
+    if (game.phase !== 'shop' || !game.board.cells.includes(pos)) return false;
+    const item = game.board.relics[pos];
+    if (!item) return false;
+    game.money = money(game.money + Core.RELICS[item.id].price * C.saleFraction);
+    delete game.board.relics[pos];
+    return true;
+  }
+
+  function compatible(game) {
+    if (!game || game.rulesVersion !== RULES_VERSION || !Number.isSafeInteger(game.rng)) return false;
+    if (!['intro', 'shop', 'viewing', 'lost', 'won'].includes(game.phase)) return false;
+    if (!Number.isInteger(game.week) || game.week < 1 || game.week > C.weeks) return false;
+    if (!Number.isInteger(game.visitor) || game.visitor < 1 || game.visitor > C.visitorsPerWeek) return false;
+    const board = game.board;
+    if (!board || !Array.isArray(board.cells) || !board.cells.every(validPos) || !board.relics || !board.tokens) return false;
+    if (!Object.entries(board.relics).every(([p, r]) => board.cells.includes(p) && !board.tokens[p] && r && Core.RELICS[r.id])) return false;
+    if (!Object.entries(board.tokens).every(([p, id]) => validPos(p) && Core.TOKENS[id])) return false;
+    if (!Array.isArray(game.dice) || !game.dice.length ||
+        !game.dice.every(die => die && Array.isArray(die.faces) && die.faces.length === C.fairFaces.length && die.faces.every(n => C.fairFaces.includes(n)))) return false;
+    if (!Array.isArray(game.history) || !Array.isArray(game.schedule) || game.schedule.length !== C.weeks ||
+        !game.schedule.every((b, i) => b && b.week === i + 1 && bossNames[b.type] && strengthNames[b.tier] === b.strength)) return false;
+    if (game.phase === 'intro') return true;
+    const v = game.view;
+    if (!v || !Array.isArray(v.remaining) || !Array.isArray(v.submitted) || !Array.isArray(v.damage) ||
+        !Array.isArray(v.thresholds) || !Array.isArray(v.rewards) || !v.rewards.every(id => Core.RELICS[id])) return false;
+    if (!v.remaining.every(entry => Number.isInteger(entry.face) && entry.face >= 0 && entry.face < C.fairFaces.length && game.dice.some(d => d.id === entry.id))) return false;
+    return game.phase !== 'shop' || (game.shop && Array.isArray(game.shop.stock) && game.shop.stock.every(id => id === null || Core.RELICS[id]));
+  }
+
+  function load(storage, seed) {
+    try {
+      const raw = storage.getItem(SAVE_KEY);
+      if (raw !== null) {
+        const game = JSON.parse(raw);
+        if (compatible(game)) return game;
+      }
+    } catch { /* Some browsers restrict local storage on file URLs. */ }
+    return newGame(seed);
+  }
+
+  function save(storage, game) {
+    try {
+      const old = storage.getItem(SAVE_KEY);
+      if (old !== null) {
+        let valid = false;
+        try { valid = compatible(JSON.parse(old)); } catch { /* Preserve unreadable data as well. */ }
+        if (!valid) {
+          let suffix = 1;
+          while (storage.getItem(SAVE_KEY + '-backup-' + suffix) !== null) suffix++;
+          storage.setItem(SAVE_KEY + '-backup-' + suffix, old);
+        }
+      }
+      storage.setItem(SAVE_KEY, JSON.stringify(game));
+      return true;
+    } catch { return false; }
+  }
+
+  return {
+    RULES_VERSION, SAVE_KEY, bossEntry, newGame, startViewing, submit, reroll, endViewing, projected, preview,
+    cellPrice, buyCell, acquire, declineReward, moveRelic, rotateRelic, sellRelic, save, load
+  };
+});
+
+</script>
+  <script>
+(function (root, makePolicy) {
+  if (typeof module === 'object' && module.exports) {
+    module.exports = makePolicy(require('./core.js'), require('./game.js'));
+  } else {
+    root.MuseumPolicy = makePolicy(root.MuseumCore, root.MuseumGame);
+  }
+})(globalThis, function (Core, Game) {
+  'use strict';
+
+  function chooseAction(game) {
+    if (game.phase !== 'viewing') throw new Error('관람 중에만 제출을 고를 수 있습니다.');
+    const ids = game.view.remaining.map(die => die.id);
+    const policy = Core.CONFIG.auto;
+    const maxSize = ids.length > policy.fullEnumerationLimit ? policy.maxSubsetSize : ids.length;
+    const baseline = Game.projected(game).score;
+    let bestGain = 0;
+    let best = null;
+    const picked = [];
+
+    function explore(start) {
+      for (let i = start; i < ids.length; i++) {
+        picked.push(ids[i]);
+        const result = Game.preview(game, picked);
+        const gain = result.score - baseline
+          - result.permanentLosses * policy.dieLossPenalty
+          - result.permanentFaceChanges * policy.faceChangePenalty
+          - result.newDust * policy.dustPenalty
+          - (result.temporaryLosses || 0) * policy.temporaryLossPenalty
+          - result.warnings.length * policy.warningPenalty;
+        if (gain > bestGain || (gain === bestGain && best && picked.length < best.length)) {
+          bestGain = gain;
+          best = picked.slice();
+        }
+        if (picked.length < maxSize) explore(i + 1);
+        picked.pop();
+      }
+    }
+
+    explore(0);
+    if (best) return { type: 'submit', ids: best };
+    if (ids.length && game.view.rerollsLeft > 0) return { type: 'reroll', ids };
+    return { type: 'end', ids: [] };
+  }
+
+  // Deterministic shop choices are shared by the full-run button and the simulator.
+  // Prefer early sources of token value, then multipliers and additional sources.
+  function shopPreference(game) {
+    const owned = Object.values(game.board.relics).map(relic => relic.id);
+    const priorities = [];
+    if (!owned.includes('banker')) priorities.push('banker');
+    if (!owned.includes('critic')) priorities.push('critic');
+    if (owned.includes('banker') && !owned.includes('die_coin')) priorities.push('die_coin');
+    if (!owned.includes('collector')) priorities.push('collector');
+    priorities.push('banker', 'lamp', 'guide', 'critic', 'dairy', 'collector', 'scribe',
+      'firework', 'alchemist', 'fidget', 'die_coin', 'die_cheese', 'die_scroll',
+      'archivist', 'thief', 'curator', 'carver', 'sweeper');
+    return priorities;
+  }
+
+  function nextShopPosition(board) {
+    const available = pos => !board.relics[pos] && !board.tokens[pos];
+    const owned = board.cells.find(available);
+    if (owned) return { pos: owned, needsCell: false };
+    // Fill a checkerboard around the entrance, leaving orthogonal spaces for tokens.
+    for (let radius = 0; ; radius += 2) {
+      for (let y = -radius; y <= radius; y++) {
+        const distance = radius - Math.abs(y);
+        for (const x of distance ? [-distance, distance] : [0]) {
+          const pos = x + ',' + y;
+          if (!board.cells.includes(pos) && available(pos)) return { pos, needsCell: true };
+        }
+      }
+    }
+  }
+
+  function takeOffer(game, source, offers) {
+    const priorities = shopPreference(game);
+    const place = nextShopPosition(game.board);
+    const cellCost = place.needsCell ? Game.cellPrice(game) : 0;
+    const candidates = offers.map((id, index) => ({ id, index }))
+      .filter(offer => offer.id && cellCost + (source === 'reward' ? 0 : Core.RELICS[offer.id].price) <= game.money)
+      .sort((a, b) => priorities.indexOf(a.id) - priorities.indexOf(b.id));
+    if (!candidates.length) return;
+    if (place.needsCell && !Game.buyCell(game, place.pos)) throw new Error('자동 상점의 칸 구매 실패');
+    if (!Game.acquire(game, source, candidates[0].index, place.pos)) throw new Error('자동 상점의 유물 배치 실패');
+  }
+
+  function step(game) {
+    if (game.phase === 'intro') {
+      Game.startViewing(game);
+      return { type: 'start', trace: [] };
+    }
+    if (game.phase === 'shop') {
+      if (!game.shop.rewardDone) {
+        takeOffer(game, 'reward', game.view.rewards);
+        if (!game.shop.rewardDone) Game.declineReward(game);
+      }
+      takeOffer(game, 'stock', game.shop.stock);
+      Game.startViewing(game);
+      return { type: 'shop', trace: [] };
+    }
+    if (game.phase === 'won' || game.phase === 'lost') return { type: 'done', trace: [] };
+    const action = chooseAction(game);
+    let trace;
+    if (action.type === 'submit') trace = Game.submit(game, action.ids);
+    else if (action.type === 'reroll') trace = Game.reroll(game, action.ids);
+    else trace = Game.endViewing(game);
+    return { ...action, trace };
+  }
+
+  function run(seed) {
+    const game = Game.newGame(seed);
+    while (game.phase !== 'won' && game.phase !== 'lost') step(game);
+    return game;
+  }
+
+  return { chooseAction, step, run };
+});
+
+</script>
+  <script>
+/* Local pictograms keep the board readable at different zoom levels and offline. */
+(() => {
+  const drawings = {
+    museum: 'M2 9L12 3L22 9ZM4 20H20M2 23H22M5 11V17M10 11V17M14 11V17M19 11V17',
+    calendar: 'M4 5H20V21H4ZM4 10H20M8 3V7M16 3V7M8 14H10M14 14H16M8 17H10',
+    book: 'M12 6Q8 3 3 5V19Q8 17 12 20Q16 17 21 19V5Q16 3 12 6ZM12 6V20',
+    floor: 'M3 3H11V11H3ZM14 3H21V11H14ZM3 14H11V21H3ZM14 14H21V21H14Z',
+    fit: 'M3 9V3H9M15 3H21V9M21 15V21H15M9 21H3V15',
+    dice: 'M5 3H19Q21 3 21 5V19Q21 21 19 21H5Q3 21 3 19V5Q3 3 5 3ZM7 7H8M12 12H13M16 17H17',
+    coins: 'M3 7C3 3 16 3 16 7C16 11 3 11 3 7ZM3 7V11C3 15 16 15 16 11V7M7 15V17C7 21 21 21 21 17V13Q21 11 18 10M9 16Q15 19 21 14',
+    guide: 'M4 9L5 5L17 4L20 7L15 9ZM6 10H18M8 11V14Q12 20 16 14V11M8 17L4 19L3 22H21L20 19L16 17M10 18L12 21L14 18',
+    lamp: 'M7 3H17L21 13H3ZM12 14V19M7 21H17M6 22H18M18 14V16',
+    banker: 'M3 5H21V21H3ZM6 8H18V17H6ZM3 10H5M3 15H5M12 9V14M10 13L14 10M10 10L14 13',
+    alchemist: 'M9 3H15M10 4V10L4 19Q3 21 6 21H18Q21 21 20 19L14 10V4M7 16H17M10 18H11',
+    thief: 'M4 8L8 4L15 4L20 8M2 10H22M5 12Q12 15 19 12L17 17L13 16L11 16L7 17ZM6 19L3 22M18 19L21 22',
+    dairy: 'M7 4H17M8 5V8L5 12V21H19V12L16 8V5M6 14H18M6 18H18',
+    scribe: 'M4 20L11 12M6 17Q5 9 13 5L21 3L18 10L13 16ZM11 12L18 6M3 22H13',
+    archivist: 'M3 5H21V9H3ZM5 9V21H19V9M9 13H15V16H9Z',
+    collector: 'M3 8H21V20H3ZM8 8V6Q8 3 12 3Q16 3 16 6V8M3 13H21M11 12H13V15H11Z',
+    curator: 'M3 3H21V19H3ZM6 6H18V16H6ZM8 14L11 10L14 13L16 11M12 19V22M8 22H16',
+    critic: 'M4 5H20V17H10L5 21V17H4ZM7 9H17M7 13H13',
+    fidget: 'M11 3H15M13 4V6M17 7L19 5M13 7A7 7 0 1 1 12.9 7ZM13 10V14L16 15',
+    sweeper: 'M12 12L19 3M10 10L15 14L9 22L2 17ZM4 18L8 14M7 20L11 16',
+    firework: 'M12 2V6M19 5L16 8M22 12H18M19 19L16 16M12 22V18M5 19L8 16M2 12H6M5 5L8 8M12 9L15 12L12 15L9 12Z',
+    carver: 'M4 18L9 13L12 16L7 21ZM10 12L18 4L21 3L20 7L13 15Z',
+    die_coin: 'M5 7Q5 3 13 3Q20 3 20 7Q20 11 13 11Q5 11 5 7ZM5 7V11Q5 15 13 15Q20 15 20 11V7M3 13V17Q3 21 11 21Q17 21 18 17',
+    die_scroll: 'M2 6Q7 4 12 8Q17 4 22 6V19Q17 17 12 21Q7 17 2 19ZM12 8V21M5 9L9 10M15 10L19 9',
+    die_cheese: 'M5 3V9Q7 13 9 9V3M7 3V21M18 3Q14 6 14 13H18M18 3V21',
+    coin: 'M12 3A9 9 0 1 1 11.9 3ZM12 6A6 6 0 1 1 11.9 6ZM12 9V15',
+    ingot: 'M4 11L15 6L20 8L22 15L10 20L2 16ZM4 11L10 14L20 8M10 14V20',
+    cheese: 'M3 12L16 4L21 9L3 15ZM3 15V20L21 14V9M8 16H9M15 13H16',
+    scroll: 'M6 4H18Q21 4 20 8H17M17 7V18Q17 21 14 21H4Q7 20 7 17V7Q7 5 6 4ZM9 10H14M9 13H14',
+    spark: 'M12 2L14 9L21 12L14 15L12 22L10 15L3 12L10 9Z',
+    dust: 'M3 17Q2 12 7 11Q8 5 13 9Q18 7 19 12Q24 14 20 18H5ZM6 21H8M16 21H17',
+    arrow: 'M3 12H20M14 6L20 12L14 18',
+    replay: 'M4 10A8 8 0 1 1 5 18M4 4V10H10',
+    pulse: 'M2 13H6L9 6L13 19L16 10L18 13H22',
+    flag: 'M5 22V3M6 4Q11 1 14 5Q17 8 21 4V14Q17 17 13 13Q10 10 6 13',
+    bag: 'M4 8H20L21 21H3ZM8 9V7A4 4 0 0 1 16 7V9',
+    list: 'M4 6H5M9 6H20M4 12H5M9 12H20M4 18H5M9 18H20'
+  };
+
+  const filled = {
+    guide: [['#d6ac72','M4 9L5 5L17 4L20 7L15 9Z'],['#f1d8b5','M8 10H16V14Q12 20 8 14Z'],['#a1b8a2','M8 17L4 19L3 22H21L20 19L16 17L12 21Z']],
+    lamp: [['#ebc276','M7 3H17L21 13H3Z'],['#be884d','M7 12H20V14H5ZM11 14H13V20H11ZM7 20H17V22H7Z']]
+  };
+  function paint(name, canvas, colorful = false) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.height = 96;
+    ctx.scale(4, 4);
+    if (colorful) {
+      for (const [color, path] of filled[name] || []) {
+        ctx.fillStyle = color;
+        ctx.fill(new Path2D(path));
+      }
+    }
+    ctx.strokeStyle = colorful ? '#29463c' : getComputedStyle(canvas).color;
+    ctx.lineWidth = colorful ? 1.3 : 1.65;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.stroke(new Path2D(drawings[name] || drawings.museum));
+  }
+  function render(root = document) {
+    for (const holder of root.querySelectorAll('[data-icon]:not([data-painted])')) {
+      holder.dataset.painted = '1';
+      holder.setAttribute('aria-hidden', 'true');
+      const canvas = document.createElement('canvas');
+      holder.append(canvas);
+      paint(holder.dataset.icon, canvas, holder.hasAttribute('data-color'));
+    }
+  }
+  window.MuseumSymbols = {render};
+})();
+
+</script>
+  <script>
+(() => {
+  const board = document.getElementById('board');
+  const tiles = document.getElementById('tiles');
+  const marks = document.getElementById('marks');
+  const axes = document.getElementById('axes');
+  const coordinate = document.getElementById('coordinate');
+  const Core = window.MuseumCore;
+  let model, actions, drag, hover = null;
+  let center = [1, 0.5], size = 79, fittedSize = 79, autoFit = true;
+  const xy = key => key.split(',').map(Number);
+  const safeCoordinate = n => Math.max(Number.MIN_SAFE_INTEGER, Math.min(Number.MAX_SAFE_INTEGER, n));
+  function extent(axis) {
+    return axis === 0 ? board.clientWidth : board.clientHeight;
+  }
+  function pixels(value, axis) {
+    return extent(axis) / 2 + (value - center[axis] - 0.5) * size;
+  }
+  function cellAt(pixel, axis) {
+    const whole = Math.floor(center[axis]);
+    return safeCoordinate(whole + Math.floor((pixel - extent(axis) / 2) / size + (center[axis] - whole) + 0.5));
+  }
+  function position(event) {
+    const rect = board.getBoundingClientRect();
+    return [cellAt(event.clientX - rect.left, 0), cellAt(event.clientY - rect.top, 1)].join(',');
+  }
+  function fit() {
+    if (!model || !board.clientWidth || !board.clientHeight) return;
+    let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
+    for (const key of [...model.board.cells, ...Object.keys(model.board.tokens)]) {
+      const [x, y] = xy(key);
+      left = Math.min(left, x); right = Math.max(right, x);
+      top = Math.min(top, y); bottom = Math.max(bottom, y);
+    }
+    center = [left + (right - left) / 2, top + (bottom - top) / 2];
+    fittedSize = Math.min(84, board.clientWidth / (right - left + 2.65), board.clientHeight / (bottom - top + 2.65));
+    size = fittedSize;
+    autoFit = true;
+  }
+  function zoom(factor) {
+    autoFit = false;
+    size = Math.max(Math.min(0.35, fittedSize), Math.min(140, size * factor));
+    draw();
+  }
+  function place(key) {
+    const [x, y] = xy(key), left = pixels(x, 0), top = pixels(y, 1);
+    if (left + size < 0 || top + size < 0 || left > board.clientWidth || top > board.clientHeight) return 'display:none';
+    return 'left:' + left + 'px;top:' + top + 'px';
+  }
+  function drawMarks() {
+    if (!model) return;
+    const {held, focus, flash, forecast} = model;
+    const anchor = held ? (hover || focus) : focus;
+    const relic = held ? held.id : model.board.relics[anchor]?.id;
+    const def = Core.RELICS[relic];
+    const marked = new Map();
+    if (anchor && def) {
+      const facing = held?.facing ?? model.board.relics[anchor]?.facing ?? 0;
+      if (def.trigger.where) {
+        for (const key of Core.targets(model.board, anchor, def.trigger.where, facing)) marked.set(key, 'target');
+      }
+      for (const effect of def.effects) {
+        if (!effect.scope) continue;
+        for (const key of Core.targets(model.board, anchor, effect.scope, facing)) {
+          const token = model.board.tokens[key];
+          const occupied = model.board.relics[key] && held?.from !== key;
+          let available;
+          if (effect.type === 'createToken') available = !occupied && !token;
+          else if (effect.type === 'destroyTokens') available = token && (!effect.token || effect.token === token) &&
+            (!effect.tag || Core.TOKENS[token].tags.includes(effect.tag));
+          else if (effect.type === 'transformTokens') available = token === effect.from;
+          else available = true;
+          if (available || !marked.has(key)) marked.set(key, available ? 'target target-open' : 'target target-blocked');
+        }
+      }
+    }
+    const mark = (key, css) => '<span class="map-mark ' + css + '" style="' + place(key) + '"></span>';
+    marks.innerHTML = [...marked].map(([key, css]) => mark(key, css)).join('') +
+      [...new Set(forecast || [])].map(k => mark(k, 'forecast')).join('') +
+      (focus ? mark(focus, 'focus') : '') + (held && anchor ? mark(anchor, 'place') : '') +
+      (flash ? mark(flash, 'flash') : '');
+    const shown = hover || focus;
+    coordinate.textContent = shown ? 'X ' + xy(shown)[0] + '  /  Y ' + xy(shown)[1] : '';
+  }
+  function draw() {
+    if (!model) return;
+    const {cells, relics, tokens} = model.board;
+    const gridStep = Math.max(1, Math.ceil(12 / size));
+    // Keep the texture's origin near the viewport even for distant rooms.
+    const gridOrigin = axis => extent(axis) / 2 - ((center[axis] % gridStep) + 0.5) * size;
+    board.style.setProperty('--cell', size + 'px');
+    board.style.setProperty('--grid', (size * gridStep) + 'px');
+    board.style.setProperty('--ox', gridOrigin(0) + 'px');
+    board.style.setProperty('--oy', gridOrigin(1) + 'px');
+    board.classList.toggle('small-tiles', size < 53);
+    board.classList.toggle('tiny-tiles', size < 22);
+    const purchased = new Set(cells);
+    const keys = [...new Set([...cells, ...Object.keys(tokens)])];
+    tiles.innerHTML = keys.map(key => {
+      const inst = relics[key], token = tokens[key];
+      const def = inst ? Core.RELICS[inst.id] : Core.TOKENS[token];
+      const kind = inst ? 'artifact' : token ? 'token-cell' : 'vacant';
+      const name = def?.name || '빈칸';
+      const icon = def ? '<i class="tile-icon" data-icon="' + (inst?.id || token) + '" data-color></i>' : '<span class="empty-plus">+</span>';
+      const arrow = inst && def.facing ? '<b class="facing">' + ['↑','→','↓','←'][inst.facing] + '</b>' : '';
+      let progress = '', progressTitle = '';
+      if (def?.kind === 'dice') {
+        const target = def.effects.find(e => e.type === 'destroyTokens');
+        const required = def.effects.find(e => e.type === 'grantDieIfDestroyed').required;
+        const count = Core.targets(model.board, key, target.scope, inst.facing).filter(p => tokens[p] === target.token).length;
+        progressTitle = ' · 인접 ' + Core.TOKENS[target.token].name + ' ' + count + '/' + required;
+        progress = '<span class="tile-progress">' + count + '/' + required + '</span>';
+      }
+      const label = name + ' (' + key + ') · ' + (purchased.has(key) ? '구매한 칸' : '미구매 자리') + progressTitle;
+      return '<button tabindex="-1" class="tile ' + kind + (purchased.has(key) ? ' purchased' : '') + '" style="' + place(key) + '" data-pos="' + key + '" aria-label="' + label + '" title="' + label + '">' + icon + '<span class="tile-name">' + name + '</span>' + progress + arrow + '</button>';
+    }).join('');
+    MuseumSymbols.render(tiles);
+    let labels = '';
+    if (size >= 35) {
+      for (const axis of [0, 1]) {
+        const first = cellAt(0, axis);
+        const count = Math.ceil(extent(axis) / size) + 1;
+        for (let i = 0; i < count; i++) {
+          const value = first + i, pixel = pixels(value, axis) + size / 2;
+          if (!Number.isSafeInteger(value) || pixel < 0 || pixel >= extent(axis)) continue;
+          labels += axis === 0 ? '<span class="axis-x" style="left:' + pixel + 'px">' + value + '</span>' :
+            '<span class="axis-y" style="top:' + pixel + 'px">' + value + '</span>';
+        }
+      }
+    }
+    axes.innerHTML = labels;
+    drawMarks();
+  }
+  function aim(pos, focusBoard = true) {
+    hover = pos || null;
+    if (hover) {
+      const to = xy(hover);
+      if (to.some((value, axis) => Math.abs(value - center[axis]) * size > Math.max(0, extent(axis) / 2 - size))) {
+        center = to;
+        autoFit = false;
+      }
+    }
+    if (focusBoard) board.focus();
+    draw();
+  }
+  board.addEventListener('pointerdown', event => {
+    if (!model || drag || !event.isPrimary || event.button !== 0) return;
+    const key = position(event);
+    drag = {id:event.pointerId, x:event.clientX, y:event.clientY, start:[...center], key, moved:false,
+      moveRelic:!model.held && model.shop && !!model.board.relics[key]};
+    board.setPointerCapture(event.pointerId);
+    board.focus({preventScroll:true});
+  });
+  board.addEventListener('pointermove', event => {
+    if (!model || !event.isPrimary || (drag && event.pointerId !== drag.id)) return;
+    const dx = event.clientX - (drag?.x ?? event.clientX), dy = event.clientY - (drag?.y ?? event.clientY);
+    if (drag && Math.hypot(dx, dy) > 5 && !drag.moved) {
+      drag.moved = true;
+      if (drag.moveRelic) actions.pick(drag.key);
+    }
+    if (drag?.moved && !drag.moveRelic) {
+      autoFit = false;
+      center = [safeCoordinate(drag.start[0] - dx / size), safeCoordinate(drag.start[1] - dy / size)];
+      draw();
+    }
+    hover = position(event);
+    drawMarks();
+  });
+  board.addEventListener('pointerup', event => {
+    if (!drag || drag.id !== event.pointerId) return;
+    const click = !drag.moved || drag.moveRelic;
+    const rect = board.getBoundingClientRect();
+    drag = null;
+    if (click && event.clientX >= rect.left && event.clientX < rect.right &&
+        event.clientY >= rect.top && event.clientY < rect.bottom) actions.select(position(event));
+  });
+  function release(event) { if (drag?.id === event.pointerId) drag = null; }
+  board.addEventListener('pointercancel', release);
+  board.addEventListener('lostpointercapture', release);
+  board.addEventListener('pointerleave', event => { if (event.isPrimary && !drag) { hover = null; drawMarks(); } });
+  board.addEventListener('click', event => {
+    if (event.detail === 0 && event.target.closest('[data-pos]')) actions.select(event.target.closest('[data-pos]').dataset.pos);
+  });
+  board.addEventListener('keydown', event => {
+    if (!model) return;
+    const offsets = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowRight:[1,0], ArrowLeft:[-1,0]};
+    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); actions.select(hover || model.focus || '0,0'); }
+    const delta = offsets[event.key];
+    if (!delta) return;
+    event.preventDefault();
+    const from = xy(hover || model.focus || '0,0');
+    const to = [safeCoordinate(from[0] + delta[0]), safeCoordinate(from[1] + delta[1])];
+    aim(to.join(','), false);
+    actions.focus(hover);
+  });
+  board.addEventListener('wheel', event => { event.preventDefault(); zoom(event.deltaY < 0 ? 1.15 : 1/1.15); }, {passive:false});
+  board.addEventListener('dragover', event => {
+    if (!model?.shop) return;
+    event.preventDefault(); hover = position(event); drawMarks();
+  });
+  board.addEventListener('drop', event => {
+    event.preventDefault();
+    if (model?.held) actions.select(position(event));
+  });
+  new ResizeObserver(() => { if (autoFit) fit(); draw(); }).observe(board);
+  window.MuseumBoard = {
+    connect(handlers) { actions = handlers; },
+    render(data) { model = data; if (autoFit) fit(); draw(); },
+    aim, zoom, fit() { fit(); draw(); }
+  };
+})();
+
+</script>
+  <script>
+(() => {
+  'use strict';
+  const C = MuseumCore, G = MuseumGame, P = MuseumPolicy, B = MuseumBoard;
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const icon = (name, color = false) => '<i data-icon="' + esc(name) + '"' + (color ? ' data-color' : '') + '></i>';
+  const btn = (action, name, style = '', disabled = false) => '<button class="btn ' + style + '" data-action="' + action + '"' + (disabled ? ' disabled' : '') + '>' + name + '</button>';
+  const head = (name, symbol, right = '') => '<div class="section-head"><div>' + icon(symbol) + '<h2>' + name + '</h2></div>' + right + '</div>';
+  const quiet = text => '<span class="quiet">' + text + '</span>';
+  const panel = html => '<section class="panel">' + html + '</section>';
+  const point = pos => '(' + esc(pos?.replace(',', ', ')) + ')';
+  const terminal = () => game.phase === 'lost' || game.phase === 'won';
+  let storage;
+  try { storage = window.localStorage; } catch { /* The status line reports unavailable storage. */ }
+  let game = G.load(storage), chosen = new Set(), focus = null, held = null, prediction = null;
+  let lastTrace = [], animation = null, animationTimer, auto = '', autoTimer, messageTimer;
+  function save() {
+    $('save-status').textContent = G.save(storage, game) ? '●  자동 저장됨' : '자동 저장 불가 · 이 브라우저의 저장 권한을 확인하세요.';
+  }
+  function say(text) {
+    clearTimeout(messageTimer);
+    $('feedback').textContent = text;
+    messageTimer = setTimeout(() => { $('feedback').textContent = ''; }, 2600);
+  }
+  function dialog(title, html) {
+    $('dialog-title').textContent = title;
+    $('dialog-body').innerHTML = html;
+    MuseumSymbols.render($('dialog'));
+    if (!$('dialog').open) $('dialog').showModal();
+  }
+  function schedule() {
+    return '<ol class="schedule">' + game.schedule.map(b =>
+      '<li><span class="week-no">' + b.week + '주</span><div><strong>' + esc(b.name) + '</strong><span class="badge tier-' + b.tier + '">' + esc(b.strength) + '</span><p>' + esc(b.rule) + '</p></div></li>'
+    ).join('') + '</ol>';
+  }
+  function inventory() {
+    const field = (name, n, unit) => '<div class="stat"><span>' + name + '</span><strong>' + n + '<small>' + unit + '</small></strong></div>';
+    return '<div class="inventory">' + field('운영 자금', game.money, '원') + field('주사위', game.dice.length, '개') + field('소장 유물', Object.keys(game.board.relics).length, '점') + '</div>';
+  }
+  function itemCard(id, action, suffix = '', disabled = false) {
+    if (!id) return '<div class="empty-offer">판매 완료</div>';
+    const r = C.RELICS[id];
+    const isOffer = action.startsWith('reward-') || action.startsWith('stock-');
+    const active = held?.action === action;
+    return '<button class="item-card' + (active ? ' chosen' : '') + '" data-action="' + action + '"' +
+      (isOffer && !disabled ? ' draggable="true"' : '') + (disabled ? ' disabled' : '') + '><span class="icon-well">' + icon(id, true) +
+      '</span><span class="item-text"><strong>' + r.name + '</strong><small>' + r.triggerText + ' · ' + r.effectText +
+      '</small></span>' + (suffix ? '<span class="price">' + suffix + '</span>' : '') + '</button>';
+  }
+  function renderHeadline() {
+    const v = game.view, phase = game.phase;
+    const [title, desc] = phase === 'intro' ? ['개관 준비','여덟 주 동안 전시실을 운영하고, 매주 세 번째 관객의 평가를 통과하세요.'] :
+      phase === 'viewing' ? [v.boss ? '평가 담당자 관람' : '일반 관객 관람', v.boss ? v.boss.name + ' 평가 · ' + v.boss.strength + ' 단계' : '주사위를 나눠 제출해 유물을 발동시키세요.'] :
+      phase === 'shop' ? ['전시 정비','관람이 끝났습니다. 다음 관객이 오기 전에 유물을 고르고 전시실을 정비하세요.'] :
+      phase === 'won' ? ['최종 평가 통과','여덟 주의 전시를 마쳤습니다.'] : ['전시 종료','이번 주 평가 담당자의 감동이 기준에 미치지 못했습니다.'];
+    let actions = '';
+    if (auto) actions = btn('stop','자동 진행 멈추기','large');
+    else if (phase === 'intro') actions = btn('auto-run','런 자동 진행') + btn('start','첫 관객 맞이하기 ' + icon('arrow'),'primary large');
+    else if (phase === 'shop') actions = btn('auto-run','런 자동 진행') + btn('start',(game.shop.rewardDone ? '다음 관객 맞이하기 ' : '무료 보상 건너뛰고 다음 관람 ') + icon('arrow'),'primary large');
+    else if (phase === 'viewing') actions = inventory();
+    else if (terminal()) actions = btn('new','새 전시 시작 ' + icon('arrow'),'primary large');
+    $('headline').innerHTML = '<div><span class="topline">' + (phase === 'intro' ? '전시 운영실' : game.week + '주차 · 관객 ' + game.visitor + ' / ' + C.CONFIG.visitorsPerWeek) + '</span><h1>' + title + '</h1><p>' + desc + '</p></div><div class="title-actions">' + actions + '</div>';
+  }
+  function remainingGoal(id, pos) {
+    const def = C.RELICS[id];
+    if (def.kind !== 'dice') return '';
+    const destroy = def.effects.find(e => e.type === 'destroyTokens'), grant = def.effects.find(e => e.type === 'grantDieIfDestroyed');
+    const count = C.targets(game.board, pos, 'adjacent').filter(p => game.board.tokens[p] === destroy.token).length;
+    return '인접 ' + C.TOKENS[destroy.token].name + ' ' + count + '/' + grant.required + '개';
+  }
+  function detail() {
+    const el = $('board-detail');
+    if (held) {
+      const def = C.RELICS[held.id];
+      const message = held.source === 'cell' ? '사려는 자리를 누르세요. 떨어진 자리도 구매할 수 있습니다.' :
+        '구매한 빈칸을 눌러 배치하세요.' + (def.facing ? ' 현재 방향 ' + ['↑','→','↓','←'][held.facing] : '');
+      el.innerHTML = '<div class="detail-title"><strong>' + (def?.name || '칸 구매 · ' + G.cellPrice(game) + '원') + '</strong></div><p class="detail-copy">' + message + '</p><div class="inline-actions">' +
+        (def?.facing ? btn('rotate','회전 R','small') : '') + btn('cancel','취소 Esc','small') + '</div>';
+    } else if (focus) {
+      const inst = game.board.relics[focus], token = game.board.tokens[focus], owned = game.board.cells.includes(focus);
+      const def = inst ? C.RELICS[inst.id] : C.TOKENS[token];
+      const info = [def?.description || (owned ? '상점에서 유물을 놓을 수 있습니다.' : '상점에서 구매할 수 있는 자리입니다.')];
+      if (inst?.charges != null) info.push('남은 충전 ' + inst.charges + '회');
+      if (inst?.id && remainingGoal(inst.id,focus)) info.push(remainingGoal(inst.id,focus));
+      if (token) info.push(owned ? '구매한 칸' : '미구매 자리');
+      let actions = '';
+      if (game.phase === 'shop') {
+        if (inst) actions = btn('move','이동','small') + (def.facing ? btn('rotate','회전 R','small') : '') + btn('sell','판매 · ' + (Math.round(def.price * C.CONFIG.saleFraction * 10)/10) + '원','small');
+        else if (!owned) actions = btn('buy-here','이 칸 구매 · ' + G.cellPrice(game) + '원','small',game.money < G.cellPrice(game));
+      }
+      el.innerHTML = '<div class="detail-title"><strong>' + (def?.name || (owned ? '구매한 빈칸' : '미구매 자리')) + '</strong><small>' + point(focus) + '</small></div><p class="detail-copy">' + info.join(' · ') + '</p>' + (actions ? '<div class="inline-actions">' + actions + '</div>' : '');
+    } else { el.innerHTML = ''; }
+  }
+  function renderBoard() {
+    const board = animation?.board || game.board;
+    $('board-count').textContent = '구매한 칸 ' + game.board.cells.length + '개';
+    B.render({board, focus, held, shop:game.phase === 'shop' && !auto, flash:animation?.pos,
+      forecast:prediction?.trace.filter(ev => ev.pos && ['fire','create','destroy','vanish','transform'].includes(ev.type)).map(ev => ev.pos)});
+    detail();
+  }
+  const pipPlaces = [[],[5],[1,9],[1,5,9],[1,3,7,9],[1,3,5,7,9],[1,3,4,6,7,9]];
+  function pips(value) {
+    return '<span class="pips" aria-hidden="true">' + pipPlaces[value].map(n => '<b style="grid-area:' + (Math.floor((n-1)/3)+1) + '/' + ((n-1)%3+1) + '"></b>').join('') + '</span>';
+  }
+  function diceTray() {
+    const v = game.view;
+    const dice = v.remaining.map(e => {
+      const value = C.valueOf(game,e), faces = game.dice.find(d => d.id === e.id).faces.join(' · ');
+      return '<button class="die" data-action="die-' + e.id + '" aria-pressed="' + chosen.has(e.id) + '" aria-label="주사위 ' + e.id + ', ' + value + ' 눈" title="#' + e.id + ' · 면 ' + faces + '"' + (auto ? ' disabled' : '') + '>' + pips(value) + '</button>';
+    }).join('');
+    const spent = entries => entries.map(e => '<span class="mini-die" title="주사위 ' + e.id + '">' + e.value + '</span>').join('');
+    const mobilePrediction = prediction ? '<div class="mobile-prediction"><b>제출 후 감동 ' + prediction.score + ' / ' + v.target + '</b> · ' + (prediction.patterns.map(esc).join(', ') || '일치 패턴 없음') +
+      [...prediction.warnings,...prediction.damage].map(s=>'<p class="warning">' + esc(s) + '</p>').join('') + '</div>' : '';
+    return head('주사위 선택','dice',quiet('남은 주사위 ' + v.remaining.length + '개')) + '<div class="tray"><div class="dice-row">' + dice + '</div><div class="consumed">제출한 주사위 ' + (spent(v.submitted) || '없음') + (v.removed.length ? ' · 평가로 제외 ' + spent(v.removed) : '') + '</div>' + mobilePrediction + '<div class="action-line">' +
+      btn('submit','선택 제출' + (chosen.size ? ' · ' + chosen.size + '개' : ''),'primary',!chosen.size || !!auto) +
+      btn('reroll',icon('replay') + '리롤 · ' + v.rerollsLeft,'',!chosen.size || !v.rerollsLeft || !!auto) +
+      btn(auto ? 'stop' : 'auto-view',auto ? '자동 멈춤' : '자동 플레이','',false) +
+      '<button class="text-btn" data-action="end"' + (auto ? ' disabled' : '') + '>조기 종료</button></div></div>';
+  }
+  function offers(source, list) {
+    return list.map((id,index) => itemCard(id,source + '-' + index,source === 'stock' && id ? C.RELICS[id].price + '원' : '',source === 'stock' && id && game.money < C.RELICS[id].price)).join('');
+  }
+  function controls() {
+    let html;
+    if (game.phase === 'intro') {
+      html = head('시작 유물','museum',quiet('소장품 2점')) + '<div class="starter-cards">' + Object.entries(game.board.relics).map(([pos,r])=>itemCard(r.id,'inspect-' + pos)).join('') + '</div><p class="intro-note rules-copy">안내원으로 합을 모으고, 같은 눈 둘을 조명에 제출해 배율을 올리세요. 관람이 끝나면 합 × (1 + 배율)이 감동이 됩니다.</p>';
+    } else if (game.phase === 'viewing') { html = diceTray(); }
+    else if (game.phase === 'shop') {
+      html = head('유물 상점','bag',quiet('잔액 ' + game.money + '원')) + '<div class="offers">' + offers('stock',game.shop.stock) + '</div><div class="panel-body"><div class="inline-actions">' + btn('cell','칸 구매 · ' + G.cellPrice(game) + '원','green',game.money < G.cellPrice(game)) + '</div><p class="button-note">유물을 선택한 뒤 배치할 칸을 누르세요. 판 위의 유물을 누르면 이동하거나 판매할 수 있습니다.</p></div>';
+    } else {
+      html = head('관람 기록','list',quiet(game.history.length + '명')) + '<div class="panel-body">' + game.history.map(r=>'<div class="result-row"><span>' + r.week + '주 · ' + (r.visitor === C.CONFIG.visitorsPerWeek ? '평가 담당자' : '관객 ' + r.visitor) + '</span><b>감동 ' + r.score + ' / ' + r.target + '</b></div>').join('') + '</div>';
+    }
+    $('controls').innerHTML = html;
+  }
+  function scorePanel() {
+    const v = game.view, end = game.phase !== 'viewing', p = G.projected(game);
+    const score = p.score, target = v.target;
+    return '<section class="panel score-panel">' + head(end ? '관람 결과' : '현재 예상 감동','pulse',quiet('관객 기준 ' + target)) +
+      '<div class="score-main"><div class="score-number"><b>' + score + '</b><span>/ ' + target + '</span></div><div class="progress"><i style="width:' + Math.min(100, 100*score/target) + '%"></i></div><div class="score-breakdown"><span>합 <b>' + v.sum + '</b></span><span>배율 <b>+' + v.mult + '</b></span><span>종료 토큰 합 <b>+' + p.tokenSum + '</b></span></div></div></section>';
+  }
+  const changes = new Set(['fire','create','destroy','transform','vanish','removeRelic','changeFace','grantDie','gainReroll']);
+  function previewPanel() {
+    let body = '<p class="muted">남은 주사위를 누르면 이번 제출로 발동할 유물과 감동을 볼 수 있습니다.</p>';
+    if (prediction) {
+      const items = prediction.trace.filter(e => changes.has(e.type));
+      body = '<div class="result-row"><span>제출 후 예상 감동</span><b class="preview-score">' + prediction.score + '</b></div><p class="muted">일치 패턴 · ' + (prediction.patterns.map(esc).join(', ') || '없음') + '</p>' +
+        (items.length ? '<ol class="preview-list">' + items.map(ev=>'<li>' + esc(ev.text) + (ev.pos ? ' ' + point(ev.pos) : '') + '</li>').join('') + '</ol>' : '<p class="muted">발동하는 유물이 없습니다.</p>') +
+        prediction.warnings.map(s=>'<p class="warning">' + esc(s) + '</p>').join('');
+    }
+    return panel(head('제출 미리보기','dice',quiet('선택 ' + chosen.size + '개')) + '<div class="preview-body">' + body + '</div>');
+  }
+  function bossPanel() {
+    const v = game.view, b = v.boss, score = prediction?.score ?? G.projected(game).score;
+    return panel(head(b.name + ' 평가','flag',quiet(b.strength + ' 단계')) + '<div class="boss-note"><strong>' + (score >= v.target ? '기준 통과' : '기준 미달') + (game.phase === 'viewing' ? ' 예상' : '') + '</strong>' + esc(b.rule) + (v.sealedFace ? ' 봉인된 눈 ' + v.sealedFace + '.' : '') + '</div><div class="panel-body"><p class="rules-copy">입은 피해 · ' + (v.damage.map(esc).join(' / ') || '없음') + '</p>' + (prediction ? '<p class="rules-copy">이번 제출의 피해 · ' + (prediction.damage.map(esc).join(' / ') || '없음') + '</p>' : '') + '</div>');
+  }
+  function sidebar() {
+    const phase = game.phase, v = game.view;
+    if (phase === 'intro') {
+      $('sidebar').innerHTML = inventory() + panel(head('주간 평가 일정','calendar',quiet('전 8주')) + schedule());
+      return;
+    }
+    let html = scorePanel();
+    if (phase === 'viewing') html += previewPanel();
+    if (v.boss) html += bossPanel();
+    if (phase !== 'viewing') {
+      const r = game.lastResult;
+      html += panel(head('관객 정산','coins',quiet(r.grade)) + '<div class="panel-body"><div class="result-row"><span>받은 팁</span><b>+' + r.tip + '원</b></div></div>');
+    }
+    if (phase === 'viewing' || phase === 'shop') {
+      const active = phase === 'shop';
+      const cards = !active ? v.rewards.map(id=>itemCard(id,'catalog-' + id)).join('') : (game.shop.rewardDone ? '<p class="rules-copy">이번 관람의 보상 선택을 마쳤습니다.</p>' : offers('reward',v.rewards));
+      html += panel(head(active ? '무료 유물 선택' : '관람 후 보상','bag',quiet('3택1')) + '<div class="offers">' + cards +
+        (active && !game.shop.rewardDone ? btn('decline','보상 거절','small') : '') + '</div>');
+    }
+    $('sidebar').innerHTML = html + (phase === 'viewing' ? '' : inventory());
+  }
+  function report() {
+    const el = $('report');
+    el.hidden = !lastTrace.length;
+    if (!lastTrace.length) return;
+    const open = !!el.querySelector('details[open]');
+    el.innerHTML = head('처리 기록','list',animation ? btn('skip','연출 건너뛰기','small') : '') +
+      (animation ? '<div class="trace-line">' + esc(animation.current) + '</div>' : '') +
+      '<div class="report-body"><details' + (open ? ' open' : '') + '><summary>최근 행동 전체 보기 · ' + lastTrace.length + '건</summary><ol class="log-list">' + lastTrace.map(e=>'<li>' + esc(e.text) + (e.pos ? ' ' + point(e.pos) : '') + '</li>').join('') + '</ol></details></div>';
+  }
+  function render() {
+    prediction = chosen.size && game.phase === 'viewing' ? G.preview(game,[...chosen]) : null;
+    renderHeadline(); controls(); sidebar(); renderBoard(); report();
+    MuseumSymbols.render();
+  }
+  function stopAnimation() {
+    clearTimeout(animationTimer);
+    animation = null;
+  }
+  function animate(trace, before) {
+    stopAnimation();
+    lastTrace = trace;
+    const frames = trace.filter(e => changes.has(e.type) || e.type === 'boss');
+    if (!frames.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    animation = {board:before, pos:null, current:''};
+    let cursor = 0;
+    function tick() {
+      if (!animation) return;
+      const e = frames[cursor++];
+      if (!e) { stopAnimation(); renderBoard(); report(); MuseumSymbols.render($('report')); return; }
+      const b = animation.board;
+      if (e.type === 'create' || e.type === 'transform') b.tokens[e.pos] = e.id;
+      if (e.type === 'destroy' || e.type === 'vanish') delete b.tokens[e.pos];
+      if (e.type === 'removeRelic') delete b.relics[e.pos];
+      animation.pos = e.pos;
+      animation.current = cursor + ' / ' + frames.length + ' · ' + e.text + (e.pos ? ' ' + point(e.pos) : '');
+      renderBoard(); report(); MuseumSymbols.render($('report'));
+      animationTimer = setTimeout(tick, auto ? 65 : 210);
+    }
+    tick();
+  }
+  function stopAuto() { clearTimeout(autoTimer); auto = ''; }
+  function clearInteraction() { chosen.clear(); focus = null; held = null; }
+  function nextVisitor() {
+    stopAnimation(); clearInteraction();
+    if (G.startViewing(game)) { lastTrace = []; save(); render(); }
+  }
+  function viewingAction(type, ids) {
+    const before = structuredClone(game.board);
+    const trace = type === 'submit' ? G.submit(game,ids) : type === 'reroll' ? G.reroll(game,ids) : G.endViewing(game);
+    if (!trace.length) return;
+    chosen.clear(); prediction = null;
+    if (terminal() || (game.phase !== 'viewing' && auto === 'view')) stopAuto();
+    save(); animate(trace,before); render();
+  }
+  function autoStep() {
+    if (!auto) return;
+    if (animation) { autoTimer = setTimeout(autoStep,100); return; }
+    if (game.phase === 'viewing') {
+      const a = P.chooseAction(game);
+      viewingAction(a.type,a.ids);
+    } else if (auto === 'run' && !terminal()) {
+      clearInteraction(); lastTrace = []; P.step(game); save(); render();
+    } else { stopAuto(); render(); return; }
+    if (auto) autoTimer = setTimeout(autoStep,350);
+  }
+  function startAuto(mode) {
+    stopAuto(); stopAnimation(); clearInteraction(); auto = mode;
+    render(); autoTimer = setTimeout(autoStep,160);
+  }
+  function selectOffer(action, refresh = true) {
+    const [source,i] = action.split('-'), index = Number(i);
+    if (game.phase !== 'shop' || auto) return;
+    const id = source === 'stock' ? game.shop.stock[index] : game.view.rewards[index];
+    if (!id || (source === 'stock' ? game.money < C.RELICS[id].price : game.shop.rewardDone)) return;
+    stopAnimation();
+    held = {id,source,index,action,facing:0};
+    focus = game.board.cells.find(k=>!game.board.relics[k] && !game.board.tokens[k]) || focus;
+    if (refresh) {
+      render(); B.aim(focus || '0,0');
+    } else renderBoard();
+  }
+  function pickMove(pos) {
+    if (game.phase !== 'shop' || auto) return;
+    const item = game.board.relics[pos];
+    if (!item) return;
+    stopAnimation(); focus = pos; held = {id:item.id,source:'move',from:pos,facing:item.facing}; render(); B.aim(pos);
+  }
+  function boardSelect(pos) {
+    if (auto) return;
+    stopAnimation();
+    focus = pos;
+    if (held && game.phase === 'shop') {
+      let ok;
+      if (held.source === 'cell') ok = G.buyCell(game,pos);
+      else if (held.source === 'move') ok = G.moveRelic(game,held.from,pos,held.facing);
+      else ok = G.acquire(game,held.source,held.index,pos,held.facing);
+      if (ok) { held = null; save(); }
+      else say(held.source === 'cell' ? '미구매 자리와 잔액을 확인하세요.' : '유물이나 토큰이 없는 구매한 칸을 선택하세요.');
+    }
+    render();
+  }
+  B.connect({select:boardSelect, pick:pickMove, focus(pos) { focus = pos; renderBoard(); }});
+  function help() {
+    const html = '<div class="dialog-copy"><h3>관람</h3><p>주사위 하나를 골라 제출하면 안내원이 그 눈만큼 합을 올립니다. 같은 눈 둘을 함께 내면 조명이 배율을 1 올립니다. 한 번 제출한 주사위는 다음 관객에게 돌아옵니다.</p><h3>감동과 평가</h3><p>감동은 최종 합 × (1 + 배율)입니다. 현재 예상 감동에는 관람 종료 때 사라질 토큰의 효과도 들어갑니다. 매주 세 번째 관객의 기준을 넘기거나 같으면 다음 주로 넘어갑니다.</p><h3>판과 상점</h3><p>유물을 눌러 발동 조건과 대상 자리를 확인하세요. 빈 곳을 끌어 판을 이동하고 +, −로 확대하거나 축소합니다. 상점에서 유물을 고른 뒤 구매한 빈칸에 놓으세요. 방향 유물은 R로 회전하고 Esc로 배치를 취소합니다.</p><h3>자동 플레이</h3><p>관람 중 자동 플레이는 현재 관객까지 진행합니다. 런 자동 진행은 상점 선택도 맡아 평가 종료까지 이어집니다. 진행 중 멈출 수 있습니다.</p></div>';
+    dialog('이용 안내',html);
+  }
+  function onAction(action) {
+    if (action === 'close') { $('dialog').close(); return; }
+    if (action === 'help' || action === 'schedule') {
+      if (auto) { stopAuto(); render(); }
+      if (action === 'help') help(); else dialog('주간 평가 일정',schedule()); return;
+    }
+    if (action === 'new') {
+      if (auto) { stopAuto(); render(); }
+      dialog('새 전시 시작','<div class="dialog-copy"><p>새 일정으로 시작하면 이 브라우저에 저장된 현재 런을 교체합니다.</p><div class="inline-actions">' + btn('close','돌아가기') + btn('reset','새 전시 시작','primary') + '</div></div>'); return;
+    }
+    if (action === 'reset') {
+      $('dialog').close(); stopAuto(); stopAnimation(); clearInteraction(); game = G.newGame();
+      lastTrace = []; save(); render(); B.fit(); return;
+    }
+    if (action === 'stop') { stopAuto(); say('자동 진행을 멈췄습니다.'); render(); return; }
+    if (action === 'skip') { stopAnimation(); render(); return; }
+    if (action === 'zoomin' || action === 'zoomout') { B.zoom(action === 'zoomin' ? 1.25 : 0.8); return; }
+    if (action === 'fit') { B.fit(); return; }
+    if (auto) return;
+    if (action === 'auto-view' || action === 'auto-run') { startAuto(action === 'auto-view' ? 'view' : 'run'); return; }
+    if (action === 'start') { nextVisitor(); return; }
+    if (action.startsWith('die-')) {
+      stopAnimation();
+      const id = Number(action.slice(4)); chosen.has(id) ? chosen.delete(id) : chosen.add(id);
+      render(); document.querySelector('[data-action="' + action + '"]')?.focus({preventScroll:true}); return;
+    }
+    if (['submit','reroll','end'].includes(action)) { viewingAction(action,[...chosen]); return; }
+    if (action.startsWith('inspect-')) { boardSelect(action.slice(8)); return; }
+    if (action.startsWith('catalog-')) {
+      const r = C.RELICS[action.slice(8)];
+      dialog(r.name,'<div class="dialog-copy"><p>' + r.description + '</p><p class="muted">이번 관람 뒤 상점에서 무료로 선택할 수 있습니다.</p></div>'); return;
+    }
+    if (action.startsWith('stock-') || action.startsWith('reward-')) { selectOffer(action); return; }
+    if (action === 'cancel') { held = null; focus = null; render(); return; }
+    if (game.phase !== 'shop') return;
+    stopAnimation();
+    if (action === 'cell') {
+      held = {source:'cell'};
+      if (!focus || game.board.cells.includes(focus)) {
+        focus = game.board.cells.flatMap(p => C.targets(game.board,p,'adjacent')).find(p => !game.board.cells.includes(p));
+      }
+      render(); B.aim(focus || '0,0'); return;
+    }
+    else if (action === 'buy-here') { G.buyCell(game,focus); }
+    else if (action === 'decline') { G.declineReward(game); if (held?.source === 'reward') held = null; }
+    else if (action === 'move') { pickMove(focus); return; }
+    else if (action === 'rotate') {
+      if (held && C.RELICS[held.id]?.facing) held.facing = (held.facing+1)%4;
+      else if (!held && focus) G.rotateRelic(game,focus);
+    }
+    else if (action === 'sell') { G.sellRelic(game,focus); }
+    save(); render();
+  }
+  document.addEventListener('click', e => {
+    const button = e.target.closest('[data-action]');
+    if (button && !button.disabled) onAction(button.dataset.action);
+  });
+  document.addEventListener('dragstart', e => {
+    const card = e.target.closest('.item-card[draggable=true]');
+    if (card) {
+      e.dataTransfer.effectAllowed = 'copy'; e.dataTransfer.setData('text/plain',card.dataset.action);
+      selectOffer(card.dataset.action,false);
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if ($('dialog').open || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'Escape') { if (auto) onAction('stop'); else onAction('cancel'); }
+    if (e.key.toLowerCase() === 'r' && game.phase === 'shop') onAction('rotate');
+  });
+  $('dialog').addEventListener('click', e => { if (e.target === $('dialog')) $('dialog').close(); });
+  save(); render();
+})();
+
+</script>
+</body>
+</html>

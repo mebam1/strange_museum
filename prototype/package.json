@@ -1,0 +1,11 @@
+{
+  "name": "strange-museum-prototype",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs",
+    "text": "node cli.mjs",
+    "test": "node --test tests/*.test.cjs",
+    "simulate": "node simulate.mjs",
+    "standalone": "node build-standalone.mjs"
+  }
+}
